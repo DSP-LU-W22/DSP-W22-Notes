@@ -1,9 +1,11 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
+title: "Data-Scientific Programming Notes"
+author: "Andrew Sage"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Preface {-}
+
+These are the class notes for the Winter 2022 section of cmsc/stat 205: Data-Scientific Programming at Lawrence University. In addition to these notes, you will find helpful examples in our primary course text [R for Data Science by Wickham and Grolemund](https://r4ds.had.co.nz/) and our secondary text [Modern Data Science with R by Baumer, Kaplan, and Horton](https://mdsr-book.github.io/mdsr2e/). 
 

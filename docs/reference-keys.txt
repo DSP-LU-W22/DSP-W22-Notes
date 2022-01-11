@@ -1,0 +1,7 @@
+data-visualization
+loading-and-exploring-data
+creating-graphics
+more-graphics
+visualizing-quantitative-data-continued
+visualizing-categorical-data
+advanced-data-graphics
