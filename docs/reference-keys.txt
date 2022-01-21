@@ -5,3 +5,7 @@ more-graphics
 visualizing-quantitative-data-continued
 visualizing-categorical-data
 advanced-data-graphics
+data-wrangling
+filtering-and-arranging-data-and-selecting-columns
+section-2.2-mutating-summarizing-and-grouping-data
+summarize

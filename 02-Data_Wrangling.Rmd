@@ -1,0 +1,419 @@
+# Data Wrangling
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 6)
+```
+
+These notes pertain to chapter 5 in Wickham and Grolemund's text. We'll consider data from Major League Baseball, available through the `Lahman()` package. 
+
+```{r}
+library(tidyverse)
+library(Lahman)
+select <- dplyr::select
+summarize <- dplyr::summarize
+```
+
+We create a tibble with batting records for all MLB players from 1871-2020 
+
+```{r}
+batting <- as_tibble(Lahman::Batting)
+head(batting)
+```
+
+```{r}
+tail(batting)
+```
+
+```{r}
+summary(batting)
+```
+
+```{r}
+dim(batting)
+```
+
+
+
+## Filtering and Arranging Data, and Selecting Columns
+
+The `filter()` command narrows a dataset to rows that meet a specified condition. 
+
+The `arrange()` command sorts a dataset according to a specified ordering. 
+
+The `select()` command narrows a dataset to a specified set of columns
+
+These commands are part of the `dplyr` R package, which itself is part of `tidyverse`. 
+
+### Example 2.1.1 {-}
+
+Using the baseball data, create a tibble with only data from the most recent season available (2020).
+
+```{r}
+batting2020 <- batting %>% filter(yearID == 2020)
+head(batting2020)
+```
+
+
+An equivalent way to do this is:
+
+```{r}
+batting2020 <- filter(batting, yearID == 2020)
+head(batting2020)
+```
+
+We'll use the first way, though. The %>% operator (called **pipe**) has advantages and makes coding more convenient when stringing together multiple operations. 
+
+### Example 2.1.2  {-}
+
+Create a tibble including only players who played for teams currently in the National League Central division: Milwaukee (MIL), Chicago Cubs (CHN), Pittsburgh (PIT), Cincinnati (CIN), and St. Louis (SLN). 
+
+```{r}
+batting_NLCentral <- batting %>% filter(teamID %in% c("MIL", "CHN", "PIT", "CIN", "SNL"))
+head(batting_NLCentral)
+```
+
+### Example 2.1.3   {-}
+
+Order the entire baseball tibble from most homeruns to fewest. 
+
+Note: we use `desc()` to sort in descending order. To sort in ascending order, simply put the name of the variable, i.e. `HR`.
+```{r}
+batting %>% arrange(desc(HR))
+```
+
+### Example 2.1.4    {-}
+
+Create a tibble that contains only the columns `playerID`, `yearID`, `teamID`, `AB`, `H`, and `HR`. 
+
+```{r}
+batting1 <- batting %>% select(playerID, yearID, teamID, AB, H, HR)
+head(batting1)
+```
+
+### Example 2.1.5    {-}
+
+The `%>%` (pipe) operator allows us to string together multiple commands. 
+
+Create a tibble including only players who batted at least 500 times in a season and played for Milwaukee (MIL) during or after the 2000 season. Include the columns `playerID`, `yearID`, and `RBI`, and order the players by most RBI to fewest.
+
+```{r}
+batting_MIL <- batting %>% filter(teamID == "MIL" & yearID >= 2000) %>%
+              select(playerID, yearID, RBI) %>%
+              arrange(desc(RBI))
+head(batting_MIL)
+```
+
+
+### Practice 2.1.6    {-}
+
+Create a subset of the data that includes only players who played in the American League (AL) after 1950. 
+
+```{r}
+#Type code here
+```
+
+### Practice 2.1.7     {-}
+
+Create a tibble containing all players, but only the variables `playerID`, `yearID`, "G", "H", and "HR". 
+
+```{r}
+#Type code here
+```
+
+### Practice 2.1.8    {-}
+
+Order the rows from most hits in a season to fewest. 
+
+```{r}
+#Type code here
+```
+
+
+
+### Example 2.1.9 Multiple Logicals      {-}
+
+The current Washington Nationals franchise previously played in Montreal from 1969-2004, and was known as the Expos. Create a dataset containing statistics for this franchise, including both its time in Montreal, and Washington. Arrange in descending order by number of homeruns. 
+
+
+```{r}
+batting_MON_WAS <- batting %>% filter( (teamID=="MON" & yearID >= 1969 & yearID <= 2004)
+                         | (teamID=="WAS" & yearID >= 2005)) %>% arrange(desc(HR))
+batting_MON_WAS
+```
+
+```{r}
+head(batting_MON_WAS)
+```
+
+```{r}
+tail(batting_MON_WAS)
+```
+
+### Example 2.1.10: Dealing with NA's              {-}
+
+For some batters, stolen base data (SB) were not available. Filter the dataset to only include rows for which stolen base data were available. 
+
+The `is.na()` command returns TRUE/FALSE depending on whether the value is missing(NA). Here we use the negation operator `!`, since we want the rows that are not na's. 
+
+```{r}
+battingSB <- batting %>% filter(!is.na(SB))
+```
+
+```{r}
+dim(battingSB)
+```
+
+```{r}
+dim(batting)
+```
+
+
+### Practice 2.1.11           {-}
+
+Create a tibble that contains only players who played in every one of their team's games in a season. Only consider seasons from 1904 on, since season length was highly variable prior to 1904. 
+
+Note that beginning in 1904, teams played 154 games per season. In 1961, the American League (AL) expanded to 162 games. The National League expanded to 162 games in 1962. From 1962-2019, teams played 162 games per season. In 2020, teams only played 60 games, due to covid-19.   
+
+
+```{r}
+# Enter code here
+```
+
+### Practice 2.1.12              {-}
+
+Create a tibble that contains only players who played for Milwaukee in 2020, but contains statistics from all years in these player's careers, whether or not they played for Milwaukee. 
+
+For example since Christian Yelich played for Milwaukee in 2020, all of his seasons should be included in the dataset, including 2013-2017, when he did not play for Milwaukee. 
+
+Include the variables `playerID`, `yearID`, `teamID`, `AB`, `H`, and `HR`, and order the dataframe in descending order by homeruns (HR). 
+
+
+```{r}
+#Enter code here
+```
+
+
+## Section 2.2 Mutating, Summarizing, and Grouping Data
+
+The `mutate` and `transmute` functions allow us to create new variables in a dataset from old ones.  
+
+### Example 2.2.1           {-}
+
+A player's **batting average** is defined as number of hits (H) divided by number of at-bats (AB). 
+
+A player's **on-base percentage** is defined as number of hits (H), walks (BB), times hit by pitch (HBP), divided by number of at-bats, walks, times hit by pitch, and sacrifice flies (SF). 
+
+A player's slugging percentage is defined as singles + 2\times doubles (X2B) + 3 \times triples (X3B) + 4 \times homeruns (HR) divided by number of at-bats. 
+
+We'll create each of these variables. Note that since singles is not a variable in the dataset, we'll create it by subtracting doubles, triples, and homeruns from hits. 
+
+```{r}
+batting %>% mutate(AVG = H / AB,
+                                  OBP = (H + BB + HBP) / (AB + BB + HBP +SF),
+                                  X1B = H - X2B - X3B - HR,
+                                  SLG = (X1B + 2*X2B + 3*X3B + 4* HR) / AB) %>%
+  select(playerID, yearID, teamID, AB, H, HR, BB, HBP, SF, AVG, OBP, SLG)
+```
+
+While `mutate` displays all variables in the dataset, `transmute` displays only the ones created. 
+
+```{r}
+batting %>% transmute(AVG = H / AB,
+                                  OBP = (H + BB + HBP) / (AB + BB + HBP +SF),
+                                  X1B = H - X2B - X3B - HR,
+                                  SLG = (X1B + 2*X2B + 3*X3B + 4* HR) / AB) 
+```
+
+
+### Example 2.2.2              {-}
+
+Create a new variable that indicates whether or not a player played for a team currently in the National League Central Division (MIL, CIN, CHN, CIN, PIT).
+
+```{r}
+batting %>% mutate(NLCentral = ifelse(teamID %in%c("MIL", "CIN", "CHN", "CIN", "PIT"), "Yes", "No")) %>%
+  select(playerID,  yearID, teamID, NLCentral)
+```
+
+
+### Summarize
+
+The `summarize` command calculates summary statistics for all variables in the dataset. 
+
+The `n()` command returns the number of rows included in the summary. 
+
+
+### Example 2.2.3                      {-}
+
+Calculate the minimum, maximum, mean, median, and upper and lower quartiles for number stolen bases 
+
+```{r, error=TRUE}
+batting %>% summarize(min_SB = min(SB), 
+                      Q1_SB = quantile(SB, 0.25),
+                      median_SB = median(SB),
+                      Q3_SB = quantile(SB, 0.75), 
+                      max_SB = max(SB), 
+                      mean_SB =mean(SB),
+                      Number = n())
+```
+
+The quantities we desire cannot be calculated some players have missing values. We tell R to ignore missing values using the argument `na.rm=TRUE`.
+
+```{r}
+batting %>% summarize(min_SB = min(SB, na.rm=TRUE), 
+                      Q1_SB = quantile(SB, 0.25, na.rm=TRUE),
+                      median_SB = median(SB, na.rm=TRUE),
+                      Q3_SB = quantile(SB, 0.75, na.rm=TRUE), 
+                      max_SB = max(SB, na.rm=TRUE), 
+                      mean_SB =mean(SB, na.rm=TRUE),
+                      Number = sum(!is.na(SB)))
+```
+
+
+
+### Practice 2.2.4                       {-}
+
+Create a variable to calculate each player's stolen base success proportion (SB/(SB+CS)). 
+
+```{r}
+#Enter Code Here
+```
+
+
+### Practice 2.2.5                       {-}
+
+Calculate the minimum, maximum, mean, median, and upper and lower quartiles for humber hits. Also give the total number of players in the dataset.
+
+```{r}
+#Enter Code Here
+```
+
+
+
+### Example 2.2.6              {-}
+
+While overall summaries are sometimes useful, often it is far more useful to summarize by group. The `group_by` command allows us to calculate summary statistics broken down by group. 
+
+Calculate the number of homeruns (HR), hits (H), and at-bats (AB) for by each team, throughout baseball history. 
+
+When grouping, `n()` returns the number of observations in each group. 
+
+```{r}
+batting %>% group_by(teamID) %>% 
+  summarize(HR = sum(HR),
+            H= sum(H), 
+            AB= sum(AB),
+            Total_Player_Seasons = n()
+  ) %>%
+  arrange(desc(HR))
+```
+
+While we might be interested in knowing the number of total player seasons for each team, it might be more interesting to know the number of different batters who have played for each team. We can accomplish this using the `unique()` function. The command `unique(playerID)` creates a vector of unique player ID's for each team. The `length()` command returns the length of each vector (i.e. number of different batters). 
+
+```{r}
+batting %>% group_by(teamID) %>% 
+  summarize(HR = sum(HR),
+            H= sum(H), 
+            AB= sum(AB),
+            Total_Batters = length(unique(playerID))
+  ) %>%
+  arrange(desc(HR))
+```
+
+### Example 2.2.7              {-}
+
+Calculate each team's all-time batting average. Include only teams with at least 100,000 at-bats. Sort by batting average. 
+
+
+```{r}
+batting %>% group_by(teamID) %>% 
+  summarize(HR = sum(HR),
+            H= sum(H), 
+            AB= sum(AB),
+            Total_Batters = length(unique(playerID)),
+            AVG = H / AB
+  ) %>%
+  filter(AB > 100000) %>%
+  arrange(desc(AVG))
+```
+
+### Example 2.2.8              {-}
+
+Some of these teams do not exist anymore, while others came about more recently. Let's include the earliest and latest year that each team played. 
+
+```{r}
+batting %>% group_by(teamID) %>% 
+  summarize(HR = sum(HR),
+            H= sum(H), 
+            AB= sum(AB),
+            Total_Batters = length(unique(playerID)),
+            AVG = H / AB,
+            First_Year = min(yearID),
+            Last_Year = max(yearID)
+  ) %>%
+  filter(AB > 100000) %>%
+  arrange(desc(AVG))
+```
+
+### Example 2.2.9              {-}
+
+We can group by more than one variable. Let's calculate the number of hits, homeruns, and at-bats, and batting average for each team in each season. 
+
+```{r}
+batting %>% group_by(teamID, yearID) %>% 
+  summarize(HR = sum(HR),
+            H= sum(H), 
+            AB= sum(AB),
+            AVG = H / AB
+  ) %>%
+  arrange(desc(HR))
+```
+
+### Practice 2.2.10              {-}
+
+Calculate the total number of at-bats (AB), hits (H), and homeruns (HR) for each player throughout their career. Also calculate their career batting average (H / AB). Sort the dataset from most hits to fewest. 
+
+```{r}
+#Enter Code Here
+```
+
+### Practice 2.2.11    {-}
+
+Calculate the total number of records (rows) for each player in the dataset. Order from most to least. Also include the player's first and last season. Note that some players played non-consecutive seasons, so the number of records will not necessarily equal the difference between the first and last seasons.
+
+```{r}
+#Enter Code Here
+```
+
+### Practice 2.2.12           {-}
+
+The total number of records for each player is not quite equal to their total number of seasons played, since players sometimes play for more than one team in a season. Calculate the total number of seasons played by each player. 
+
+```{r}
+#Enter Code Here
+```
+
+
+### Practice 2.2.13         {-}
+
+Calculate the average number of stolen bases and homeruns per team for each year since 1871. For example, the average number of homeruns per team was 226.      
+
+```{r}
+#Enter Code Here
+```
+
+
+Plot the average number of homeruns and stolen bases against year. 
+
+```{r}
+#Enter Code Here
+```
+
+
+```{r}
+#Enter Code Here
+```
+
+
+
+
+
