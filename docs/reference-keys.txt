@@ -7,5 +7,13 @@ visualizing-categorical-data
 advanced-data-graphics
 data-wrangling
 filtering-and-arranging-data-and-selecting-columns
-section-2.2-mutating-summarizing-and-grouping-data
+mutating-summarizing-and-grouping-data
 summarize
+tidy-data
+joining-data
+use-one-of-the-join-commands-to-create-the-following-datasets.
+a-a-dataset-whose-first-two-columns-are-identical-to-students-and-whose-third-column-contains-the-book_cost-for-each-course.-if-the-course-does-not-appear-in-the-costs-dataset-return-na.
+b-a-dataset-like-the-one-in-a-but-which-excludes-courses-whose-book-costs-are-not-listed
+c-a-dataset-that-lists-each-course-in-the-costs-dataset-along-with-the-number-of-students-taking-the-course-and-the-cost-of-books.-hint-you-will-need-to-do-some-data-wrangling-before-joining-the-data.
+a-create-and-display-a-dataset-containing-all-courses-listed-in-costs-that-at-least-one-student-is-taking-along-with-the-cost-of-books-for-the-course.
+b-create-and-display-a-dataset-listing-the-ids-of-all-students-who-are-taking-a-course-not-listed-in-costs-as-well-as-the-unlisted-course-they-are-taking.

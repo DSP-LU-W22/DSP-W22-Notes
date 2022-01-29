@@ -193,7 +193,7 @@ Include the variables `playerID`, `yearID`, `teamID`, `AB`, `H`, and `HR`, and o
 ```
 
 
-## Section 2.2 Mutating, Summarizing, and Grouping Data
+## Mutating, Summarizing, and Grouping Data
 
 The `mutate` and `transmute` functions allow us to create new variables in a dataset from old ones.  
 
@@ -415,5 +415,459 @@ Plot the average number of homeruns and stolen bases against year.
 
 
 
+## Tidy Data
 
+Data are stored in many different forms. Some are easier to work with than others. Packages in `tidyverse` (`gglot2`, `dplyr`, etc.) are designed to work with tidy data. This means:
+
+* Each variable must have its own column.    
+* Each observation must have its own row.     
+* Each value must have its own cell.     
+
+Note that any two of these imply the third. 
+
+
+Since data often come in non-tidy form, we often need to reshape our data before creating graphs or calculating summary statistics. Often, we see either: 
+
+1. one variable spread across multiple columns  OR
+2. one observation spread across multiple rows
+
+Such data can be reshaped into tidy form using the `pivot_longer()` or `pivot_wider()` commands. 
+
+### Example 2.3.1: `pivot_longer()` {-}
+
+We consider a dataset containing results from a [10 week sensory experiment on french fries](https://www.rdocumentation.org/packages/reshape/versions/0.8.8/topics/French%20fries), conducted at Iowa State University in 2004. 
+
+* 12 individuals were asked to assess the taste of french fries according to how they taste with respect to five different criteria:     
+     - potato-y      
+     - buttery      
+     - grassy     
+     - rancid      
+     - paint-y     
+     
+* fries were fried in 1 of 3 different oils (treatment). Each week, individuals tasted and assessed six batches of fries (all three oils, replicated twice)
+
+
+```{r}
+Fries <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/frenchfries.csv")
+Fries
+```
+
+* Suppose we want to create a boxplot displaying ratings for each of the five critera, while faceting by type of oil (`treatment`). Can we do this with the data in its current format? Why or why not?
+
+
+Note that in format 1, the column names `potato`, `buttery`, `grassy`, `rancid`, `painty` are not names of variables, but rather categories (or levels) of the variable `criterion`. Thus, each row represents 5 observations, not 1. 
+
+The `pivot_longer()` command converts a "wide" dataset like format 1 into a "longer" tidy form. 
+
+```{r}
+Fries_tidy <- Fries %>% pivot_longer(cols = c("potato", "buttery", "grassy", "rancid", "painty"), 
+                                      names_to = "criterion", values_to="rating")
+```
+
+* `cols` specifies the columns whose names should be made into the values, or levels of a single variable.   
+* `names_to` specifies the name of the variable to be made out of the column names.    
+* `values_to` specifies the name of the variable that will contain the values in these columns of the dataset. (Note that quotes are required when creating variables whose names do not exist in the original dataset.)    
+
+```{r}
+head(Fries_tidy)
+```
+
+Now, we can create the plot we desire. 
+
+```{r}
+ggplot(data=Fries_tidy) + geom_boxplot(aes(x=criterion, y=rating)) + facet_grid(~treatment) + coord_flip()
+```
+
+We can save a .csv file containing the new dataset using the `write.csv` command
+
+```{r}
+write.csv(Fries_tidy, file="Fries_tidy.csv")
+```
+
+
+### Example 2.3.2 `pivot_wider`  {-}
+
+This dataset gives the median annual income and median monthly rent in 2017 for each of the 50 US states. 
+
+`estimate` represents the estimated monthly income or rent, and `moe` represents the margin of error for that estimate. 
+
+```{r}
+head(us_rent_income)
+```
+
+Why are these data not in tidy form?
+
+
+What would happen if we tried to create a histogram of annual rent estimates?
+
+
+
+We use the `pivot_wider()` command to reshape these data into tidy form. 
+
+```{r}
+us_rent_income_tidy <- us_rent_income %>% pivot_wider(names_from = variable, values_from=c("estimate", "moe"))
+head(us_rent_income_tidy)
+```
+
+* `names_from` specifies the single column to be spread over multiple columns. 
+* `values_from` specifies the variables from which to obtain the values for the new columns
+
+By default, new column names will consist of the old column names and the variables in `names_from`, separated by a _
+
+```{r}
+ggplot(data = us_rent_income_tidy) +geom_histogram(aes(x=estimate_rent), binwidth=100)
+```
+
+
+### Example 2.3.3 `separate()` and `unite()`   {-}
+
+Sometimes, we need to split a column into two columns. This can be done using the `separate()` command. For example, the following dataset has a variable called `rate`, which gives the ratio of cases of TB in various countries, to the country's population. 
+
+Let's create two columns, one with the number of TB cases, and the other with population. 
+
+```{r, echo=FALSE}
+TBcases <- table3
+head(TBcases)
+```
+
+```{r}
+TBcases_sep <- TBcases %>% separate("rate", into = c("TB_cases", "population"), sep="/")
+head(TBcases_sep)
+```
+
+Notice that the new columns are listed as character vectors, even though they are numeric. We can tell R to convert the resulting columns using the command `convert=TRUE`. 
+
+```{r}
+TBcases_sep <- TBcases %>% separate("rate", into = c("TB_cases", "population"), sep="/", convert=TRUE)
+head(TBcases_sep)
+```
+
+If we want to return to the initial form, we can combine the variables back into one using `unite()`
+
+```{r}
+TBcases_united <- TBcases_sep %>% unite(col="rate", "TB_cases", "population", sep="/")
+head(TBcases_united)
+```
+
+
+### Practice 2.3.4   {-}
+
+The GDP growth dataset contains each country's annual GDP growth in each year since 1800. The data are in a format where columns represent years.  
+
+```{r}
+GDP_Growth <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/gdp_total_yearly_growth.csv")
+```
+
+Suppose we wanted to plot a country's GDP growth over time. Why wouldn't we be able to do that with the data in its current form?
+
+Reshape the data into a format with three columns: `country`, `year`, and `GDP_Growth`. 
+
+Hint: you can reference all columns between 1801 and 2013, using  `c("1801":"2013"). 
+
+```{r}
+#type code here. 
+```
+
+
+You should notice that the `year` variable is stored as a character. Convert it to an integer using the command:
+
+```{r, eval=FALSE}
+GDP_Growth <- GDP_Growth %>%  mutate(year=as.integer(year))
+```  
+
+
+
+
+Now plot GPD_Growth by year for Brazil, China, India, the United States, and Vietnam. Use a line graph to connect the points. 
+
+```{r}
+#type code here
+```
+
+
+Create a .csv file containing the new version of the dataset. 
+
+```{r}
+#type code here
+```
+
+
+### Practice 2.3.5   {-}
+
+The `fish_encounters` dataset contains data on fish migration along a river. Sensors were setup at multiple stations along the river, and the data show whether the fish was observed at each station. Notice that there are many rows for each fish, corresponding to each station where the fish was observed. If a fish was not observed at a station, then that row is omitted from the dataset. 
+
+```{r}
+data("fish_encounters")
+head(fish_encounters)
+```
+
+Reshape the data so that each fish has exactly one row in the data, columns correspond to the different stations, and the entry in the cell correponding to a fish and station has value 1 if the fish was seen at that station. (See illustration.)   
+
+```{r}
+# Type code here
+```
+
+If we add `values_fill = 0` in the pivot command, NA's will be replaced with 0's.  
+
+### Practice 2.3.6   {-}
+
+The following code scrapes the Milwaukee Bucks roster from `espn.com`. We'll learn about how to scrape data from the web later in the term.  
+
+```{r}
+library(rvest)
+page <- read_html("https://www.espn.com/nba/team/roster/_/name/mil")
+table <- page %>%
+html_elements("table") %>%
+html_table()
+Bucks <- table[[1]]
+Bucks
+```
+
+Notice that the `HT` variable includes both feet and inches, separated by the ' symbol. 
+
+We'll want to separate the `HT` variable into two separate numeric variables, `FT` and `IN`. 
+
+First, we'll remove the " symbol after inches, using the code below. You'll learn more about the `str_replace()` function soon. 
+
+```{r}
+Bucks$HT <- str_replace(Bucks$HT, '"', "")
+Bucks
+```
+
+Now, separate the `HT` variable into two variables, called `FT` and `IN`. Make sure they are both numeric variables. 
+
+```{r}
+#Type code here
+```
+
+
+## Joining Data
+
+### Mutating Joins  {-}
+
+A mutating join adds new variables to a dataframe by matching observations in another. 
+
+```{r}
+library(Lock5Data)
+data(AllCountries)
+countries <- AllCountries
+```
+
+```{r}
+glimpse(countries)
+```
+
+
+```{r}
+head(countries)
+```
+
+Let's graph each country's life expectancy against its GDP, as we saw in the GapMinder graphic. 
+
+```{r}
+ggplot(data=countries) + geom_point(aes(y=LifeExpectancy, x=GDP, size=Population)) + scale_x_continuous(trans = 'log2')
+```
+
+We cannot color by continent because continent is not a variable in our dataset. Fortunately, we can find the countries in each continent from another source. 
+
+```{r}
+continents <- read_csv("https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/Countries-Continents.csv")
+glimpse(continents)
+```
+
+```{r}
+head(continents)
+```
+
+In order to join the dataframes together, we need a **key**. A **key** is a variable, or set of variables, that uniquely identifies an observation. Keys are used to match observations. 
+
+Used to connect two data tables
+
+- **primary key** uniquely identifies an observation in its own table
+
+- **foreign key** uniquely identifies an observation in another table
+
+
+There are four different kinds of mutating joins in R. 
+
+1. `inner_join` matches pairs of observations when their keys are equal. The new dataframe contains only observations that were contained in both of the original ones. 
+
+2. `left_join` keeps all observations from the left (x) table. Those not matched return NA's for the variables in the y-table. 
+
+3. `right_join` keeps all observations from the right (y) table. Those not matched return NA's for the variables in the x-table.   
+
+4. `full_join` keeps all observations in both tables. Those not matched return NA's for variables in the other table. 
+
+**Inner**
+
+![inner join illustration](http://r4ds.had.co.nz/diagrams/join-inner.png)
+
+
+![outer join illustration](http://r4ds.had.co.nz/diagrams/join-outer.png)
+
+
+### Example 2.4.1 Joining countries and continents     {-}
+
+a) Using `inner_join` 
+```{r}
+countries_inner <- countries %>% inner_join(continents, by="Country") %>% 
+  select(Country, Continent, everything())
+head(countries_inner)
+```
+
+```{r}
+dim(countries_inner)
+```
+
+b) Using `left_join` 
+```{r}
+countries_left <- countries %>% left_join(continents, by="Country") %>% 
+  select(Country, Continent, everything())
+head(countries_left)
+```
+
+```{r}
+dim(countries_left)
+```
+
+
+c) Using `right_join` 
+```{r}
+countries_right <- countries %>% right_join(continents, by="Country") %>% 
+  select(Country, Continent, everything())
+head(countries_right)
+```
+
+```{r}
+dim(countries_right)
+```
+
+d) Using `full_join` 
+```{r}
+countries_full <- countries %>% full_join(continents, by="Country") %>% 
+  select(Country, Continent, everything())
+head(countries_full)
+```
+
+```{r}
+dim(countries_full)
+```
+
+
+We'll create a new .csv file with the dataset we created. 
+
+```{r}
+write.csv(countries_full, file="Countries_Full.csv")
+```
+
+
+**Notes:**   
+* If we do not specify a `by` argument, R will join datasets using a key consisting of all varaibles that appear in both datasets.    
+
+* If the datasets use different names for the same variable, join using `by=c("variablename_x"= "variablename_y")`. For example, if the variable `Country` were instead called `country` in the `countries` dataset and `ctry` in the `Continents` dataset, we would use `inner_join(countries, continents, by=c("country"="ctry"))`. 
+
+
+We create two small fictional datasets. `Students` contains a list of fictional student id's, and the courses the students are enrolled in. Note there is a separate line for each course. `Costs` contains the total cost of textbooks and other materials for each course. 
+
+
+```{r}
+id <- c(10576, 10576, 10576, 11439, 11439, 19857, 11306, 11306, 12576, 12576)
+course <-c("Calculus", "Art", "Economics", "Calculus", "Shakespeare", "History", "Economics", "Statistics", "Art", "Shakespeare")
+Students <- data.frame(id, course)
+Students
+```
+
+```{r}
+course <- c("Calculus", "Economics", "Shakespeare", "History", "Engineering")
+book_cost <- c(90, 75, 50, 80, 100)
+Costs <- data.frame(course, book_cost)
+Costs
+```
+
+
+
+
+### Practice 2.4.2      {-}
+
+#### Use one of the join commands to create the following datasets.
+
+#### a) a dataset whose first two columns are identical to `Students`, and whose third column contains the `book_cost` for each course. If the course does not appear in the `Costs` dataset, return `NA`. 
+
+```{r}
+# Type code here
+```
+
+#### b) a dataset like the one in (a), but which excludes courses whose book costs are not listed   
+
+```{r}
+# Type code here
+```
+
+#### c) a dataset that lists each course in the `Costs` dataset along with the number of students taking the course, and the cost of books. Hint: you will need to do some data wrangling before joining the data. 
+
+```{r}
+# Type code here
+```
+
+
+
+### Filtering Joins     {-}
+
+A filtering join filters observations from one data frame based on whether or not they match an observation in the other table.
+
+There are two types of filtering joins:
+
+* `semi_join(x, y)` keeps all observations in dataframe `x` that have a match in dataframe `y`   
+     ![semi join illustration](http://r4ds.had.co.nz/diagrams/join-semi.png)
+* `anti_join(x, y)` drops all observations in dataframe `x` that have a match in dataframe `y`.
+     ![anti join illustration](http://r4ds.had.co.nz/diagrams/join-anti.png)
+
+
+Anti-joins are useful for diagnosing join mismatches.
+
+
+### Example 2.4.3 Joining countries and continents     {-}
+
+Use semi_join to create a dataset of all countries in continents whose total land area is greater than 20 million square km. (Note: land area is given in thousands of square km.)
+
+```{r}
+Large_Area <- countries_full %>% group_by(Continent) %>% 
+  summarize(total_area = sum(LandArea, na.rm=TRUE)) %>% filter(total_area > 20000)
+head(Large_Area)
+```
+
+```{r}
+countries_full %>% semi_join(Large_Area) %>% head()
+```
+
+Use anti-join to find the countries contained in the full-join of the datasets that are not contained in the inner-join.
+
+```{r}
+countries_full %>% anti_join(countries_inner, by="Country")
+```
+
+
+We'll create the life-expectancy plot, colored by continent. 
+
+```{r}
+ggplot(data=countries_inner) + 
+  geom_point(aes(y=LifeExpectancy, x=GDP, size=Population, color = Continent)) + 
+  scale_x_continuous(trans = 'log2')
+```
+
+### Practice 2.4.4      {-}
+
+Continue working with the `Students` and `Costs` datasets. 
+
+#### a) Create and display a dataset containing all courses, listed in `Costs` that at least one student is taking, along with the cost of books for the course. 
+
+```{r}
+# Type code here
+```
+
+#### b) Create and display a dataset listing the id's of all students who are taking a course not listed in `Costs`, as well as the unlisted course they are taking. 
+
+```{r}
+# Type code here
+```
 

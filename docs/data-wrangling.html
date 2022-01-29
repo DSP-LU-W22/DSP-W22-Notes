@@ -24,7 +24,7 @@
 <meta name="author" content="Andrew Sage" />
 
 
-<meta name="date" content="2022-01-21" />
+<meta name="date" content="2022-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,7 +172,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.11"><i class="fa fa-check"></i>Practice 2.1.11</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.12"><i class="fa fa-check"></i>Practice 2.1.12</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#section-2.2-mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Section 2.2 Mutating, Summarizing, and Grouping Data</a><ul>
+<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Mutating, Summarizing, and Grouping Data</a><ul>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.1"><i class="fa fa-check"></i>Example 2.2.1</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.2"><i class="fa fa-check"></i>Example 2.2.2</a></li>
 <li class="chapter" data-level="2.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#summarize"><i class="fa fa-check"></i><b>2.2.1</b> Summarize</a></li>
@@ -187,6 +187,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.11"><i class="fa fa-check"></i>Practice 2.2.11</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.12"><i class="fa fa-check"></i>Practice 2.2.12</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.13"><i class="fa fa-check"></i>Practice 2.2.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>2.3</b> Tidy Data</a><ul>
+<li><a href="data-wrangling.html#example-2.3.1-pivot_longer">Example 2.3.1: <code>pivot_longer()</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.2-pivot_wider">Example 2.3.2 <code>pivot_wider</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.3-separate-and-unite">Example 2.3.3 <code>separate()</code> and <code>unite()</code></a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.4"><i class="fa fa-check"></i>Practice 2.3.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.5"><i class="fa fa-check"></i>Practice 2.3.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.6"><i class="fa fa-check"></i>Practice 2.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling.html"><a href="data-wrangling.html#joining-data"><i class="fa fa-check"></i><b>2.4</b> Joining Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-joins"><i class="fa fa-check"></i>Mutating Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.1-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.1 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.2"><i class="fa fa-check"></i>Practice 2.4.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-joins"><i class="fa fa-check"></i>Filtering Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.3-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.3 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.4"><i class="fa fa-check"></i>Practice 2.4.4</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -487,8 +503,8 @@ batting_MON_WAS</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Enter code here</span></code></pre></div>
 </div>
 </div>
-<div id="section-2.2-mutating-summarizing-and-grouping-data" class="section level2">
-<h2><span class="header-section-number">2.2</span> Section 2.2 Mutating, Summarizing, and Grouping Data</h2>
+<div id="mutating-summarizing-and-grouping-data" class="section level2">
+<h2><span class="header-section-number">2.2</span> Mutating, Summarizing, and Grouping Data</h2>
 <p>The <code>mutate</code> and <code>transmute</code> functions allow us to create new variables in a dataset from old ones.</p>
 <div id="example-2.2.1" class="section level3 unnumbered">
 <h3>Example 2.2.1</h3>
@@ -749,7 +765,974 @@ batting_MON_WAS</code></pre></div>
 <p>Plot the average number of homeruns and stolen bases against year.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Enter Code Here</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Enter Code Here</span></code></pre></div>
+</div>
+</div>
+<div id="tidy-data" class="section level2">
+<h2><span class="header-section-number">2.3</span> Tidy Data</h2>
+<p>Data are stored in many different forms. Some are easier to work with than others. Packages in <code>tidyverse</code> (<code>gglot2</code>, <code>dplyr</code>, etc.) are designed to work with tidy data. This means:</p>
+<ul>
+<li>Each variable must have its own column.<br />
+</li>
+<li>Each observation must have its own row.<br />
+</li>
+<li>Each value must have its own cell.</li>
+</ul>
+<p>Note that any two of these imply the third.</p>
+<p>Since data often come in non-tidy form, we often need to reshape our data before creating graphs or calculating summary statistics. Often, we see either:</p>
+<ol style="list-style-type: decimal">
+<li>one variable spread across multiple columns OR</li>
+<li>one observation spread across multiple rows</li>
+</ol>
+<p>Such data can be reshaped into tidy form using the <code>pivot_longer()</code> or <code>pivot_wider()</code> commands.</p>
+<div id="example-2.3.1-pivot_longer" class="section level3 unnumbered">
+<h3>Example 2.3.1: <code>pivot_longer()</code></h3>
+<p>We consider a dataset containing results from a <a href="https://www.rdocumentation.org/packages/reshape/versions/0.8.8/topics/French%20fries">10 week sensory experiment on french fries</a>, conducted at Iowa State University in 2004.</p>
+<ul>
+<li>12 individuals were asked to assess the taste of french fries according to how they taste with respect to five different criteria:
+<ul>
+<li>potato-y<br />
+</li>
+<li>buttery<br />
+</li>
+<li>grassy<br />
+</li>
+<li>rancid<br />
+</li>
+<li>paint-y</li>
+</ul></li>
+<li>fries were fried in 1 of 3 different oils (treatment). Each week, individuals tasted and assessed six batches of fries (all three oils, replicated twice)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Fries &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/frenchfries.csv&quot;</span>)
+Fries</code></pre></div>
+<pre><code>## # A tibble: 696 x 9
+##     time treatment subject   rep potato buttery grassy rancid painty
+##    &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1         1       3     1    2.9     0      0      0      5.5
+##  2     1         1       3     2   14       0      0      1.1    0  
+##  3     1         1      10     1   11       6.4    0      0      0  
+##  4     1         1      10     2    9.9     5.9    2.9    2.2    0  
+##  5     1         1      15     1    1.2     0.1    0      1.1    5.1
+##  6     1         1      15     2    8.8     3      3.6    1.5    2.3
+##  7     1         1      16     1    9       2.6    0.4    0.1    0.2
+##  8     1         1      16     2    8.2     4.4    0.3    1.4    4  
+##  9     1         1      19     1    7       3.2    0      4.9    3.2
+## 10     1         1      19     2   13       0      3.1    4.3   10.3
+## # … with 686 more rows</code></pre>
+<ul>
+<li>Suppose we want to create a boxplot displaying ratings for each of the five critera, while faceting by type of oil (<code>treatment</code>). Can we do this with the data in its current format? Why or why not?</li>
+</ul>
+<p>Note that in format 1, the column names <code>potato</code>, <code>buttery</code>, <code>grassy</code>, <code>rancid</code>, <code>painty</code> are not names of variables, but rather categories (or levels) of the variable <code>criterion</code>. Thus, each row represents 5 observations, not 1.</p>
+<p>The <code>pivot_longer()</code> command converts a &quot;wide&quot; dataset like format 1 into a &quot;longer&quot; tidy form.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Fries_tidy &lt;-<span class="st"> </span>Fries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">&quot;potato&quot;</span>, <span class="st">&quot;buttery&quot;</span>, <span class="st">&quot;grassy&quot;</span>, <span class="st">&quot;rancid&quot;</span>, <span class="st">&quot;painty&quot;</span>), 
+                                      <span class="dt">names_to =</span> <span class="st">&quot;criterion&quot;</span>, <span class="dt">values_to=</span><span class="st">&quot;rating&quot;</span>)</code></pre></div>
+<ul>
+<li><code>cols</code> specifies the columns whose names should be made into the values, or levels of a single variable.<br />
+</li>
+<li><code>names_to</code> specifies the name of the variable to be made out of the column names.<br />
+</li>
+<li><code>values_to</code> specifies the name of the variable that will contain the values in these columns of the dataset. (Note that quotes are required when creating variables whose names do not exist in the original dataset.)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(Fries_tidy)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##    time treatment subject   rep criterion rating
+##   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+## 1     1         1       3     1 potato       2.9
+## 2     1         1       3     1 buttery      0  
+## 3     1         1       3     1 grassy       0  
+## 4     1         1       3     1 rancid       0  
+## 5     1         1       3     1 painty       5.5
+## 6     1         1       3     2 potato      14</code></pre>
+<p>Now, we can create the plot we desire.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>Fries_tidy) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>criterion, <span class="dt">y=</span>rating)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(<span class="op">~</span>treatment) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-90-1.png" width="576" /></p>
+<p>We can save a .csv file containing the new dataset using the <code>write.csv</code> command</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(Fries_tidy, <span class="dt">file=</span><span class="st">&quot;Fries_tidy.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="example-2.3.2-pivot_wider" class="section level3 unnumbered">
+<h3>Example 2.3.2 <code>pivot_wider</code></h3>
+<p>This dataset gives the median annual income and median monthly rent in 2017 for each of the 50 US states.</p>
+<p><code>estimate</code> represents the estimated monthly income or rent, and <code>moe</code> represents the margin of error for that estimate.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(us_rent_income)</code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   GEOID NAME    variable estimate   moe
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 01    Alabama income      24476   136
+## 2 01    Alabama rent          747     3
+## 3 02    Alaska  income      32940   508
+## 4 02    Alaska  rent         1200    13
+## 5 04    Arizona income      27517   148
+## 6 04    Arizona rent          972     4</code></pre>
+<p>Why are these data not in tidy form?</p>
+<p>What would happen if we tried to create a histogram of annual rent estimates?</p>
+<p>We use the <code>pivot_wider()</code> command to reshape these data into tidy form.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">us_rent_income_tidy &lt;-<span class="st"> </span>us_rent_income <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> variable, <span class="dt">values_from=</span><span class="kw">c</span>(<span class="st">&quot;estimate&quot;</span>, <span class="st">&quot;moe&quot;</span>))
+<span class="kw">head</span>(us_rent_income_tidy)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   GEOID NAME       estimate_income estimate_rent moe_income moe_rent
+##   &lt;chr&gt; &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 01    Alabama              24476           747        136        3
+## 2 02    Alaska               32940          1200        508       13
+## 3 04    Arizona              27517           972        148        4
+## 4 05    Arkansas             23789           709        165        5
+## 5 06    California           29454          1358        109        3
+## 6 08    Colorado             32401          1125        109        5</code></pre>
+<ul>
+<li><code>names_from</code> specifies the single column to be spread over multiple columns.</li>
+<li><code>values_from</code> specifies the variables from which to obtain the values for the new columns</li>
+</ul>
+<p>By default, new column names will consist of the old column names and the variables in <code>names_from</code>, separated by a _</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> us_rent_income_tidy) <span class="op">+</span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>estimate_rent), <span class="dt">binwidth=</span><span class="dv">100</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-94-1.png" width="576" /></p>
+</div>
+<div id="example-2.3.3-separate-and-unite" class="section level3 unnumbered">
+<h3>Example 2.3.3 <code>separate()</code> and <code>unite()</code></h3>
+<p>Sometimes, we need to split a column into two columns. This can be done using the <code>separate()</code> command. For example, the following dataset has a variable called <code>rate</code>, which gives the ratio of cases of TB in various countries, to the country's population.</p>
+<p>Let's create two columns, one with the number of TB cases, and the other with population.</p>
+<pre><code>## # A tibble: 6 x 3
+##   country      year rate             
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TBcases_sep &lt;-<span class="st"> </span>TBcases <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="st">&quot;rate&quot;</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;TB_cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>)
+<span class="kw">head</span>(TBcases_sep)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country      year TB_cases population
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;     
+## 1 Afghanistan  1999 745      19987071  
+## 2 Afghanistan  2000 2666     20595360  
+## 3 Brazil       1999 37737    172006362 
+## 4 Brazil       2000 80488    174504898 
+## 5 China        1999 212258   1272915272
+## 6 China        2000 213766   1280428583</code></pre>
+<p>Notice that the new columns are listed as character vectors, even though they are numeric. We can tell R to convert the resulting columns using the command <code>convert=TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TBcases_sep &lt;-<span class="st"> </span>TBcases <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">separate</span>(<span class="st">&quot;rate&quot;</span>, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;TB_cases&quot;</span>, <span class="st">&quot;population&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>, <span class="dt">convert=</span><span class="ot">TRUE</span>)
+<span class="kw">head</span>(TBcases_sep)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country      year TB_cases population
+##   &lt;chr&gt;       &lt;int&gt;    &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999      745   19987071
+## 2 Afghanistan  2000     2666   20595360
+## 3 Brazil       1999    37737  172006362
+## 4 Brazil       2000    80488  174504898
+## 5 China        1999   212258 1272915272
+## 6 China        2000   213766 1280428583</code></pre>
+<p>If we want to return to the initial form, we can combine the variables back into one using <code>unite()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TBcases_united &lt;-<span class="st"> </span>TBcases_sep <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unite</span>(<span class="dt">col=</span><span class="st">&quot;rate&quot;</span>, <span class="st">&quot;TB_cases&quot;</span>, <span class="st">&quot;population&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>)
+<span class="kw">head</span>(TBcases_united)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country      year rate             
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;            
+## 1 Afghanistan  1999 745/19987071     
+## 2 Afghanistan  2000 2666/20595360    
+## 3 Brazil       1999 37737/172006362  
+## 4 Brazil       2000 80488/174504898  
+## 5 China        1999 212258/1272915272
+## 6 China        2000 213766/1280428583</code></pre>
+</div>
+<div id="practice-2.3.4" class="section level3 unnumbered">
+<h3>Practice 2.3.4</h3>
+<p>The GDP growth dataset contains each country's annual GDP growth in each year since 1800. The data are in a format where columns represent years.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GDP_Growth &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/gdp_total_yearly_growth.csv&quot;</span>)</code></pre></div>
+<p>Suppose we wanted to plot a country's GDP growth over time. Why wouldn't we be able to do that with the data in its current form?</p>
+<p>Reshape the data into a format with three columns: <code>country</code>, <code>year</code>, and <code>GDP_Growth</code>.</p>
+<p>Hint: you can reference all columns between 1801 and 2013, using `c(&quot;1801&quot;:&quot;2013&quot;).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type code here. </span></code></pre></div>
+<p>You should notice that the <code>year</code> variable is stored as a character. Convert it to an integer using the command:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">GDP_Growth &lt;-<span class="st"> </span>GDP_Growth <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year=</span><span class="kw">as.integer</span>(year))</code></pre></div>
+<p>Now plot GPD_Growth by year for Brazil, China, India, the United States, and Vietnam. Use a line graph to connect the points.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type code here</span></code></pre></div>
+<p>Create a .csv file containing the new version of the dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type code here</span></code></pre></div>
+</div>
+<div id="practice-2.3.5" class="section level3 unnumbered">
+<h3>Practice 2.3.5</h3>
+<p>The <code>fish_encounters</code> dataset contains data on fish migration along a river. Sensors were setup at multiple stations along the river, and the data show whether the fish was observed at each station. Notice that there are many rows for each fish, corresponding to each station where the fish was observed. If a fish was not observed at a station, then that row is omitted from the dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;fish_encounters&quot;</span>)
+<span class="kw">head</span>(fish_encounters)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   fish  station  seen
+##   &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
+## 1 4842  Release     1
+## 2 4842  I80_1       1
+## 3 4842  Lisbon      1
+## 4 4842  Rstr        1
+## 5 4842  Base_TD     1
+## 6 4842  BCE         1</code></pre>
+<p>Reshape the data so that each fish has exactly one row in the data, columns correspond to the different stations, and the entry in the cell correponding to a fish and station has value 1 if the fish was seen at that station. (See illustration.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+<p>If we add <code>values_fill = 0</code> in the pivot command, NA's will be replaced with 0's.</p>
+</div>
+<div id="practice-2.3.6" class="section level3 unnumbered">
+<h3>Practice 2.3.6</h3>
+<p>The following code scrapes the Milwaukee Bucks roster from <code>espn.com</code>. We'll learn about how to scrape data from the web later in the term.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)
+page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.espn.com/nba/team/roster/_/name/mil&quot;</span>)
+table &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="kw">html_elements</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span>
+<span class="kw">html_table</span>()
+Bucks &lt;-<span class="st"> </span>table[[<span class="dv">1</span>]]
+Bucks</code></pre></div>
+<pre><code>## # A tibble: 18 x 8
+##    ``    Name                POS     Age HT       WT      College      Salary   
+##    &lt;lgl&gt; &lt;chr&gt;               &lt;chr&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;    
+##  1 NA    Grayson Allen7      SG       26 &quot;6&#39; 4\&quot;&quot; 198 lbs Duke         $4,054,6…
+##  2 NA    Giannis Antetokoun… PF       27 &quot;6&#39; 11\… 242 lbs --           $39,344,…
+##  3 NA    Thanasis Antetokou… SF       29 &quot;6&#39; 6\&quot;&quot; 219 lbs --           $1,669,1…
+##  4 NA    Pat Connaughton24   SG       29 &quot;6&#39; 5\&quot;&quot; 209 lbs Notre Dame   $5,333,3…
+##  5 NA    Donte DiVincenzo0   SG       24 &quot;6&#39; 4\&quot;&quot; 203 lbs Villanova    $4,675,8…
+##  6 NA    Jeff Dowtin15       PG       24 &quot;6&#39; 3\&quot;&quot; 177 lbs Rhode Island --       
+##  7 NA    Langston Galloway12 SG       30 &quot;6&#39; 1\&quot;&quot; 200 lbs Saint Josep… --       
+##  8 NA    George Hill3        PG       35 &quot;6&#39; 4\&quot;&quot; 188 lbs IUPUI        $4,000,0…
+##  9 NA    Jrue Holiday21      PG       31 &quot;6&#39; 3\&quot;&quot; 205 lbs UCLA         $32,413,…
+## 10 NA    Rodney Hood5        SG       29 &quot;6&#39; 8\&quot;&quot; 208 lbs Duke         $1,669,1…
+## 11 NA    Brook Lopez11       C        33 &quot;7&#39; 0\&quot;&quot; 282 lbs Stanford     $13,302,…
+## 12 NA    Sandro Mamukelashv… PF       22 &quot;6&#39; 9\&quot;&quot; 240 lbs Seton Hall   --       
+## 13 NA    Wesley Matthews23   SG       35 &quot;6&#39; 4\&quot;&quot; 220 lbs Marquette    $1,237,4…
+## 14 NA    Khris Middleton22   SF       30 &quot;6&#39; 7\&quot;&quot; 222 lbs Texas A&amp;M    $35,500,…
+## 15 NA    Jordan Nwora13      SF       23 &quot;6&#39; 8\&quot;&quot; 225 lbs Louisville   $1,517,9…
+## 16 NA    Semi Ojeleye37      PF       27 &quot;6&#39; 6\&quot;&quot; 240 lbs SMU          $1,669,1…
+## 17 NA    Bobby Portis9       C        26 &quot;6&#39; 10\… 250 lbs Arkansas     $4,347,6…
+## 18 NA    Lindell Wigginton28 G        23 &quot;6&#39; 1\&quot;&quot; 189 lbs Iowa State   --</code></pre>
+<p>Notice that the <code>HT</code> variable includes both feet and inches, separated by the ' symbol.</p>
+<p>We'll want to separate the <code>HT</code> variable into two separate numeric variables, <code>FT</code> and <code>IN</code>.</p>
+<p>First, we'll remove the &quot; symbol after inches, using the code below. You'll learn more about the <code>str_replace()</code> function soon.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Bucks<span class="op">$</span>HT &lt;-<span class="st"> </span><span class="kw">str_replace</span>(Bucks<span class="op">$</span>HT, <span class="st">&#39;&quot;&#39;</span>, <span class="st">&quot;&quot;</span>)
+Bucks</code></pre></div>
+<pre><code>## # A tibble: 18 x 8
+##    ``    Name                  POS     Age HT    WT      College      Salary    
+##    &lt;lgl&gt; &lt;chr&gt;                 &lt;chr&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;     
+##  1 NA    Grayson Allen7        SG       26 6&#39; 4  198 lbs Duke         $4,054,695
+##  2 NA    Giannis Antetokounmp… PF       27 6&#39; 11 242 lbs --           $39,344,9…
+##  3 NA    Thanasis Antetokounm… SF       29 6&#39; 6  219 lbs --           $1,669,178
+##  4 NA    Pat Connaughton24     SG       29 6&#39; 5  209 lbs Notre Dame   $5,333,334
+##  5 NA    Donte DiVincenzo0     SG       24 6&#39; 4  203 lbs Villanova    $4,675,830
+##  6 NA    Jeff Dowtin15         PG       24 6&#39; 3  177 lbs Rhode Island --        
+##  7 NA    Langston Galloway12   SG       30 6&#39; 1  200 lbs Saint Josep… --        
+##  8 NA    George Hill3          PG       35 6&#39; 4  188 lbs IUPUI        $4,000,000
+##  9 NA    Jrue Holiday21        PG       31 6&#39; 3  205 lbs UCLA         $32,413,3…
+## 10 NA    Rodney Hood5          SG       29 6&#39; 8  208 lbs Duke         $1,669,178
+## 11 NA    Brook Lopez11         C        33 7&#39; 0  282 lbs Stanford     $13,302,3…
+## 12 NA    Sandro Mamukelashvil… PF       22 6&#39; 9  240 lbs Seton Hall   --        
+## 13 NA    Wesley Matthews23     SG       35 6&#39; 4  220 lbs Marquette    $1,237,494
+## 14 NA    Khris Middleton22     SF       30 6&#39; 7  222 lbs Texas A&amp;M    $35,500,0…
+## 15 NA    Jordan Nwora13        SF       23 6&#39; 8  225 lbs Louisville   $1,517,981
+## 16 NA    Semi Ojeleye37        PF       27 6&#39; 6  240 lbs SMU          $1,669,178
+## 17 NA    Bobby Portis9         C        26 6&#39; 10 250 lbs Arkansas     $4,347,600
+## 18 NA    Lindell Wigginton28   G        23 6&#39; 1  189 lbs Iowa State   --</code></pre>
+<p>Now, separate the <code>HT</code> variable into two variables, called <code>FT</code> and <code>IN</code>. Make sure they are both numeric variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type code here</span></code></pre></div>
+</div>
+</div>
+<div id="joining-data" class="section level2">
+<h2><span class="header-section-number">2.4</span> Joining Data</h2>
+<div id="mutating-joins" class="section level3 unnumbered">
+<h3>Mutating Joins</h3>
+<p>A mutating join adds new variables to a dataframe by matching observations in another.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Lock5Data)
+<span class="kw">data</span>(AllCountries)
+countries &lt;-<span class="st"> </span>AllCountries</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(countries)</code></pre></div>
+<pre><code>## Rows: 217
+## Columns: 26
+## $ Country        &lt;fct&gt; &quot;Afghanistan&quot;, &quot;Albania&quot;, &quot;Algeria&quot;, &quot;American Samoa&quot;, …
+## $ Code           &lt;fct&gt; AFG, ALB, DZA, ASM, AND, AGO, ATG, ARG, ARM, ABW, AUS, …
+## $ LandArea       &lt;dbl&gt; 652.860, 27.400, 2381.740, 0.200, 0.470, 1246.700, 0.44…
+## $ Population     &lt;dbl&gt; 37.172, 2.866, 42.228, 0.055, 0.077, 30.810, 0.096, 44.…
+## $ Density        &lt;dbl&gt; 56.9, 104.6, 17.7, 277.3, 163.8, 24.7, 218.8, 16.3, 103…
+## $ GDP            &lt;int&gt; 521, 5254, 4279, NA, 42030, 3432, 16864, 11653, 4212, N…
+## $ Rural          &lt;dbl&gt; 74.5, 39.7, 27.4, 12.8, 11.9, 34.5, 75.4, 8.1, 36.9, 56…
+## $ CO2            &lt;dbl&gt; 0.29, 1.98, 3.74, NA, 5.83, 1.29, 5.74, 4.78, 1.90, 8.4…
+## $ PumpPrice      &lt;dbl&gt; 0.70, 1.36, 0.28, NA, NA, 0.97, NA, 1.10, 0.77, NA, 0.9…
+## $ Military       &lt;dbl&gt; 3.72, 4.08, 13.81, NA, NA, 9.40, NA, 2.05, 20.86, NA, 5…
+## $ Health         &lt;dbl&gt; 2.01, 9.51, 10.73, NA, 14.02, 5.43, 10.76, 13.56, 6.05,…
+## $ ArmedForces    &lt;int&gt; 323, 9, 317, NA, NA, 117, 0, 105, 49, NA, 58, 21, 82, 1…
+## $ Internet       &lt;dbl&gt; 11.4, 71.8, 47.7, NA, 98.9, 14.3, 76.0, 75.8, 69.7, 97.…
+## $ Cell           &lt;dbl&gt; 67.4, 123.7, 111.0, NA, 104.4, 44.7, 180.4, 139.8, 119.…
+## $ HIV            &lt;dbl&gt; NA, 0.1, 0.1, NA, NA, 1.9, NA, 0.4, 0.2, NA, 0.1, 0.1, …
+## $ Hunger         &lt;dbl&gt; 30.3, 5.5, 4.7, NA, NA, 23.9, NA, 3.8, 4.3, NA, 2.5, 2.…
+## $ Diabetes       &lt;dbl&gt; 9.6, 10.1, 6.7, NA, 8.0, 3.9, 13.2, 5.5, 7.1, 11.6, 5.1…
+## $ BirthRate      &lt;dbl&gt; 32.5, 11.7, 22.3, NA, NA, 41.3, 16.1, 17.0, 13.1, 11.0,…
+## $ DeathRate      &lt;dbl&gt; 6.6, 7.5, 4.8, NA, NA, 8.4, 5.8, 7.6, 9.7, 8.9, 6.5, 9.…
+## $ ElderlyPop     &lt;dbl&gt; 2.6, 13.6, 6.4, NA, NA, 2.5, 7.2, 11.3, 11.4, 13.6, 15.…
+## $ LifeExpectancy &lt;dbl&gt; 64.0, 78.5, 76.3, NA, NA, 61.8, 76.5, 76.7, 74.8, 76.0,…
+## $ FemaleLabor    &lt;dbl&gt; 50.3, 55.9, 16.4, NA, NA, 76.4, NA, 57.1, 55.8, NA, 72.…
+## $ Unemployment   &lt;dbl&gt; 1.5, 13.9, 12.1, NA, NA, 7.3, NA, 9.5, 17.7, NA, 5.4, 4…
+## $ Energy         &lt;int&gt; NA, 808, 1328, NA, NA, 545, NA, 2030, 1016, NA, 5335, 3…
+## $ Electricity    &lt;int&gt; NA, 2309, 1363, NA, NA, 312, NA, 3075, 1962, NA, 10071,…
+## $ Developed      &lt;int&gt; NA, 1, 1, NA, NA, 1, NA, 2, 1, NA, 3, 3, 1, NA, 3, 1, N…</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(countries)</code></pre></div>
+<pre><code>##          Country Code LandArea Population Density   GDP Rural  CO2 PumpPrice
+## 1    Afghanistan  AFG   652.86     37.172    56.9   521  74.5 0.29      0.70
+## 2        Albania  ALB    27.40      2.866   104.6  5254  39.7 1.98      1.36
+## 3        Algeria  DZA  2381.74     42.228    17.7  4279  27.4 3.74      0.28
+## 4 American Samoa  ASM     0.20      0.055   277.3    NA  12.8   NA        NA
+## 5        Andorra  AND     0.47      0.077   163.8 42030  11.9 5.83        NA
+## 6         Angola  AGO  1246.70     30.810    24.7  3432  34.5 1.29      0.97
+##   Military Health ArmedForces Internet  Cell HIV Hunger Diabetes BirthRate
+## 1     3.72   2.01         323     11.4  67.4  NA   30.3      9.6      32.5
+## 2     4.08   9.51           9     71.8 123.7 0.1    5.5     10.1      11.7
+## 3    13.81  10.73         317     47.7 111.0 0.1    4.7      6.7      22.3
+## 4       NA     NA          NA       NA    NA  NA     NA       NA        NA
+## 5       NA  14.02          NA     98.9 104.4  NA     NA      8.0        NA
+## 6     9.40   5.43         117     14.3  44.7 1.9   23.9      3.9      41.3
+##   DeathRate ElderlyPop LifeExpectancy FemaleLabor Unemployment Energy
+## 1       6.6        2.6           64.0        50.3          1.5     NA
+## 2       7.5       13.6           78.5        55.9         13.9    808
+## 3       4.8        6.4           76.3        16.4         12.1   1328
+## 4        NA         NA             NA          NA           NA     NA
+## 5        NA         NA             NA          NA           NA     NA
+## 6       8.4        2.5           61.8        76.4          7.3    545
+##   Electricity Developed
+## 1          NA        NA
+## 2        2309         1
+## 3        1363         1
+## 4          NA        NA
+## 5          NA        NA
+## 6         312         1</code></pre>
+<p>Let's graph each country's life expectancy against its GDP, as we saw in the GapMinder graphic.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>countries) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>LifeExpectancy, <span class="dt">x=</span>GDP, <span class="dt">size=</span>Population)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans =</span> <span class="st">&#39;log2&#39;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-112-1.png" width="576" /></p>
+<p>We cannot color by continent because continent is not a variable in our dataset. Fortunately, we can find the countries in each continent from another source.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">continents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/dbouquin/IS_608/master/NanosatDB_munging/Countries-Continents.csv&quot;</span>)
+<span class="kw">glimpse</span>(continents)</code></pre></div>
+<pre><code>## Rows: 194
+## Columns: 2
+## $ Continent &lt;chr&gt; &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, &quot;Africa&quot;, …
+## $ Country   &lt;chr&gt; &quot;Algeria&quot;, &quot;Angola&quot;, &quot;Benin&quot;, &quot;Botswana&quot;, &quot;Burkina&quot;, &quot;Burund…</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(continents)</code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   Continent Country 
+##   &lt;chr&gt;     &lt;chr&gt;   
+## 1 Africa    Algeria 
+## 2 Africa    Angola  
+## 3 Africa    Benin   
+## 4 Africa    Botswana
+## 5 Africa    Burkina 
+## 6 Africa    Burundi</code></pre>
+<p>In order to join the dataframes together, we need a <strong>key</strong>. A <strong>key</strong> is a variable, or set of variables, that uniquely identifies an observation. Keys are used to match observations.</p>
+<p>Used to connect two data tables</p>
+<ul>
+<li><p><strong>primary key</strong> uniquely identifies an observation in its own table</p></li>
+<li><p><strong>foreign key</strong> uniquely identifies an observation in another table</p></li>
+</ul>
+<p>There are four different kinds of mutating joins in R.</p>
+<ol style="list-style-type: decimal">
+<li><p><code>inner_join</code> matches pairs of observations when their keys are equal. The new dataframe contains only observations that were contained in both of the original ones.</p></li>
+<li><p><code>left_join</code> keeps all observations from the left (x) table. Those not matched return NA's for the variables in the y-table.</p></li>
+<li><p><code>right_join</code> keeps all observations from the right (y) table. Those not matched return NA's for the variables in the x-table.</p></li>
+<li><p><code>full_join</code> keeps all observations in both tables. Those not matched return NA's for variables in the other table.</p></li>
+</ol>
+<p><strong>Inner</strong></p>
+<div class="figure">
+<img src="http://r4ds.had.co.nz/diagrams/join-inner.png" alt="inner join illustration" />
+<p class="caption">inner join illustration</p>
+</div>
+<div class="figure">
+<img src="http://r4ds.had.co.nz/diagrams/join-outer.png" alt="outer join illustration" />
+<p class="caption">outer join illustration</p>
+</div>
+</div>
+<div id="example-2.4.1-joining-countries-and-continents" class="section level3 unnumbered">
+<h3>Example 2.4.1 Joining countries and continents</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Using <code>inner_join</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_inner &lt;-<span class="st"> </span>countries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inner_join</span>(continents, <span class="dt">by=</span><span class="st">&quot;Country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Country, Continent, <span class="kw">everything</span>())
+<span class="kw">head</span>(countries_inner)</code></pre></div>
+<pre><code>##               Country     Continent Code LandArea Population Density   GDP
+## 1         Afghanistan          Asia  AFG   652.86     37.172    56.9   521
+## 2             Albania        Europe  ALB    27.40      2.866   104.6  5254
+## 3             Algeria        Africa  DZA  2381.74     42.228    17.7  4279
+## 4             Andorra        Europe  AND     0.47      0.077   163.8 42030
+## 5              Angola        Africa  AGO  1246.70     30.810    24.7  3432
+## 6 Antigua and Barbuda North America  ATG     0.44      0.096   218.8 16864
+##   Rural  CO2 PumpPrice Military Health ArmedForces Internet  Cell HIV Hunger
+## 1  74.5 0.29      0.70     3.72   2.01         323     11.4  67.4  NA   30.3
+## 2  39.7 1.98      1.36     4.08   9.51           9     71.8 123.7 0.1    5.5
+## 3  27.4 3.74      0.28    13.81  10.73         317     47.7 111.0 0.1    4.7
+## 4  11.9 5.83        NA       NA  14.02          NA     98.9 104.4  NA     NA
+## 5  34.5 1.29      0.97     9.40   5.43         117     14.3  44.7 1.9   23.9
+## 6  75.4 5.74        NA       NA  10.76           0     76.0 180.4  NA     NA
+##   Diabetes BirthRate DeathRate ElderlyPop LifeExpectancy FemaleLabor
+## 1      9.6      32.5       6.6        2.6           64.0        50.3
+## 2     10.1      11.7       7.5       13.6           78.5        55.9
+## 3      6.7      22.3       4.8        6.4           76.3        16.4
+## 4      8.0        NA        NA         NA             NA          NA
+## 5      3.9      41.3       8.4        2.5           61.8        76.4
+## 6     13.2      16.1       5.8        7.2           76.5          NA
+##   Unemployment Energy Electricity Developed
+## 1          1.5     NA          NA        NA
+## 2         13.9    808        2309         1
+## 3         12.1   1328        1363         1
+## 4           NA     NA          NA        NA
+## 5          7.3    545         312         1
+## 6           NA     NA          NA        NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(countries_inner)</code></pre></div>
+<pre><code>## [1] 165  27</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Using <code>left_join</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_left &lt;-<span class="st"> </span>countries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(continents, <span class="dt">by=</span><span class="st">&quot;Country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Country, Continent, <span class="kw">everything</span>())
+<span class="kw">head</span>(countries_left)</code></pre></div>
+<pre><code>##          Country Continent Code LandArea Population Density   GDP Rural  CO2
+## 1    Afghanistan      Asia  AFG   652.86     37.172    56.9   521  74.5 0.29
+## 2        Albania    Europe  ALB    27.40      2.866   104.6  5254  39.7 1.98
+## 3        Algeria    Africa  DZA  2381.74     42.228    17.7  4279  27.4 3.74
+## 4 American Samoa      &lt;NA&gt;  ASM     0.20      0.055   277.3    NA  12.8   NA
+## 5        Andorra    Europe  AND     0.47      0.077   163.8 42030  11.9 5.83
+## 6         Angola    Africa  AGO  1246.70     30.810    24.7  3432  34.5 1.29
+##   PumpPrice Military Health ArmedForces Internet  Cell HIV Hunger Diabetes
+## 1      0.70     3.72   2.01         323     11.4  67.4  NA   30.3      9.6
+## 2      1.36     4.08   9.51           9     71.8 123.7 0.1    5.5     10.1
+## 3      0.28    13.81  10.73         317     47.7 111.0 0.1    4.7      6.7
+## 4        NA       NA     NA          NA       NA    NA  NA     NA       NA
+## 5        NA       NA  14.02          NA     98.9 104.4  NA     NA      8.0
+## 6      0.97     9.40   5.43         117     14.3  44.7 1.9   23.9      3.9
+##   BirthRate DeathRate ElderlyPop LifeExpectancy FemaleLabor Unemployment Energy
+## 1      32.5       6.6        2.6           64.0        50.3          1.5     NA
+## 2      11.7       7.5       13.6           78.5        55.9         13.9    808
+## 3      22.3       4.8        6.4           76.3        16.4         12.1   1328
+## 4        NA        NA         NA             NA          NA           NA     NA
+## 5        NA        NA         NA             NA          NA           NA     NA
+## 6      41.3       8.4        2.5           61.8        76.4          7.3    545
+##   Electricity Developed
+## 1          NA        NA
+## 2        2309         1
+## 3        1363         1
+## 4          NA        NA
+## 5          NA        NA
+## 6         312         1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(countries_left)</code></pre></div>
+<pre><code>## [1] 217  27</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Using <code>right_join</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_right &lt;-<span class="st"> </span>countries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">right_join</span>(continents, <span class="dt">by=</span><span class="st">&quot;Country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Country, Continent, <span class="kw">everything</span>())
+<span class="kw">head</span>(countries_right)</code></pre></div>
+<pre><code>##               Country     Continent Code LandArea Population Density   GDP
+## 1         Afghanistan          Asia  AFG   652.86     37.172    56.9   521
+## 2             Albania        Europe  ALB    27.40      2.866   104.6  5254
+## 3             Algeria        Africa  DZA  2381.74     42.228    17.7  4279
+## 4             Andorra        Europe  AND     0.47      0.077   163.8 42030
+## 5              Angola        Africa  AGO  1246.70     30.810    24.7  3432
+## 6 Antigua and Barbuda North America  ATG     0.44      0.096   218.8 16864
+##   Rural  CO2 PumpPrice Military Health ArmedForces Internet  Cell HIV Hunger
+## 1  74.5 0.29      0.70     3.72   2.01         323     11.4  67.4  NA   30.3
+## 2  39.7 1.98      1.36     4.08   9.51           9     71.8 123.7 0.1    5.5
+## 3  27.4 3.74      0.28    13.81  10.73         317     47.7 111.0 0.1    4.7
+## 4  11.9 5.83        NA       NA  14.02          NA     98.9 104.4  NA     NA
+## 5  34.5 1.29      0.97     9.40   5.43         117     14.3  44.7 1.9   23.9
+## 6  75.4 5.74        NA       NA  10.76           0     76.0 180.4  NA     NA
+##   Diabetes BirthRate DeathRate ElderlyPop LifeExpectancy FemaleLabor
+## 1      9.6      32.5       6.6        2.6           64.0        50.3
+## 2     10.1      11.7       7.5       13.6           78.5        55.9
+## 3      6.7      22.3       4.8        6.4           76.3        16.4
+## 4      8.0        NA        NA         NA             NA          NA
+## 5      3.9      41.3       8.4        2.5           61.8        76.4
+## 6     13.2      16.1       5.8        7.2           76.5          NA
+##   Unemployment Energy Electricity Developed
+## 1          1.5     NA          NA        NA
+## 2         13.9    808        2309         1
+## 3         12.1   1328        1363         1
+## 4           NA     NA          NA        NA
+## 5          7.3    545         312         1
+## 6           NA     NA          NA        NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(countries_right)</code></pre></div>
+<pre><code>## [1] 194  27</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Using <code>full_join</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_full &lt;-<span class="st"> </span>countries <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">full_join</span>(continents, <span class="dt">by=</span><span class="st">&quot;Country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Country, Continent, <span class="kw">everything</span>())
+<span class="kw">head</span>(countries_full)</code></pre></div>
+<pre><code>##          Country Continent Code LandArea Population Density   GDP Rural  CO2
+## 1    Afghanistan      Asia  AFG   652.86     37.172    56.9   521  74.5 0.29
+## 2        Albania    Europe  ALB    27.40      2.866   104.6  5254  39.7 1.98
+## 3        Algeria    Africa  DZA  2381.74     42.228    17.7  4279  27.4 3.74
+## 4 American Samoa      &lt;NA&gt;  ASM     0.20      0.055   277.3    NA  12.8   NA
+## 5        Andorra    Europe  AND     0.47      0.077   163.8 42030  11.9 5.83
+## 6         Angola    Africa  AGO  1246.70     30.810    24.7  3432  34.5 1.29
+##   PumpPrice Military Health ArmedForces Internet  Cell HIV Hunger Diabetes
+## 1      0.70     3.72   2.01         323     11.4  67.4  NA   30.3      9.6
+## 2      1.36     4.08   9.51           9     71.8 123.7 0.1    5.5     10.1
+## 3      0.28    13.81  10.73         317     47.7 111.0 0.1    4.7      6.7
+## 4        NA       NA     NA          NA       NA    NA  NA     NA       NA
+## 5        NA       NA  14.02          NA     98.9 104.4  NA     NA      8.0
+## 6      0.97     9.40   5.43         117     14.3  44.7 1.9   23.9      3.9
+##   BirthRate DeathRate ElderlyPop LifeExpectancy FemaleLabor Unemployment Energy
+## 1      32.5       6.6        2.6           64.0        50.3          1.5     NA
+## 2      11.7       7.5       13.6           78.5        55.9         13.9    808
+## 3      22.3       4.8        6.4           76.3        16.4         12.1   1328
+## 4        NA        NA         NA             NA          NA           NA     NA
+## 5        NA        NA         NA             NA          NA           NA     NA
+## 6      41.3       8.4        2.5           61.8        76.4          7.3    545
+##   Electricity Developed
+## 1          NA        NA
+## 2        2309         1
+## 3        1363         1
+## 4          NA        NA
+## 5          NA        NA
+## 6         312         1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(countries_full)</code></pre></div>
+<pre><code>## [1] 246  27</code></pre>
+<p>We'll create a new .csv file with the dataset we created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(countries_full, <span class="dt">file=</span><span class="st">&quot;Countries_Full.csv&quot;</span>)</code></pre></div>
+<p>**<a href="Notes:**" class="uri">Notes:**</a><br />
+* If we do not specify a <code>by</code> argument, R will join datasets using a key consisting of all varaibles that appear in both datasets.</p>
+<ul>
+<li>If the datasets use different names for the same variable, join using <code>by=c(&quot;variablename_x&quot;= &quot;variablename_y&quot;)</code>. For example, if the variable <code>Country</code> were instead called <code>country</code> in the <code>countries</code> dataset and <code>ctry</code> in the <code>Continents</code> dataset, we would use <code>inner_join(countries, continents, by=c(&quot;country&quot;=&quot;ctry&quot;))</code>.</li>
+</ul>
+<p>We create two small fictional datasets. <code>Students</code> contains a list of fictional student id's, and the courses the students are enrolled in. Note there is a separate line for each course. <code>Costs</code> contains the total cost of textbooks and other materials for each course.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">id &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">10576</span>, <span class="dv">10576</span>, <span class="dv">10576</span>, <span class="dv">11439</span>, <span class="dv">11439</span>, <span class="dv">19857</span>, <span class="dv">11306</span>, <span class="dv">11306</span>, <span class="dv">12576</span>, <span class="dv">12576</span>)
+course &lt;-<span class="kw">c</span>(<span class="st">&quot;Calculus&quot;</span>, <span class="st">&quot;Art&quot;</span>, <span class="st">&quot;Economics&quot;</span>, <span class="st">&quot;Calculus&quot;</span>, <span class="st">&quot;Shakespeare&quot;</span>, <span class="st">&quot;History&quot;</span>, <span class="st">&quot;Economics&quot;</span>, <span class="st">&quot;Statistics&quot;</span>, <span class="st">&quot;Art&quot;</span>, <span class="st">&quot;Shakespeare&quot;</span>)
+Students &lt;-<span class="st"> </span><span class="kw">data.frame</span>(id, course)
+Students</code></pre></div>
+<pre><code>##       id      course
+## 1  10576    Calculus
+## 2  10576         Art
+## 3  10576   Economics
+## 4  11439    Calculus
+## 5  11439 Shakespeare
+## 6  19857     History
+## 7  11306   Economics
+## 8  11306  Statistics
+## 9  12576         Art
+## 10 12576 Shakespeare</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">course &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Calculus&quot;</span>, <span class="st">&quot;Economics&quot;</span>, <span class="st">&quot;Shakespeare&quot;</span>, <span class="st">&quot;History&quot;</span>, <span class="st">&quot;Engineering&quot;</span>)
+book_cost &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">75</span>, <span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">100</span>)
+Costs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(course, book_cost)
+Costs</code></pre></div>
+<pre><code>##        course book_cost
+## 1    Calculus        90
+## 2   Economics        75
+## 3 Shakespeare        50
+## 4     History        80
+## 5 Engineering       100</code></pre>
+</div>
+<div id="practice-2.4.2" class="section level3 unnumbered">
+<h3>Practice 2.4.2</h3>
+<div id="use-one-of-the-join-commands-to-create-the-following-datasets." class="section level4">
+<h4><span class="header-section-number">2.4.0.1</span> Use one of the join commands to create the following datasets.</h4>
+</div>
+<div id="a-a-dataset-whose-first-two-columns-are-identical-to-students-and-whose-third-column-contains-the-book_cost-for-each-course.-if-the-course-does-not-appear-in-the-costs-dataset-return-na." class="section level4">
+<h4><span class="header-section-number">2.4.0.2</span> a) a dataset whose first two columns are identical to <code>Students</code>, and whose third column contains the <code>book_cost</code> for each course. If the course does not appear in the <code>Costs</code> dataset, return <code>NA</code>.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+<div id="b-a-dataset-like-the-one-in-a-but-which-excludes-courses-whose-book-costs-are-not-listed" class="section level4">
+<h4><span class="header-section-number">2.4.0.3</span> b) a dataset like the one in (a), but which excludes courses whose book costs are not listed</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+<div id="c-a-dataset-that-lists-each-course-in-the-costs-dataset-along-with-the-number-of-students-taking-the-course-and-the-cost-of-books.-hint-you-will-need-to-do-some-data-wrangling-before-joining-the-data." class="section level4">
+<h4><span class="header-section-number">2.4.0.4</span> c) a dataset that lists each course in the <code>Costs</code> dataset along with the number of students taking the course, and the cost of books. Hint: you will need to do some data wrangling before joining the data.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+</div>
+<div id="filtering-joins" class="section level3 unnumbered">
+<h3>Filtering Joins</h3>
+<p>A filtering join filters observations from one data frame based on whether or not they match an observation in the other table.</p>
+<p>There are two types of filtering joins:</p>
+<ul>
+<li><code>semi_join(x, y)</code> keeps all observations in dataframe <code>x</code> that have a match in dataframe <code>y</code><br />
+<img src="http://r4ds.had.co.nz/diagrams/join-semi.png" alt="semi join illustration" /></li>
+<li><code>anti_join(x, y)</code> drops all observations in dataframe <code>x</code> that have a match in dataframe <code>y</code>. <img src="http://r4ds.had.co.nz/diagrams/join-anti.png" alt="anti join illustration" /></li>
+</ul>
+<p>Anti-joins are useful for diagnosing join mismatches.</p>
+</div>
+<div id="example-2.4.3-joining-countries-and-continents" class="section level3 unnumbered">
+<h3>Example 2.4.3 Joining countries and continents</h3>
+<p>Use semi_join to create a dataset of all countries in continents whose total land area is greater than 20 million square km. (Note: land area is given in thousands of square km.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Large_Area &lt;-<span class="st"> </span>countries_full <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Continent) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">total_area =</span> <span class="kw">sum</span>(LandArea, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(total_area <span class="op">&gt;</span><span class="st"> </span><span class="dv">20000</span>)
+<span class="kw">head</span>(Large_Area)</code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   Continent total_area
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 Africa        22777.
+## 2 Asia          43510.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_full <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">semi_join</span>(Large_Area) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+<pre><code>##       Country Continent Code LandArea Population Density   GDP Rural   CO2
+## 1 Afghanistan      Asia  AFG  652.860     37.172    56.9   521  74.5  0.29
+## 2     Algeria    Africa  DZA 2381.740     42.228    17.7  4279  27.4  3.74
+## 3      Angola    Africa  AGO 1246.700     30.810    24.7  3432  34.5  1.29
+## 4     Bahrain      Asia  BHR    0.778      1.569  2017.3 24051  10.7 23.46
+## 5  Bangladesh      Asia  BGD  130.170    161.356  1239.6  1698  63.4  0.47
+## 6       Benin    Africa  BEN  112.760     11.485   101.9   902  52.7  0.61
+##   PumpPrice Military Health ArmedForces Internet  Cell HIV Hunger Diabetes
+## 1      0.70     3.72   2.01         323     11.4  67.4  NA   30.3      9.6
+## 2      0.28    13.81  10.73         317     47.7 111.0 0.1    4.7      6.7
+## 3      0.97     9.40   5.43         117     14.3  44.7 1.9   23.9      3.9
+## 4      0.43    10.93   8.41          19     95.9 158.4 0.1     NA     16.5
+## 5      1.12    10.16   3.38         221     18.0  91.7 0.1   15.2      8.4
+## 6      0.72     3.72   3.72          12     14.1  78.5 1.0   10.4      1.0
+##   BirthRate DeathRate ElderlyPop LifeExpectancy FemaleLabor Unemployment Energy
+## 1      32.5       6.6        2.6           64.0        50.3          1.5     NA
+## 2      22.3       4.8        6.4           76.3        16.4         12.1   1328
+## 3      41.3       8.4        2.5           61.8        76.4          7.3    545
+## 4      14.4       2.4        2.4           77.0        46.1          1.0  10597
+## 5      18.6       5.3        5.1           72.8        38.1          4.3    229
+## 6      36.6       9.0        3.3           61.2        70.6          2.1    417
+##   Electricity Developed
+## 1          NA        NA
+## 2        1363         1
+## 3         312         1
+## 4       19597         3
+## 5         320         1
+## 6         100         1</code></pre>
+<p>Use anti-join to find the countries contained in the full-join of the datasets that are not contained in the inner-join.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countries_full <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anti_join</span>(countries_inner, <span class="dt">by=</span><span class="st">&quot;Country&quot;</span>)</code></pre></div>
+<pre><code>##                             Country     Continent Code  LandArea Population
+## 1                    American Samoa          &lt;NA&gt;  ASM    0.2000      0.055
+## 2                             Aruba          &lt;NA&gt;  ABW    0.1800      0.106
+## 3                      Bahamas, The          &lt;NA&gt;  BHS   10.0100      0.386
+## 4                           Bermuda          &lt;NA&gt;  BMU    0.0540      0.064
+## 5            British Virgin Islands          &lt;NA&gt;  VGB    0.1500      0.030
+## 6                 Brunei Darussalam          &lt;NA&gt;  BRN    5.2700      0.429
+## 7                      Burkina Faso          &lt;NA&gt;  BFA  273.6000     19.752
+## 8                        Cabo Verde          &lt;NA&gt;  CPV    4.0300      0.544
+## 9                    Cayman Islands          &lt;NA&gt;  CYM    0.2400      0.064
+## 10                  Channel Islands          &lt;NA&gt;  CHI    0.1980      0.170
+## 11                 Congo, Dem. Rep.          &lt;NA&gt;  COD 2267.0500     84.068
+## 12                      Congo, Rep.          &lt;NA&gt;  COG  341.5000      5.244
+## 13                    Cote d&#39;Ivoire          &lt;NA&gt;  CIV  318.0000     25.069
+## 14                          Curacao          &lt;NA&gt;  CUW        NA      0.160
+## 15                   Czech Republic          &lt;NA&gt;  CZE   77.2200     10.626
+## 16                 Egypt, Arab Rep.          &lt;NA&gt;  EGY  995.4500     98.424
+## 17                         Eswatini          &lt;NA&gt;  SWZ   17.2000      1.136
+## 18                    Faroe Islands          &lt;NA&gt;  FRO    1.3960      0.048
+## 19                 French Polynesia          &lt;NA&gt;  PYF    3.6600      0.278
+## 20                      Gambia, The          &lt;NA&gt;  GMB   10.1200      2.280
+## 21                        Gibraltar          &lt;NA&gt;  GIB    0.0100      0.034
+## 22                        Greenland          &lt;NA&gt;  GRL  410.4500      0.056
+## 23                             Guam          &lt;NA&gt;  GUM    0.5400      0.166
+## 24             Hong Kong SAR, China          &lt;NA&gt;  HKG    1.0500      7.451
+## 25               Iran, Islamic Rep.          &lt;NA&gt;  IRN 1628.7600     81.800
+## 26                      Isle of Man          &lt;NA&gt;  IMN    0.5700      0.084
+## 27        Korea, Dem. People&#39;s Rep.          &lt;NA&gt;  PRK  120.4100     25.550
+## 28                      Korea, Rep.          &lt;NA&gt;  KOR   97.4890     51.635
+## 29                           Kosovo          &lt;NA&gt;  XKX        NA      1.845
+## 30                  Kyrgyz Republic          &lt;NA&gt;  KGZ  191.8000      6.316
+## 31                          Lao PDR          &lt;NA&gt;  LAO  230.8000      7.062
+## 32                 Macao SAR, China          &lt;NA&gt;  MAC    0.0304      0.632
+## 33            Micronesia, Fed. Sts.          &lt;NA&gt;  FSM    0.7000      0.113
+## 34                          Myanmar          &lt;NA&gt;  MMR  653.0800     53.708
+## 35                    New Caledonia          &lt;NA&gt;  NCL   18.2800      0.284
+## 36                  North Macedonia          &lt;NA&gt;  MKD   25.2200      2.083
+## 37         Northern Mariana Islands          &lt;NA&gt;  MNP    0.4600      0.057
+## 38                      Puerto Rico          &lt;NA&gt;  PRI    8.8700      3.195
+## 39        Sint Maarten (Dutch part)          &lt;NA&gt;  SXM        NA      0.041
+## 40                  Slovak Republic          &lt;NA&gt;  SVK   48.0800      5.447
+## 41              St. Kitts and Nevis          &lt;NA&gt;  KNA    0.2600      0.052
+## 42                        St. Lucia          &lt;NA&gt;  LCA    0.6100      0.182
+## 43         St. Martin (French part)          &lt;NA&gt;  MAF        NA      0.037
+## 44   St. Vincent and the Grenadines          &lt;NA&gt;  VCT    0.3900      0.110
+## 45             Syrian Arab Republic          &lt;NA&gt;  SYR  183.6300     16.906
+## 46                      Timor-Leste          &lt;NA&gt;  TLS   14.8700      1.268
+## 47         Turks and Caicos Islands          &lt;NA&gt;  TCA    0.9500      0.038
+## 48                    United States          &lt;NA&gt;  USA 9147.4200    327.167
+## 49                    Venezuela, RB          &lt;NA&gt;  VEN  882.0500     28.870
+## 50            Virgin Islands (U.S.)          &lt;NA&gt;  VIR    0.3500      0.107
+## 51               West Bank and Gaza          &lt;NA&gt;  PSE    6.0200      4.569
+## 52                      Yemen, Rep.          &lt;NA&gt;  YEM  527.9700     28.499
+## 53                          Burkina        Africa &lt;NA&gt;        NA         NA
+## 54                       Cape Verde        Africa &lt;NA&gt;        NA         NA
+## 55                            Congo        Africa &lt;NA&gt;        NA         NA
+## 56    Congo, Democratic Republic of        Africa &lt;NA&gt;        NA         NA
+## 57                            Egypt        Africa &lt;NA&gt;        NA         NA
+## 58                           Gambia        Africa &lt;NA&gt;        NA         NA
+## 59                      Ivory Coast        Africa &lt;NA&gt;        NA         NA
+## 60                        Swaziland        Africa &lt;NA&gt;        NA         NA
+## 61                           Brunei          Asia &lt;NA&gt;        NA         NA
+## 62                  Burma (Myanmar)          Asia &lt;NA&gt;        NA         NA
+## 63                       East Timor          Asia &lt;NA&gt;        NA         NA
+## 64                             Iran          Asia &lt;NA&gt;        NA         NA
+## 65                     Korea, North          Asia &lt;NA&gt;        NA         NA
+## 66                     Korea, South          Asia &lt;NA&gt;        NA         NA
+## 67                       Kyrgyzstan          Asia &lt;NA&gt;        NA         NA
+## 68                             Laos          Asia &lt;NA&gt;        NA         NA
+## 69                            Syria          Asia &lt;NA&gt;        NA         NA
+## 70                            Yemen          Asia &lt;NA&gt;        NA         NA
+## 71                               CZ        Europe &lt;NA&gt;        NA         NA
+## 72                        Macedonia        Europe &lt;NA&gt;        NA         NA
+## 73                         Slovakia        Europe &lt;NA&gt;        NA         NA
+## 74                     Vatican City        Europe &lt;NA&gt;        NA         NA
+## 75                          Bahamas North America &lt;NA&gt;        NA         NA
+## 76            Saint Kitts and Nevis North America &lt;NA&gt;        NA         NA
+## 77                      Saint Lucia North America &lt;NA&gt;        NA         NA
+## 78 Saint Vincent and the Grenadines North America &lt;NA&gt;        NA         NA
+## 79                               US North America &lt;NA&gt;        NA         NA
+## 80                       Micronesia       Oceania &lt;NA&gt;        NA         NA
+## 81                        Venezuela South America &lt;NA&gt;        NA         NA
+##    Density   GDP Rural   CO2 PumpPrice Military Health ArmedForces Internet
+## 1    277.3    NA  12.8    NA        NA       NA     NA          NA       NA
+## 2    588.0    NA  56.6  8.41        NA       NA     NA          NA     97.2
+## 3     38.5    NA  17.0  6.52     0.920       NA  15.98           1     85.0
+## 4   1184.6    NA   0.0  8.84        NA       NA     NA          NA     98.4
+## 5    198.7    NA  52.3  6.20        NA       NA     NA          NA       NA
+## 6     81.4 31628  22.4 22.23     0.370     7.80   5.69           8     94.9
+## 7     72.2   731  70.6  0.16     0.980     8.01  11.03          11     15.9
+## 8    134.9  3654  34.3  0.95     1.020     1.76   9.89           1     57.2
+## 9    267.4    NA   0.0  8.92        NA       NA     NA          NA     81.1
+## 10   861.1    NA  69.1    NA        NA       NA     NA          NA       NA
+## 11    37.1   562  55.5  0.06     1.490     5.47   3.73         134      8.6
+## 12    15.4  2148  33.1  0.65     0.970    10.44   3.92          12      8.7
+## 13    78.8  1716  49.2  0.49     0.930     5.98   4.88          27     43.8
+## 14      NA    NA  10.9 37.73        NA       NA     NA          NA       NA
+## 15   137.6 22973  26.2  9.17     1.170     2.76  14.83          23     78.7
+## 16    98.9  2549  57.3  2.23     0.400     4.14   4.22         836     45.0
+## 17    66.1  4140  76.2  1.10     0.770     5.25  15.23          NA     30.3
+## 18    34.7    NA  57.9 12.46        NA       NA     NA          NA     97.6
+## 19    75.9    NA  38.2  2.96        NA       NA     NA          NA     72.7
+## 20   225.3   712  38.7  0.25     1.180     3.31   2.76           1     19.8
+## 21  3371.8    NA   0.0 15.66        NA       NA     NA          NA       NA
+## 22     0.1    NA  13.2  8.99        NA       NA     NA          NA     69.5
+## 23   307.0    NA   5.2    NA        NA       NA     NA          NA     80.5
+## 24  7096.2 48717   0.0  6.39     1.860       NA     NA          NA     89.4
+## 25    50.2    NA  25.1  8.38     0.399    15.78  22.60         563     60.4
+## 26   147.5    NA  47.4    NA        NA       NA     NA          NA       NA
+## 27   212.2    NA  38.1  1.62     0.580       NA     NA        1469       NA
+## 28   529.7 31363  18.5 11.57     1.220    12.35  13.45         634     95.1
+## 29      NA  4281    NA    NA     1.110     2.67     NA          NA       NA
+## 30    32.9  1281  63.6  1.65     0.560     4.39   6.60          21     38.2
+## 31    30.6  2568  65.0  0.29     0.930       NA   3.74         129     25.5
+## 32 20777.5 86355   0.0  2.17        NA       NA     NA          NA     83.2
+## 33   160.9  3058  77.3  1.40        NA       NA   5.73          NA     35.3
+## 34    82.2  1326  69.4  0.41     0.540    15.20   4.79         513     30.7
+## 35    15.5    NA  29.3 16.01        NA       NA     NA          NA     82.0
+## 36    82.6  6084  42.0  3.61     1.110     3.06  13.05          16     76.3
+## 37   123.7    NA   8.4    NA        NA       NA     NA          NA       NA
+## 38   360.2 31651   6.4    NA        NA       NA     NA          NA     72.8
+## 39      NA    NA   0.0 19.46        NA       NA     NA          NA       NA
+## 40   113.3 19547  46.3  5.66     1.320     3.01  13.71          16     81.6
+## 41   201.7 19829  69.2  4.55        NA       NA   8.15          NA     80.7
+## 42   298.2 10315  81.3  2.28        NA       NA   8.46          NA     50.8
+## 43      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 44   282.6  7378  47.8  1.92        NA       NA   9.56          NA     65.6
+## 45    92.1    NA  45.8  1.64        NA       NA     NA         239     34.3
+## 46    85.3  2036  69.4  0.40     1.100     1.41   3.22           2     27.5
+## 47    39.6 27142   6.9  5.81        NA       NA     NA          NA       NA
+## 48    35.8 62641  17.7 16.50     0.710     9.01  39.46        1359     75.2
+## 49    32.7    NA  11.8  6.16        NA       NA   1.86         343     64.3
+## 50   305.6    NA   4.3    NA        NA       NA     NA          NA     64.4
+## 51   759.0  3199  23.8    NA     1.540       NA     NA          NA     65.2
+## 52    54.0   944  63.4  0.88     0.920       NA   0.00          40     26.7
+## 53      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 54      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 55      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 56      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 57      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 58      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 59      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 60      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 61      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 62      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 63      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 64      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 65      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 66      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 67      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 68      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 69      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 70      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 71      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 72      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 73      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 74      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 75      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 76      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 77      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 78      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 79      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 80      NA    NA    NA    NA        NA       NA     NA          NA       NA
+## 81      NA    NA    NA    NA        NA       NA     NA          NA       NA
+##     Cell  HIV Hunger Diabetes BirthRate DeathRate ElderlyPop LifeExpectancy
+## 1     NA   NA     NA       NA        NA        NA         NA             NA
+## 2     NA   NA     NA     11.6      11.0       8.9       13.6           76.0
+## 3   89.4  1.9     NA     13.2      14.1       6.4        9.4           75.8
+## 4  105.9   NA     NA     13.0       9.3       7.8         NA           81.4
+## 5     NA   NA     NA     13.7        NA        NA         NA             NA
+## 6  127.1   NA    2.6     12.8      15.6       3.6        4.9           77.4
+## 7   93.5  0.8   21.3      2.4      38.4       8.3        2.4           60.8
+## 8  112.1  0.6   12.3      2.4      20.7       5.4        4.5           73.0
+## 9  157.0   NA     NA     13.2       9.9       3.4         NA             NA
+## 10    NA   NA     NA      4.3       9.3       9.0       18.4           81.3
+## 11  43.5  0.7     NA      6.1      41.7       9.7        3.0           60.0
+## 12  96.1  3.1   37.5      7.2      34.1       7.1        3.4           65.1
+## 13 130.7  2.8   20.7      2.4      36.6      11.9        2.9           54.1
+## 14 116.6   NA     NA     11.6       9.7       8.9       16.8           78.0
+## 15 119.0  0.1    2.5      6.8      10.8      10.5       19.5           79.5
+## 16 105.5  0.1    4.8     17.3      25.7       5.9        5.2           71.7
+## 17  76.9 27.4   20.7      3.9      28.4       9.4        3.2           58.3
+## 18 114.2   NA     NA       NA      13.1       8.9         NA           82.4
+## 19 101.7   NA    4.4     22.6      15.2       5.5        8.1           77.0
+## 20 141.2  1.6    9.6      1.9      39.0       7.9        2.4           61.4
+## 21 118.7   NA     NA       NA        NA        NA         NA             NA
+## 22    NA   NA     NA      2.2      15.2       8.9         NA             NA
+## 23    NA   NA     NA     21.5      16.7       5.1        9.9           79.8
+## 24 249.8   NA    2.5      8.3       7.7       6.3       16.9           84.7
+## 25 107.2  0.1    4.9      9.6      15.9       4.5        5.7           76.2
+## 26    NA   NA     NA       NA        NA        NA         NA             NA
+## 27  14.9   NA   43.4      4.0      13.8       9.0        9.3           71.9
+## 28 124.9   NA    2.5      6.8       7.0       5.6       14.4           82.6
+## 29    NA   NA     NA       NA      16.4       7.0         NA           71.9
+## 30 121.9  0.2    6.5      7.1      24.8       5.4        4.7           71.2
+## 31  54.1  0.3   16.6      4.0      23.4       6.6        4.1           67.0
+## 32 328.8   NA   11.4       NA      12.2       3.9       10.5           84.0
+## 33  21.9   NA     NA     12.0      23.8       6.2        5.1           69.3
+## 34  89.8  0.7   10.5      4.6      17.6       8.2        6.0           66.7
+## 35    NA   NA   11.6     23.4      14.5       5.5       10.1           77.1
+## 36  96.4  0.1    4.1     10.1      11.2       9.9       13.7           75.9
+## 37    NA   NA     NA       NA        NA        NA         NA             NA
+## 38  92.5   NA     NA     12.9       7.3       8.9       15.5           80.0
+## 39    NA   NA     NA       NA        NA        NA         NA             NA
+## 40 130.7  0.1    2.7      7.3      10.7       9.9       15.6           77.2
+## 41 138.9   NA     NA     12.8        NA        NA         NA             NA
+## 42  98.8   NA     NA     11.6      12.0       7.5        9.9           75.7
+## 43    NA   NA     NA       NA      14.9       4.3         NA           79.7
+## 44 105.4   NA    5.7     11.6      15.2       7.3        8.0           73.3
+## 45  84.2   NA     NA      8.2      20.9       5.4        4.5           71.0
+## 46 120.1   NA   27.2      6.9      34.6       5.4        3.6           69.2
+## 47    NA   NA     NA       NA        NA        NA         NA             NA
+## 48 120.7   NA    2.5     10.8      11.8       8.5       15.8           78.5
+## 49  78.5   NA   11.7      6.5      18.7       5.7        6.8           74.7
+## 50    NA   NA     NA     12.3      12.8       7.8       19.1           79.4
+## 51  81.2   NA     NA     10.6      31.4       3.5        3.1           73.6
+## 52  54.4   NA   34.4      5.4      31.0       6.4        2.9           65.2
+## 53    NA   NA     NA       NA        NA        NA         NA             NA
+## 54    NA   NA     NA       NA        NA        NA         NA             NA
+## 55    NA   NA     NA       NA        NA        NA         NA             NA
+## 56    NA   NA     NA       NA        NA        NA         NA             NA
+## 57    NA   NA     NA       NA        NA        NA         NA             NA
+## 58    NA   NA     NA       NA        NA        NA         NA             NA
+## 59    NA   NA     NA       NA        NA        NA         NA             NA
+## 60    NA   NA     NA       NA        NA        NA         NA             NA
+## 61    NA   NA     NA       NA        NA        NA         NA             NA
+## 62    NA   NA     NA       NA        NA        NA         NA             NA
+## 63    NA   NA     NA       NA        NA        NA         NA             NA
+## 64    NA   NA     NA       NA        NA        NA         NA             NA
+## 65    NA   NA     NA       NA        NA        NA         NA             NA
+## 66    NA   NA     NA       NA        NA        NA         NA             NA
+## 67    NA   NA     NA       NA        NA        NA         NA             NA
+## 68    NA   NA     NA       NA        NA        NA         NA             NA
+## 69    NA   NA     NA       NA        NA        NA         NA             NA
+## 70    NA   NA     NA       NA        NA        NA         NA             NA
+## 71    NA   NA     NA       NA        NA        NA         NA             NA
+## 72    NA   NA     NA       NA        NA        NA         NA             NA
+## 73    NA   NA     NA       NA        NA        NA         NA             NA
+## 74    NA   NA     NA       NA        NA        NA         NA             NA
+## 75    NA   NA     NA       NA        NA        NA         NA             NA
+## 76    NA   NA     NA       NA        NA        NA         NA             NA
+## 77    NA   NA     NA       NA        NA        NA         NA             NA
+## 78    NA   NA     NA       NA        NA        NA         NA             NA
+## 79    NA   NA     NA       NA        NA        NA         NA             NA
+## 80    NA   NA     NA       NA        NA        NA         NA             NA
+## 81    NA   NA     NA       NA        NA        NA         NA             NA
+##    FemaleLabor Unemployment Energy Electricity Developed
+## 1           NA           NA     NA          NA        NA
+## 2           NA           NA     NA          NA        NA
+## 3         75.6         11.9     NA          NA        NA
+## 4           NA           NA     NA          NA        NA
+## 5           NA           NA     NA          NA        NA
+## 6         62.1          9.2   8673       10291         3
+## 7         60.0          6.1     NA          NA        NA
+## 8         69.7         12.3     NA          NA        NA
+## 9           NA           NA     NA          NA        NA
+## 10        63.8          7.3     NA          NA        NA
+## 11        61.7          4.2    389         109         1
+## 12        68.1         10.4    555         203         1
+## 13        49.3          2.5    613         275         1
+## 14          NA           NA  12651        4798         2
+## 15        69.3          2.4   3915        6259         3
+## 16        24.7         11.4    827        1683         1
+## 17        43.7         22.5     NA          NA        NA
+## 18          NA           NA     NA          NA        NA
+## 19        52.9         12.0     NA          NA        NA
+## 20        52.9          8.9     NA          NA        NA
+## 21          NA           NA   5812        5693         3
+## 22          NA           NA     NA          NA        NA
+## 23        59.6          5.6     NA          NA         1
+## 24        65.3          2.8   1970        6083         3
+## 25        17.9         12.0   3060        3022         2
+## 26          NA           NA     NA          NA        NA
+## 27        81.4          3.3    475         602         1
+## 28        59.4          3.8   5289       10497         3
+## 29          NA           NA   1213        2804         2
+## 30        51.6          7.2    650        1941         1
+## 31        80.7          0.6     NA          NA        NA
+## 32        73.5          2.0     NA          NA        NA
+## 33          NA           NA     NA          NA        NA
+## 34        51.7          1.6    369         215         1
+## 35        65.9         13.6     NA          NA        NA
+## 36        51.8         21.6   1262        3497         2
+## 37          NA           NA     NA          NA        NA
+## 38        39.9         11.4     NA          NA        NA
+## 39          NA           NA     NA          NA        NA
+## 40        66.4          6.8   2943        5137         3
+## 41          NA           NA     NA          NA        NA
+## 42        67.8         20.9     NA          NA        NA
+## 43          NA           NA     NA          NA        NA
+## 44        63.5         19.8     NA          NA        NA
+## 45        12.9          8.1    577         974         1
+## 46        25.6          3.0     NA          NA        NA
+## 47          NA           NA     NA          NA        NA
+## 48        66.8          3.9   6961       12994         3
+## 49        52.0          8.4     NA        2719         2
+## 50        64.6          8.4     NA          NA        NA
+## 51        20.3         30.2     NA          NA        NA
+## 52         6.2         12.9     NA         220         1
+## 53          NA           NA     NA          NA        NA
+## 54          NA           NA     NA          NA        NA
+## 55          NA           NA     NA          NA        NA
+## 56          NA           NA     NA          NA        NA
+## 57          NA           NA     NA          NA        NA
+## 58          NA           NA     NA          NA        NA
+## 59          NA           NA     NA          NA        NA
+## 60          NA           NA     NA          NA        NA
+## 61          NA           NA     NA          NA        NA
+## 62          NA           NA     NA          NA        NA
+## 63          NA           NA     NA          NA        NA
+## 64          NA           NA     NA          NA        NA
+## 65          NA           NA     NA          NA        NA
+## 66          NA           NA     NA          NA        NA
+## 67          NA           NA     NA          NA        NA
+## 68          NA           NA     NA          NA        NA
+## 69          NA           NA     NA          NA        NA
+## 70          NA           NA     NA          NA        NA
+## 71          NA           NA     NA          NA        NA
+## 72          NA           NA     NA          NA        NA
+## 73          NA           NA     NA          NA        NA
+## 74          NA           NA     NA          NA        NA
+## 75          NA           NA     NA          NA        NA
+## 76          NA           NA     NA          NA        NA
+## 77          NA           NA     NA          NA        NA
+## 78          NA           NA     NA          NA        NA
+## 79          NA           NA     NA          NA        NA
+## 80          NA           NA     NA          NA        NA
+## 81          NA           NA     NA          NA        NA</code></pre>
+<p>We'll create the life-expectancy plot, colored by continent.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>countries_inner) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y=</span>LifeExpectancy, <span class="dt">x=</span>GDP, <span class="dt">size=</span>Population, <span class="dt">color =</span> Continent)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">trans =</span> <span class="st">&#39;log2&#39;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-132-1.png" width="576" /></p>
+</div>
+<div id="practice-2.4.4" class="section level3 unnumbered">
+<h3>Practice 2.4.4</h3>
+<p>Continue working with the <code>Students</code> and <code>Costs</code> datasets.</p>
+<div id="a-create-and-display-a-dataset-containing-all-courses-listed-in-costs-that-at-least-one-student-is-taking-along-with-the-cost-of-books-for-the-course." class="section level4">
+<h4><span class="header-section-number">2.4.0.5</span> a) Create and display a dataset containing all courses, listed in <code>Costs</code> that at least one student is taking, along with the cost of books for the course.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+<div id="b-create-and-display-a-dataset-listing-the-ids-of-all-students-who-are-taking-a-course-not-listed-in-costs-as-well-as-the-unlisted-course-they-are-taking." class="section level4">
+<h4><span class="header-section-number">2.4.0.6</span> b) Create and display a dataset listing the id's of all students who are taking a course not listed in <code>Costs</code>, as well as the unlisted course they are taking.</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
 
+</div>
 </div>
 </div>
 </div>

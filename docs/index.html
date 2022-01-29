@@ -24,7 +24,7 @@
 <meta name="author" content="Andrew Sage" />
 
 
-<meta name="date" content="2022-01-21" />
+<meta name="date" content="2022-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,7 +172,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.11"><i class="fa fa-check"></i>Practice 2.1.11</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.12"><i class="fa fa-check"></i>Practice 2.1.12</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#section-2.2-mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Section 2.2 Mutating, Summarizing, and Grouping Data</a><ul>
+<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Mutating, Summarizing, and Grouping Data</a><ul>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.1"><i class="fa fa-check"></i>Example 2.2.1</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.2"><i class="fa fa-check"></i>Example 2.2.2</a></li>
 <li class="chapter" data-level="2.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#summarize"><i class="fa fa-check"></i><b>2.2.1</b> Summarize</a></li>
@@ -187,6 +187,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.11"><i class="fa fa-check"></i>Practice 2.2.11</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.12"><i class="fa fa-check"></i>Practice 2.2.12</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.13"><i class="fa fa-check"></i>Practice 2.2.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>2.3</b> Tidy Data</a><ul>
+<li><a href="data-wrangling.html#example-2.3.1-pivot_longer">Example 2.3.1: <code>pivot_longer()</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.2-pivot_wider">Example 2.3.2 <code>pivot_wider</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.3-separate-and-unite">Example 2.3.3 <code>separate()</code> and <code>unite()</code></a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.4"><i class="fa fa-check"></i>Practice 2.3.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.5"><i class="fa fa-check"></i>Practice 2.3.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.6"><i class="fa fa-check"></i>Practice 2.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling.html"><a href="data-wrangling.html#joining-data"><i class="fa fa-check"></i><b>2.4</b> Joining Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-joins"><i class="fa fa-check"></i>Mutating Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.1-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.1 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.2"><i class="fa fa-check"></i>Practice 2.4.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-joins"><i class="fa fa-check"></i>Filtering Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.3-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.3 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.4"><i class="fa fa-check"></i>Practice 2.4.4</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -211,7 +227,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Data-Scientific Programming Notes</h1>
 <p class="author"><em>Andrew Sage</em></p>
-<p class="date"><em>2022-01-21</em></p>
+<p class="date"><em>2022-01-29</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
