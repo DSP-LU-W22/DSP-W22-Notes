@@ -871,3 +871,238 @@ Continue working with the `Students` and `Costs` datasets.
 # Type code here
 ```
 
+
+
+
+## Strings, Factors and Dates   
+
+### Example 2.5.1: Modifying String Variables  {-}
+
+We scrape the Milwaukee Bucks roster from ESPN.com
+
+```{r}
+library(rvest)
+page <- read_html("https://www.espn.com/nba/team/roster/_/name/mil")
+table <- page %>%
+html_elements("table") %>%
+html_table()
+Bucks <- table[[1]]
+Bucks <- Bucks %>% select(-c(1))
+Bucks
+```
+
+We'll perform several steps to clean the data. 
+
+```{r}
+Bucks <- Bucks %>% mutate(HT = str_remove(HT, '"'),             # remove " from heights
+                 WT = str_remove(WT, "lbs"),                    # remove "lbs" from weights
+                 Salary = str_remove_all(Salary, c("\\$|,")),   # remove $ and , from salary - put \\ in front of special chars.
+                 College = str_replace(College, "--", "NA"),    # replace -- with NA for colleges
+                 WT = as.numeric(WT),                           # convert salaries and weights to numeric
+                 Salary = as.numeric(Salary),
+                 POS = as.factor(POS)                           # convert positions to factor (categorical) variable
+                 )
+```
+
+Now, we'll separate the player's uniform number from their name.  In the notation in the `sep` operator, tells R to separate at the location in the string that lies between a lower case letter and a digit. The `?>=` says "this should be on the left" and the `?=` says "this should be on the right".   
+
+```{r}
+Bucks %>%
+  separate(Name, into = c("Name", "Number"), sep = "(?<=[a-z])(?=[0-9])", convert=TRUE) %>%
+  separate(HT, into = c("FT", "IN"), convert=TRUE)    
+```
+
+### Practice 2.5.2: {-}
+
+We'll load a dataset containing data on the 1000 highest grossing Hollwood movies of all time. Data come from Kaggle (https://www.kaggle.com/sanjeetsinghnaik/top-1000-highest-grossing-movies). 
+
+```{r}
+Movies <- read_csv("Highest_Hollywood_Grossing_Movies.csv")
+head(Movies)
+```
+
+Clean the data in the following ways:    
+1) Create separate variables for year and title and remove any excess characters from each.  
+2) Create a variable containing the release month    
+3) Create separate variables called `hr` and one called `min` containing the hours and minutes of the film. Eliminate any excess characters, and ensure they are both numeric.  
+
+```{r}
+#Type code here
+```
+
+
+### Example 2.5.3: Working with Factor Variables   {-}
+
+We load data from a sample of responses to the General Social survey, between 2000 and 2014. 
+
+```{r}
+data("gss_cat")
+GSS <- gss_cat
+head(GSS)
+```
+
+The `levels` command displays categories of a categorical variable. 
+
+```{r}
+levels(GSS$partyid)
+```
+
+The `count` command shows the number of people in each cetegory.   
+
+```{r}
+GSS %>% count(partyid)
+```
+
+```{r}
+GSS %>% count(relig)
+```
+
+
+The `fct_recode` command allows us to change the names of the levels, or categories.  
+
+The `fct_lmp` function groups together categories that are not among the n most frequent, into a category called "other". 
+
+
+```{r}
+GSS <- GSS %>%
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong"    = "Strong republican",
+    "Republican, weak"      = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak"        = "Not str democrat",
+    "Democrat, strong"      = "Strong democrat",
+    "Other"                 = "No answer",
+    "Other"                 = "Don't know",
+    "Other"                 = "Other party"), 
+    relig = fct_lump(relig, n=5))
+head(GSS)
+```
+
+```{r}
+ggplot(data=GSS %>% filter(partyid!="Other")) + geom_bar(aes(x=relig, fill=partyid), position="fill")  
+```
+
+#### Practice 2.5.4   {-}
+
+Modify the `maritial` variable to indicate whether a person has ever been married. That is, Married, Widowed, Divorced, and Separated should all be listed as "Yes", never married as "No", and No Answer as NA.  
+
+Also, group the `denom` variable to include only the 10 most prevelant denominations, and classify people not belonging to those denominations as `other`.  
+
+```{r}
+#Type code here
+```
+
+### Example 2.5.5: Dates and Times {-}
+
+The `lubridate` package is useful for working with dates and times.   
+
+```{r}
+library(lubridate)
+```
+
+We'll read in a .csv file containing columns of dates, listed in various formats, as well as a fictional number of sales on those days. 
+
+```{r}
+Dates <- read.csv('Dates.csv')
+```
+
+```{r}
+Dates
+```
+
+
+When we try to plot these data, we get something nonsensical. Notice that R thinks of the column headings as character variables, not dates and times.  
+
+```{r}
+ggplot(data=Dates, aes(x=DateA, y=Sales)) + geom_point()
+```
+
+
+If we can get R to recognize the date columns as dates, it will be able to use them in meaningful ways, such as creating graphs. 
+
+We can tell R to treat a date-like variable as a date using the `dmy`, `ymd`, or `mdy` commands, in accordance with the order month, day, and year are given. 
+
+```{r}
+Dates <- Dates %>% mutate(DateA = dmy(DateA))
+Dates
+```
+
+
+```{r}
+ggplot(data=Dates, aes(x=DateA, y=Sales)) + geom_point()
+```
+
+We can also use commands like `dmy_hm` or `dmy_hms` when the variable contains hours, minutes, and seconds. 
+
+```{r}
+Dates <- Dates %>% mutate(DateB = ymd(DateB),
+                          DateC = mdy_hm(DateC))
+Dates
+```
+
+
+
+### Practice 2.5.6    {-}
+
+Convert DateD, DateE, and DateF to appropriate date and/or time variables.  
+
+```{r}
+#Type code here
+```
+
+
+### Example 2.5.7 Creating Date Variable    {-}
+
+We can combine columns to create a date. 
+
+The `nycflights13` package contains data on flights departing from New York City in 2013.  
+
+```{r}
+library(nycflights13)
+head(flights)
+```
+
+We'll combine year, month, day, hour, and minute into a single variable, called `departure`. We tell R to make this into a date and time variable using the `make_datetime` command. 
+
+```{r}
+flights_dt <- flights  %>% 
+  mutate(departure = make_datetime(year, month, day, hour, minute))  
+head(flights_dt)
+```
+
+We plot number of departures by time. 
+
+
+```{r}
+flights_dt %>% 
+  ggplot(aes(departure)) + 
+  geom_freqpoly(binwidth = 86400) # 86400 seconds = 1 day
+```
+
+We plot number of departures on a single day, January 1, 2013 by time.  
+
+```{r}
+flights_dt %>% 
+  filter(departure < ymd(20130102)) %>% 
+  ggplot(aes(departure)) + 
+  geom_freqpoly(binwidth = 600) # 600 s = 10 minutes
+```
+  
+  
+### Example 2.5.8 `today` and `now`    {-}
+
+The `today` and `now` functions return the current date and time. 
+  
+```{r}
+today()
+now()
+```
+
+What happens if we convert between dates and times?
+
+```{r}
+as_datetime(today())
+as_date(now())
+```
+
