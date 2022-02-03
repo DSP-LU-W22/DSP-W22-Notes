@@ -917,8 +917,8 @@ Bucks %>%
 We'll load a dataset containing data on the 1000 highest grossing Hollwood movies of all time. Data come from Kaggle (https://www.kaggle.com/sanjeetsinghnaik/top-1000-highest-grossing-movies). 
 
 ```{r}
-Movies <- read_csv("Highest_Hollywood_Grossing_Movies.csv")
-head(Movies)
+#Movies <- read_csv("Highest_Hollywood_Grossing_Movies.csv")
+#head(Movies)
 ```
 
 Clean the data in the following ways:    
