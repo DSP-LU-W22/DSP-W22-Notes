@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Shiny Apps | Data-Scientific Programming Notes</title>
+  <meta name="description" content="Chapter 3 Shiny Apps | Data-Scientific Programming Notes" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Shiny Apps | Data-Scientific Programming Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Shiny Apps | Data-Scientific Programming Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage" />
+
+
+<meta name="date" content="2022-02-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-wrangling.html"/>
+
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data-Scientific Programming Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>1</b> Data Visualization</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-visualization.html"><a href="data-visualization.html#loading-and-exploring-data"><i class="fa fa-check"></i><b>1.1</b> Loading and Exploring Data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="data-visualization.html"><a href="data-visualization.html#creating-graphics"><i class="fa fa-check"></i><b>1.1.1</b> Creating Graphics</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.1-basic-scatterplot"><i class="fa fa-check"></i>Example 1.1.1 Basic Scatterplot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.2-scatterplot-with-text-labels"><i class="fa fa-check"></i>Example 1.1.2 Scatterplot with text labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.3-scatterplot-with-color-shape-and-size"><i class="fa fa-check"></i>Example 1.1.3 Scatterplot with color, shape, and size</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.4-changing-axis-labels-and-hiding-legend"><i class="fa fa-check"></i>Example 1.1.4 Changing Axis Labels and Hiding Legend</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.1.5"><i class="fa fa-check"></i>Practice 1.1.5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-visualization.html"><a href="data-visualization.html#more-graphics"><i class="fa fa-check"></i><b>1.2</b> More Graphics</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-quantitative-data-continued"><i class="fa fa-check"></i><b>1.2.1</b> Visualizing Quantitative Data (Continued)</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.1-faceting"><i class="fa fa-check"></i>Example 1.2.1: Faceting</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.2-histograms"><i class="fa fa-check"></i>Example 1.2.2: Histograms</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.3-boxplots"><i class="fa fa-check"></i>Example 1.2.3: Boxplots</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.4"><i class="fa fa-check"></i>Practice 1.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.5"><i class="fa fa-check"></i>Practice 1.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.6"><i class="fa fa-check"></i>Practice 1.2.6</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-categorical-data"><i class="fa fa-check"></i><b>1.2.2</b> Visualizing Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.7-bar-graph"><i class="fa fa-check"></i>Example 1.2.7: Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.8-reordering-bars"><i class="fa fa-check"></i>Example 1.2.8 Reordering Bars</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.9-relative-frequency-bar-graph"><i class="fa fa-check"></i>Example 1.2.9 Relative Frequency Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.10"><i class="fa fa-check"></i>Practice 1.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.11"><i class="fa fa-check"></i>Practice 1.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.12"><i class="fa fa-check"></i>Practice 1.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.13-stacked-bar-graph"><i class="fa fa-check"></i>Example 1.2.13 Stacked Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.14-stacked-bar-graph-with-equal-heights"><i class="fa fa-check"></i>Example 1.2.14 Stacked Bar Graph with Equal Heights</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.15-side-by-side-bar-graph"><i class="fa fa-check"></i>Example 1.2.15 Side-by-Side Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.16-height-specified-by-variable"><i class="fa fa-check"></i>Example 1.2.16 Height Specified by Variable</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.17-height-specified-by-variable"><i class="fa fa-check"></i>Practice 1.2.17 Height Specified by Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-visualization.html"><a href="data-visualization.html#advanced-data-graphics"><i class="fa fa-check"></i><b>1.3</b> Advanced Data Graphics</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#babynames-dataset"><i class="fa fa-check"></i>Babynames dataset</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.1-age-distribution-for-a-given-name"><i class="fa fa-check"></i>Example 1.3.1: Age Distribution for a Given Name</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#choosing-name-and-gender"><i class="fa fa-check"></i>Choosing Name and Gender</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setting-axis-limits"><i class="fa fa-check"></i>Setting Axis Limits</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-line"><i class="fa fa-check"></i>Adding Line</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#axis-labels"><i class="fa fa-check"></i>Axis Labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-text"><i class="fa fa-check"></i>Adding Text</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-median-age"><i class="fa fa-check"></i>Adding Median Age</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.2-common-female-names"><i class="fa fa-check"></i>Example 1.3.2: Common Female Names</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#some-data-prep"><i class="fa fa-check"></i>Some data prep</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setup-the-plot"><i class="fa fa-check"></i>Setup the Plot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-linerange-and-color"><i class="fa fa-check"></i>Add Linerange and color</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-points-at-median"><i class="fa fa-check"></i>Add points at median</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-labels-and-flip-coordinates"><i class="fa fa-check"></i>Add Labels and Flip Coordinates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-and-arranging-data-and-selecting-columns"><i class="fa fa-check"></i><b>2.1</b> Filtering and Arranging Data, and Selecting Columns</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.1"><i class="fa fa-check"></i>Example 2.1.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.2"><i class="fa fa-check"></i>Example 2.1.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.3"><i class="fa fa-check"></i>Example 2.1.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.4"><i class="fa fa-check"></i>Example 2.1.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.5"><i class="fa fa-check"></i>Example 2.1.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.6"><i class="fa fa-check"></i>Practice 2.1.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.7"><i class="fa fa-check"></i>Practice 2.1.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.8"><i class="fa fa-check"></i>Practice 2.1.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.9-multiple-logicals"><i class="fa fa-check"></i>Example 2.1.9 Multiple Logicals</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.10-dealing-with-nas"><i class="fa fa-check"></i>Example 2.1.10: Dealing with NA's</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.11"><i class="fa fa-check"></i>Practice 2.1.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.12"><i class="fa fa-check"></i>Practice 2.1.12</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Mutating, Summarizing, and Grouping Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.1"><i class="fa fa-check"></i>Example 2.2.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.2"><i class="fa fa-check"></i>Example 2.2.2</a></li>
+<li class="chapter" data-level="2.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#summarize"><i class="fa fa-check"></i><b>2.2.1</b> Summarize</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.3"><i class="fa fa-check"></i>Example 2.2.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.4"><i class="fa fa-check"></i>Practice 2.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.5"><i class="fa fa-check"></i>Practice 2.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.6"><i class="fa fa-check"></i>Example 2.2.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.7"><i class="fa fa-check"></i>Example 2.2.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.8"><i class="fa fa-check"></i>Example 2.2.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.9"><i class="fa fa-check"></i>Example 2.2.9</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.10"><i class="fa fa-check"></i>Practice 2.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.11"><i class="fa fa-check"></i>Practice 2.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.12"><i class="fa fa-check"></i>Practice 2.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.13"><i class="fa fa-check"></i>Practice 2.2.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>2.3</b> Tidy Data</a><ul>
+<li><a href="data-wrangling.html#example-2.3.1-pivot_longer">Example 2.3.1: <code>pivot_longer()</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.2-pivot_wider">Example 2.3.2 <code>pivot_wider</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.3-separate-and-unite">Example 2.3.3 <code>separate()</code> and <code>unite()</code></a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.4"><i class="fa fa-check"></i>Practice 2.3.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.5"><i class="fa fa-check"></i>Practice 2.3.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.6"><i class="fa fa-check"></i>Practice 2.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling.html"><a href="data-wrangling.html#joining-data"><i class="fa fa-check"></i><b>2.4</b> Joining Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-joins"><i class="fa fa-check"></i>Mutating Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.1-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.1 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.2"><i class="fa fa-check"></i>Practice 2.4.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-joins"><i class="fa fa-check"></i>Filtering Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.3-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.3 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.4"><i class="fa fa-check"></i>Practice 2.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-wrangling.html"><a href="data-wrangling.html#strings-factors-and-dates"><i class="fa fa-check"></i><b>2.5</b> Strings, Factors and Dates</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.1-modifying-string-variables"><i class="fa fa-check"></i>Example 2.5.1: Modifying String Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.2"><i class="fa fa-check"></i>Practice 2.5.2:</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.3-working-with-factor-variables"><i class="fa fa-check"></i>Example 2.5.3: Working with Factor Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.5-dates-and-times"><i class="fa fa-check"></i>Example 2.5.5: Dates and Times</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.6"><i class="fa fa-check"></i>Practice 2.5.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.7-creating-date-variable"><i class="fa fa-check"></i>Example 2.5.7 Creating Date Variable</a></li>
+<li><a href="data-wrangling.html#example-2.5.8-today-and-now">Example 2.5.8 <code>today</code> and <code>now</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>3</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="3.1" data-path="shiny-apps.html"><a href="shiny-apps.html#introduction-to-shiny"><i class="fa fa-check"></i><b>3.1</b> Introduction to Shiny</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-structure"><i class="fa fa-check"></i>Shiny Structure</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-template"><i class="fa fa-check"></i>Shiny App Template</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.1.1-geyser-app"><i class="fa fa-check"></i>Example 3.1.1: Geyser App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.2-weather-app."><i class="fa fa-check"></i>Practice 3.1.2: Weather App.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.3-lga-temperatures"><i class="fa fa-check"></i>Practice 3.1.3: LGA Temperatures</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.4-scatterplot-of-temp-by-hour"><i class="fa fa-check"></i>Practice 3.1.4: Scatterplot of Temp by Hour</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-inputs"><i class="fa fa-check"></i><b>3.2</b> Shiny App Inputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.1-weather-app"><i class="fa fa-check"></i>Example 3.2.1 Weather App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.2-babynames-app"><i class="fa fa-check"></i>Example 3.2.2 Babynames App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.3-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.3: User Specified Month and Airport.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.4-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.4: User Specified Month and Airport.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="shiny-apps.html"><a href="shiny-apps.html#multiple-outputs"><i class="fa fa-check"></i><b>3.3</b> Multiple Outputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.1-weather-app-with-reactive-expression"><i class="fa fa-check"></i>Example 3.3.1 Weather App with Reactive Expression</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.2-babynames-app-with-interactive-user-interface"><i class="fa fa-check"></i>Example 3.3.2 Babynames App with Interactive User Interface</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.3.3"><i class="fa fa-check"></i>Practice 3.3.3</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data-Scientific Programming Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="shiny-apps" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Shiny Apps</h1>
+<p>These notes provide an overview of methods for creating web apps using the R package Shiny. For more detailed information, see the <a href="https://shiny.rstudio.com/tutorial/">RStudio Shiny tutorial</a>.</p>
+<div id="introduction-to-shiny" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction to Shiny</h2>
+<p>The <a href="https://ajsage.shinyapps.io/GeyserApp/">Old Faithful App</a> displays a histogram of the amount of time between eruptions of the geyser called &quot;Old Faithful,&quot; which is located at Yellowstone National Park in Wyoming.</p>
+<p>The app lets the user specify the number of bins to include in the histogram.</p>
+<p>Study the app. Imagine you were to create this app. List everything you can think of that you would need to account for when creating the app.</p>
+<div id="shiny-structure" class="section level3 unnumbered">
+<h3>Shiny Structure</h3>
+<p>Every Shiny App consists of three parts:<br />
+1. A user interface that determines the way a user interacts with the graphic.<br />
+2. A server function that performs the work needed to create the desired output.<br />
+3. A call to shinyApp to run the app.</p>
+</div>
+<div id="shiny-app-template" class="section level3 unnumbered">
+<h3>Shiny App Template</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+
+<span class="co"># Define UI ----</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  <span class="co"># put user interface code here</span>
+)
+
+<span class="co"># Define server logic ----</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  <span class="co"># put server code here</span>
+}
+
+<span class="co"># Run the app ----</span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p>Shiny offers many options for customization. See the above tutorial for more.</p>
+<p>To get a sense of what you can do with Shiny, see the <a href="https://shiny.rstudio.com/gallery/">RStudio Shiny Apps</a> gallery.</p>
+</div>
+<div id="example-3.1.1-geyser-app" class="section level3 unnumbered">
+<h3>Example 3.1.1: Geyser App</h3>
+<p>The app displays the distribution of time between eruptions of the Old Faithful Geyser in Yellowstone National Park.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">data</span>(faithful)
+
+<span class="co"># Define UI for application </span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+   
+   <span class="co"># Application title</span>
+   <span class="kw">titlePanel</span>(<span class="st">&quot;Time Between Eruptions of Old Faithful Geyser&quot;</span>),
+   
+   <span class="co"># Sidebar with a slider input for number of bins </span>
+   <span class="kw">sidebarLayout</span>(
+      <span class="kw">sidebarPanel</span>(
+         <span class="kw">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,
+                     <span class="st">&quot;Number of bins:&quot;</span>,
+                     <span class="dt">min =</span> <span class="dv">1</span>,
+                     <span class="dt">max =</span> <span class="dv">50</span>,
+                     <span class="dt">value =</span> <span class="dv">30</span>)
+      ),
+      
+      <span class="co"># Show a plot of the generated distribution</span>
+      <span class="kw">mainPanel</span>(
+         <span class="kw">plotOutput</span>(<span class="st">&quot;distPlot&quot;</span>)
+      )
+   )
+)
+
+<span class="co"># Define server logic required to draw a histogram</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+   
+   output<span class="op">$</span>distPlot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+      <span class="co"># generate bins based on input$bins from ui.R</span>
+      num_bins &lt;-<span class="st"> </span>input<span class="op">$</span>bins
+      
+      <span class="co"># draw the histogram with the specified number of bins</span>
+      <span class="kw">ggplot</span>(<span class="dt">data =</span> faithful) <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> waiting), <span class="dt">bins =</span> num_bins, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">        </span><span class="kw">xlab</span>(<span class="st">&quot;Minutes Between Eruptions&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)
+      })
+}
+
+<span class="co"># Run the application </span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-162-1.png" width="576" /></p>
+</div>
+<div id="practice-3.1.2-weather-app." class="section level3 unnumbered">
+<h3>Practice 3.1.2: Weather App.</h3>
+<p>Copy/paste the code from the Geyser app and modify it to display a histogram of temperatures at the NYC airports, taken each hour of the day in 2013. Let the user specify the number of bins as was done in the Geysers.R app. Start with the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Display temperatures at all airports</span>
+<span class="co"># user sets number of bins</span>
+<span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(nycflights13)
+<span class="kw">data</span>(weather)
+
+<span class="co">#copy/paste code and edit here</span></code></pre></div>
+</div>
+<div id="practice-3.1.3-lga-temperatures" class="section level3 unnumbered">
+<h3>Practice 3.1.3: LGA Temperatures</h3>
+<p>Create an app that displays only temperatures at Laguardia airport (LGA). Also allow between 10 and 30 bins (with 20 as default). Color the bins green.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type code here</span></code></pre></div>
+</div>
+<div id="practice-3.1.4-scatterplot-of-temp-by-hour" class="section level3 unnumbered">
+<h3>Practice 3.1.4: Scatterplot of Temp by Hour</h3>
+<p>Display only temperatures at LaGuardia (LGA). Create scatterplot displaying temp on y-axis and hour on x-axis. Use <code>geom_smooth</code> to add a smoothing curve to the plot. Let user choose the month to display. For consistency, ensure that the range of the y-axis always runs from 0 to 100 deg. F.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type code here</span></code></pre></div>
+</div>
+</div>
+<div id="shiny-app-inputs" class="section level2">
+<h2><span class="header-section-number">3.2</span> Shiny App Inputs</h2>
+<div id="example-3.2.1-weather-app" class="section level3 unnumbered">
+<h3>Example 3.2.1 Weather App</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(nycflights13)
+<span class="kw">data</span>(weather)
+
+<span class="co"># Define UI for application </span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  
+  <span class="co"># Application title</span>
+  <span class="kw">titlePanel</span>(<span class="st">&quot;Hourly Temperature at NYC Airports in 2013&quot;</span>),
+  
+  <span class="kw">fluidRow</span>(
+    
+    <span class="kw">column</span>(<span class="dv">4</span>, 
+           <span class="kw">checkboxGroupInput</span>(<span class="st">&quot;airport_list&quot;</span>, 
+                              <span class="kw">h3</span>(<span class="st">&quot;Select Airport(s)&quot;</span>), 
+                              <span class="dt">choices =</span> <span class="kw">list</span>(<span class="st">&quot;EWR&quot;</span> =<span class="st"> &quot;EWR&quot;</span>, 
+                                             <span class="st">&quot;JFK&quot;</span> =<span class="st"> &quot;JFK&quot;</span>, 
+                                             <span class="st">&quot;LGA&quot;</span> =<span class="st"> &quot;LGA&quot;</span>),
+                              <span class="dt">selected =</span> <span class="st">&quot;EWR&quot;</span>)
+           ),
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">sliderInput</span>(<span class="st">&quot;month_number&quot;</span>,
+                       <span class="st">&quot;Month Number:&quot;</span>,
+                       <span class="dt">min =</span> <span class="dv">1</span>,
+                       <span class="dt">max =</span> <span class="dv">12</span>,
+                       <span class="dt">value =</span> <span class="dv">1</span>)
+    ),
+           
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">varSelectInput</span>(<span class="st">&quot;variable&quot;</span>, 
+                        <span class="st">&quot;Select Variable to Display&quot;</span>, 
+                      <span class="dt">data =</span> weather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(temp, dewp, humid, wind_speed, precip, pressure, visib))
+  ),
+
+    <span class="co"># Show a plot of the generated distribution</span>
+  <span class="kw">fluidRow</span>(
+      <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>)
+    )
+))
+
+
+<span class="co"># Define server logic required to draw a histogram</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  
+  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+    airport_list &lt;-<span class="st"> </span>input<span class="op">$</span>airport_list
+    num_month &lt;-<span class="st"> </span>input<span class="op">$</span>month_number
+  
+    <span class="co"># draw the histogram with the specified number of bins</span>
+    <span class="kw">ggplot</span>(<span class="dt">data =</span> weather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(origin <span class="op">%in%</span><span class="st"> </span>airport_list <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span>num_month)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour, <span class="dt">y=</span><span class="op">!!</span>input<span class="op">$</span>variable)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour, <span class="dt">y=</span><span class="op">!!</span>input<span class="op">$</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">xlab</span>(<span class="st">&quot;Hour&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">23</span>))
+  })
+}
+
+<span class="co"># Run the application </span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-166-1.png" width="576" /></p>
+</div>
+<div id="example-3.2.2-babynames-app" class="section level3 unnumbered">
+<h3>Example 3.2.2 Babynames App</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(babynames)
+<span class="kw">library</span>(mdsr)
+
+summarize &lt;-<span class="st"> </span>dplyr<span class="op">::</span>summarize
+
+Names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ashley&quot;</span>, <span class="st">&quot;Brittany&quot;</span>, <span class="st">&quot;Dorothy&quot;</span>, <span class="st">&quot;Jennifer&quot;</span>, <span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Sophia&quot;</span>)
+
+<span class="co"># combine genders</span>
+babies &lt;-<span class="st"> </span>babynames <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(name <span class="op">%in%</span><span class="st"> </span>Names) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(name, year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">sum</span>(n))
+
+<span class="co">#user interface</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  
+  <span class="kw">titlePanel</span>(<span class="st">&quot;Popularity of Baby Names&quot;</span>),
+  
+  <span class="kw">fluidRow</span>( 
+    
+       <span class="kw">column</span>(<span class="dv">4</span>,
+           
+           <span class="kw">numericInput</span>(<span class="st">&quot;startyear&quot;</span>, 
+                        <span class="kw">h3</span>(<span class="st">&quot;Enter starting year&quot;</span>), 
+                        <span class="dt">value=</span><span class="dv">1880</span>, 
+                        <span class="dt">min=</span><span class="dv">1880</span>, 
+                        <span class="dt">max=</span><span class="dv">2014</span>, 
+                        <span class="dt">step=</span><span class="dv">1</span>)
+    ),
+    
+  
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">numericInput</span>(<span class="st">&quot;endyear&quot;</span>, 
+                        <span class="kw">h3</span>(<span class="st">&quot;Enter ending year&quot;</span>), 
+                        <span class="dt">value=</span><span class="dv">2014</span>, 
+                        <span class="dt">min=</span><span class="dv">1880</span>, 
+                        <span class="dt">max=</span><span class="dv">2014</span>, 
+                        <span class="dt">step=</span><span class="dv">1</span>)
+    ), 
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           
+           <span class="kw">checkboxGroupInput</span>(<span class="st">&#39;names&#39;</span>, <span class="st">&#39;Names to display:&#39;</span>, 
+                              <span class="kw">sort</span>(Names),
+                              <span class="dt">selected=</span><span class="kw">c</span>(<span class="st">&quot;Ashley&quot;</span>, <span class="st">&quot;Jennifer&quot;</span>, <span class="st">&quot;Mary&quot;</span>))
+    ),
+    
+    <span class="co"># Show a plot of the generated distribution</span>
+    <span class="kw">mainPanel</span>(
+      <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>)
+    )
+  ))
+
+
+<span class="co"># Define server logic required to draw a histogram</span>
+
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  
+  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+    Start_year &lt;-<span class="st"> </span>input<span class="op">$</span>startyear
+    End_year &lt;-<span class="st"> </span>input<span class="op">$</span>endyear
+    Names &lt;-<span class="st"> </span>input<span class="op">$</span>names
+    
+    names_df &lt;-<span class="st"> </span>babies <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">filter</span>(year <span class="op">&gt;=</span><span class="st"> </span>Start_year, year <span class="op">&lt;=</span><span class="st"> </span>End_year, name <span class="op">%in%</span><span class="st"> </span>Names)
+    <span class="kw">ggplot</span>(<span class="dt">data=</span>names_df, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n, <span class="dt">color=</span>name))<span class="op">+</span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">2</span>)
+  })
+}
+
+<span class="co"># Run the application </span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-167-1.png" width="576" /></p>
+</div>
+<div id="practice-3.2.3-user-specified-month-and-airport." class="section level3 unnumbered">
+<h3>Practice 3.2.3: User Specified Month and Airport.</h3>
+<p>Create an app similar to the one in Weather4.R, but now add a dropdown menu, allowing the user to choose which of the three airports to display (EWR, JFK, or LGA). (Hint: See the selectInput command in the <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/">RStudio Shiny tutorial</a>.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+<div id="practice-3.2.4-user-specified-month-and-airport." class="section level3 unnumbered">
+<h3>Practice 3.2.4: User Specified Month and Airport.</h3>
+<p>Create an app that lets the user choose the airport using radio buttons, hour of the day using a slider, and variable to display using a pull-down menu.</p>
+<p>Display boxplots for each month, graphing the variable chosen on the y-axis. (See illustration).</p>
+</div>
+</div>
+<div id="multiple-outputs" class="section level2">
+<h2><span class="header-section-number">3.3</span> Multiple Outputs</h2>
+<p>We'll create an app that displays variables by hour, and also a table, containing the high and low for each day.</p>
+<p>Rather than doing the filter calculation separately for the graph and table, we'll do it once, using a reactive expression, and reference that expression in the code for the graph and table.</p>
+<p>A reactive expression is a function that exists inside the server function that re-evaluates itself when the user changes an input that affects it. These are useful when the same calculated values are used in multiple places in the server function.</p>
+<div id="example-3.3.1-weather-app-with-reactive-expression" class="section level3 unnumbered">
+<h3>Example 3.3.1 Weather App with Reactive Expression</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(nycflights13)
+<span class="kw">data</span>(weather)
+
+<span class="co"># Define UI for application </span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  
+  <span class="co"># Application title</span>
+  <span class="kw">titlePanel</span>(<span class="st">&quot;Hourly Temperature at NYC Airports in 2013&quot;</span>),
+  
+  <span class="kw">fluidRow</span>(
+    
+    <span class="kw">column</span>(<span class="dv">4</span>, 
+           <span class="kw">checkboxGroupInput</span>(<span class="st">&quot;airport_list&quot;</span>, 
+                              <span class="kw">h3</span>(<span class="st">&quot;Select Airport(s)&quot;</span>), 
+                              <span class="dt">choices =</span> <span class="kw">list</span>(<span class="st">&quot;EWR&quot;</span> =<span class="st"> &quot;EWR&quot;</span>, 
+                                             <span class="st">&quot;JFK&quot;</span> =<span class="st"> &quot;JFK&quot;</span>, 
+                                             <span class="st">&quot;LGA&quot;</span> =<span class="st"> &quot;LGA&quot;</span>),
+                              <span class="dt">selected =</span> <span class="st">&quot;EWR&quot;</span>)
+           ),
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">sliderInput</span>(<span class="st">&quot;month_number&quot;</span>,
+                       <span class="st">&quot;Month Number:&quot;</span>,
+                       <span class="dt">min =</span> <span class="dv">1</span>,
+                       <span class="dt">max =</span> <span class="dv">12</span>,
+                       <span class="dt">value =</span> <span class="dv">1</span>)
+    ),
+           
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">varSelectInput</span>(<span class="st">&quot;variable&quot;</span>, 
+                        <span class="st">&quot;Select Variable to Display&quot;</span>, 
+                      <span class="dt">data =</span> weather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(temp, dewp, humid, wind_speed, precip, pressure, visib))
+  )
+  ),
+
+    <span class="co"># Show a plot of the generated distribution</span>
+  <span class="kw">fluidRow</span>( 
+    <span class="kw">column</span>(<span class="dv">8</span>,
+      <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>)
+    ),
+    <span class="kw">column</span>(<span class="dv">4</span>, 
+     <span class="kw">tableOutput</span>(<span class="st">&quot;table&quot;</span>)
+    )
+  )       
+)
+
+
+<span class="co"># Define server logic required to draw a histogram</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  
+  filtered_data &lt;-<span class="st"> </span><span class="kw">reactive</span>({
+    airport_list &lt;-<span class="st"> </span>input<span class="op">$</span>airport_list
+    num_month &lt;-<span class="st"> </span>input<span class="op">$</span>month_number
+    dataset &lt;-<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(origin <span class="op">%in%</span><span class="st"> </span>airport_list <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span>num_month)
+  <span class="kw">return</span>(dataset)
+  })
+  
+  
+  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+    <span class="co"># draw the histogram with the specified number of bins</span>
+    <span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="kw">filtered_data</span>()) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour, <span class="dt">y=</span><span class="op">!!</span>input<span class="op">$</span>variable)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour, <span class="dt">y=</span><span class="op">!!</span>input<span class="op">$</span>variable)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">xlab</span>(<span class="st">&quot;Hour&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">23</span>))
+  })
+  
+    output<span class="op">$</span>table &lt;-<span class="st"> </span><span class="kw">renderTable</span>({
+    <span class="kw">filtered_data</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(
+      <span class="dt">max=</span><span class="kw">max</span>(<span class="op">!!</span>input<span class="op">$</span>variable, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+      <span class="dt">min=</span><span class="kw">min</span>(<span class="op">!!</span>input<span class="op">$</span>variable, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))
+    })
+  
+}
+
+<span class="co"># Run the application </span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-169-1.png" width="576" /></p>
+</div>
+<div id="example-3.3.2-babynames-app-with-interactive-user-interface" class="section level3 unnumbered">
+<h3>Example 3.3.2 Babynames App with Interactive User Interface</h3>
+<p>Sometimes, we'll want to allow the user interface to change, based information provided by the user. Observe how the following app changes based on the years that the user inputs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(babynames)
+<span class="kw">library</span>(mdsr)
+
+summarize &lt;-<span class="st"> </span>dplyr<span class="op">::</span>summarize
+
+<span class="co">#user interface</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  
+  <span class="kw">titlePanel</span>(<span class="st">&quot;Popularity of Baby Names&quot;</span>),
+  
+  <span class="kw">fluidRow</span>( 
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           
+           <span class="kw">numericInput</span>(<span class="st">&quot;startyear&quot;</span>, 
+                        <span class="kw">h3</span>(<span class="st">&quot;Enter starting year&quot;</span>), 
+                        <span class="dt">value=</span><span class="dv">1880</span>, 
+                        <span class="dt">min=</span><span class="dv">1880</span>, 
+                        <span class="dt">max=</span><span class="dv">2014</span>, 
+                        <span class="dt">step=</span><span class="dv">1</span>)
+    ),
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           <span class="kw">numericInput</span>(<span class="st">&quot;endyear&quot;</span>, 
+                        <span class="kw">h3</span>(<span class="st">&quot;Enter ending year&quot;</span>), 
+                        <span class="dt">value=</span><span class="dv">2014</span>, 
+                        <span class="dt">min=</span><span class="dv">1880</span>, 
+                        <span class="dt">max=</span><span class="dv">2014</span>, 
+                        <span class="dt">step=</span><span class="dv">1</span>)
+    ), 
+    
+    <span class="kw">column</span>(<span class="dv">4</span>,
+           
+           <span class="kw">uiOutput</span>(<span class="st">&quot;names_menu&quot;</span>)
+    ),
+    
+    <span class="co"># Show a plot of the generated distribution</span>
+    <span class="kw">mainPanel</span>(
+      <span class="kw">plotOutput</span>(<span class="st">&quot;plot&quot;</span>)
+    )
+  ))
+
+
+<span class="co"># Define server logic required to draw a histogram</span>
+
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+
+
+get_names &lt;-<span class="st"> </span><span class="kw">reactive</span>({    
+babies &lt;-<span class="st"> </span>babynames <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>startyear) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+<span class="kw">return</span>(babies<span class="op">$</span>name[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>])
+})
+
+output<span class="op">$</span>names_menu &lt;-<span class="st"> </span><span class="kw">renderUI</span>(
+  <span class="kw">checkboxGroupInput</span>(<span class="st">&#39;names&#39;</span>, <span class="st">&#39;Names to display:&#39;</span>, <span class="kw">get_names</span>())
+)  
+
+
+filter_names &lt;-<span class="st"> </span><span class="kw">reactive</span>({
+dataset &lt;-<span class="st"> </span>babynames <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>startyear <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&lt;=</span><span class="st"> </span>input<span class="op">$</span>endyear <span class="op">&amp;</span><span class="st"> </span>name <span class="op">%in%</span><span class="st"> </span>input<span class="op">$</span>names) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(name, year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">n=</span><span class="kw">sum</span>(n))
+<span class="kw">return</span>(dataset)
+})
+
+  output<span class="op">$</span>plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+    <span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">filter_names</span>(), <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>n, <span class="dt">color=</span>name))<span class="op">+</span><span class="kw">geom_line</span>(<span class="dt">size=</span><span class="dv">2</span>)
+  })
+  
+  
+}
+
+<span class="co"># Run the application </span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-170-1.png" width="576" /></p>
+</div>
+<div id="practice-3.3.3" class="section level3 unnumbered">
+<h3>Practice 3.3.3</h3>
+<p>Change the code in example 3.3.2 to allow the user to choose from the 15 most common names over the entire range they're displaying, not just in the first year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here.</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-wrangling.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/edit/master/03-Shiny_Apps.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/blob/master/03-Shiny_Apps.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

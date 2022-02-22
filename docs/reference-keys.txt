@@ -18,3 +18,7 @@ c-a-dataset-that-lists-each-course-in-the-costs-dataset-along-with-the-number-of
 a-create-and-display-a-dataset-containing-all-courses-listed-in-costs-that-at-least-one-student-is-taking-along-with-the-cost-of-books-for-the-course.
 b-create-and-display-a-dataset-listing-the-ids-of-all-students-who-are-taking-a-course-not-listed-in-costs-as-well-as-the-unlisted-course-they-are-taking.
 strings-factors-and-dates
+shiny-apps
+introduction-to-shiny
+shiny-app-inputs
+multiple-outputs

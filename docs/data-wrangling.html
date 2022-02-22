@@ -24,7 +24,7 @@
 <meta name="author" content="Andrew Sage" />
 
 
-<meta name="date" content="2022-02-03" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="data-visualization.html"/>
-
+<link rel="next" href="shiny-apps.html"/>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -212,6 +212,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.6"><i class="fa fa-check"></i>Practice 2.5.6</a></li>
 <li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.7-creating-date-variable"><i class="fa fa-check"></i>Example 2.5.7 Creating Date Variable</a></li>
 <li><a href="data-wrangling.html#example-2.5.8-today-and-now">Example 2.5.8 <code>today</code> and <code>now</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>3</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="3.1" data-path="shiny-apps.html"><a href="shiny-apps.html#introduction-to-shiny"><i class="fa fa-check"></i><b>3.1</b> Introduction to Shiny</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-structure"><i class="fa fa-check"></i>Shiny Structure</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-template"><i class="fa fa-check"></i>Shiny App Template</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.1.1-geyser-app"><i class="fa fa-check"></i>Example 3.1.1: Geyser App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.2-weather-app."><i class="fa fa-check"></i>Practice 3.1.2: Weather App.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.3-lga-temperatures"><i class="fa fa-check"></i>Practice 3.1.3: LGA Temperatures</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.4-scatterplot-of-temp-by-hour"><i class="fa fa-check"></i>Practice 3.1.4: Scatterplot of Temp by Hour</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-inputs"><i class="fa fa-check"></i><b>3.2</b> Shiny App Inputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.1-weather-app"><i class="fa fa-check"></i>Example 3.2.1 Weather App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.2-babynames-app"><i class="fa fa-check"></i>Example 3.2.2 Babynames App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.3-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.3: User Specified Month and Airport.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.4-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.4: User Specified Month and Airport.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="shiny-apps.html"><a href="shiny-apps.html#multiple-outputs"><i class="fa fa-check"></i><b>3.3</b> Multiple Outputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.1-weather-app-with-reactive-expression"><i class="fa fa-check"></i>Example 3.3.1 Weather App with Reactive Expression</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.2-babynames-app-with-interactive-user-interface"><i class="fa fa-check"></i>Example 3.3.2 Babynames App with Interactive User Interface</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.3.3"><i class="fa fa-check"></i>Practice 3.3.3</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -991,20 +1012,20 @@ Bucks</code></pre></div>
 ##  1 NA    Grayson Allen7      SG       26 &quot;6&#39; 4\&quot;&quot; 198 lbs Duke         $4,054,6…
 ##  2 NA    Giannis Antetokoun… PF       27 &quot;6&#39; 11\… 242 lbs --           $39,344,…
 ##  3 NA    Thanasis Antetokou… SF       29 &quot;6&#39; 6\&quot;&quot; 219 lbs --           $1,669,1…
-##  4 NA    Pat Connaughton24   SG       29 &quot;6&#39; 5\&quot;&quot; 209 lbs Notre Dame   $5,333,3…
-##  5 NA    Donte DiVincenzo0   SG       25 &quot;6&#39; 4\&quot;&quot; 203 lbs Villanova    $4,675,8…
+##  4 NA    DeAndre&#39; Bembry95   SG       27 &quot;6&#39; 5\&quot;&quot; 210 lbs Saint Josep… $1,669,1…
+##  5 NA    Pat Connaughton24   SG       29 &quot;6&#39; 5\&quot;&quot; 209 lbs Notre Dame   $5,333,3…
 ##  6 NA    Jeff Dowtin15       PG       24 &quot;6&#39; 3\&quot;&quot; 177 lbs Rhode Island --       
 ##  7 NA    Langston Galloway12 SG       30 &quot;6&#39; 1\&quot;&quot; 200 lbs Saint Josep… --       
 ##  8 NA    George Hill3        PG       35 &quot;6&#39; 4\&quot;&quot; 188 lbs IUPUI        $4,000,0…
 ##  9 NA    Jrue Holiday21      PG       31 &quot;6&#39; 3\&quot;&quot; 205 lbs UCLA         $32,413,…
-## 10 NA    Rodney Hood5        SG       29 &quot;6&#39; 8\&quot;&quot; 208 lbs Duke         $1,669,1…
+## 10 NA    Serge Ibaka25       C        32 &quot;6&#39; 10\… 235 lbs --           $9,720,9…
 ## 11 NA    Brook Lopez11       C        33 &quot;7&#39; 0\&quot;&quot; 282 lbs Stanford     $13,302,…
 ## 12 NA    Sandro Mamukelashv… PF       22 &quot;6&#39; 9\&quot;&quot; 240 lbs Seton Hall   --       
 ## 13 NA    Wesley Matthews23   SG       35 &quot;6&#39; 4\&quot;&quot; 220 lbs Marquette    $1,237,4…
 ## 14 NA    Khris Middleton22   SF       30 &quot;6&#39; 7\&quot;&quot; 222 lbs Texas A&amp;M    $35,500,…
-## 15 NA    Jordan Nwora13      SF       23 &quot;6&#39; 8\&quot;&quot; 225 lbs Louisville   $1,517,9…
-## 16 NA    Semi Ojeleye37      PF       27 &quot;6&#39; 6\&quot;&quot; 240 lbs SMU          $1,669,1…
-## 17 NA    Bobby Portis9       C        26 &quot;6&#39; 10\… 250 lbs Arkansas     $4,347,6…
+## 15 NA    Greg Monroe15       C        31 &quot;6&#39; 10\… 250 lbs Georgetown   --       
+## 16 NA    Jordan Nwora13      SF       23 &quot;6&#39; 8\&quot;&quot; 225 lbs Louisville   $1,517,9…
+## 17 NA    Bobby Portis9       C        27 &quot;6&#39; 10\… 250 lbs Arkansas     $4,347,6…
 ## 18 NA    Lindell Wigginton28 G        23 &quot;6&#39; 1\&quot;&quot; 189 lbs Iowa State   --</code></pre>
 <p>Notice that the <code>HT</code> variable includes both feet and inches, separated by the ' symbol.</p>
 <p>We'll want to separate the <code>HT</code> variable into two separate numeric variables, <code>FT</code> and <code>IN</code>.</p>
@@ -1017,20 +1038,20 @@ Bucks</code></pre></div>
 ##  1 NA    Grayson Allen7        SG       26 6&#39; 4  198 lbs Duke         $4,054,695
 ##  2 NA    Giannis Antetokounmp… PF       27 6&#39; 11 242 lbs --           $39,344,9…
 ##  3 NA    Thanasis Antetokounm… SF       29 6&#39; 6  219 lbs --           $1,669,178
-##  4 NA    Pat Connaughton24     SG       29 6&#39; 5  209 lbs Notre Dame   $5,333,334
-##  5 NA    Donte DiVincenzo0     SG       25 6&#39; 4  203 lbs Villanova    $4,675,830
+##  4 NA    DeAndre&#39; Bembry95     SG       27 6&#39; 5  210 lbs Saint Josep… $1,669,178
+##  5 NA    Pat Connaughton24     SG       29 6&#39; 5  209 lbs Notre Dame   $5,333,334
 ##  6 NA    Jeff Dowtin15         PG       24 6&#39; 3  177 lbs Rhode Island --        
 ##  7 NA    Langston Galloway12   SG       30 6&#39; 1  200 lbs Saint Josep… --        
 ##  8 NA    George Hill3          PG       35 6&#39; 4  188 lbs IUPUI        $4,000,000
 ##  9 NA    Jrue Holiday21        PG       31 6&#39; 3  205 lbs UCLA         $32,413,3…
-## 10 NA    Rodney Hood5          SG       29 6&#39; 8  208 lbs Duke         $1,669,178
+## 10 NA    Serge Ibaka25         C        32 6&#39; 10 235 lbs --           $9,720,900
 ## 11 NA    Brook Lopez11         C        33 7&#39; 0  282 lbs Stanford     $13,302,3…
 ## 12 NA    Sandro Mamukelashvil… PF       22 6&#39; 9  240 lbs Seton Hall   --        
 ## 13 NA    Wesley Matthews23     SG       35 6&#39; 4  220 lbs Marquette    $1,237,494
 ## 14 NA    Khris Middleton22     SF       30 6&#39; 7  222 lbs Texas A&amp;M    $35,500,0…
-## 15 NA    Jordan Nwora13        SF       23 6&#39; 8  225 lbs Louisville   $1,517,981
-## 16 NA    Semi Ojeleye37        PF       27 6&#39; 6  240 lbs SMU          $1,669,178
-## 17 NA    Bobby Portis9         C        26 6&#39; 10 250 lbs Arkansas     $4,347,600
+## 15 NA    Greg Monroe15         C        31 6&#39; 10 250 lbs Georgetown   --        
+## 16 NA    Jordan Nwora13        SF       23 6&#39; 8  225 lbs Louisville   $1,517,981
+## 17 NA    Bobby Portis9         C        27 6&#39; 10 250 lbs Arkansas     $4,347,600
 ## 18 NA    Lindell Wigginton28   G        23 6&#39; 1  189 lbs Iowa State   --</code></pre>
 <p>Now, separate the <code>HT</code> variable into two variables, called <code>FT</code> and <code>IN</code>. Make sure they are both numeric variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type code here</span></code></pre></div>
@@ -1762,20 +1783,20 @@ Bucks</code></pre></div>
 ##  1 Grayson Allen7         SG       26 &quot;6&#39; 4\&quot;&quot;  198 lbs Duke          $4,054,695
 ##  2 Giannis Antetokounmpo… PF       27 &quot;6&#39; 11\&quot;&quot; 242 lbs --            $39,344,9…
 ##  3 Thanasis Antetokounmp… SF       29 &quot;6&#39; 6\&quot;&quot;  219 lbs --            $1,669,178
-##  4 Pat Connaughton24      SG       29 &quot;6&#39; 5\&quot;&quot;  209 lbs Notre Dame    $5,333,334
-##  5 Donte DiVincenzo0      SG       25 &quot;6&#39; 4\&quot;&quot;  203 lbs Villanova     $4,675,830
+##  4 DeAndre&#39; Bembry95      SG       27 &quot;6&#39; 5\&quot;&quot;  210 lbs Saint Joseph… $1,669,178
+##  5 Pat Connaughton24      SG       29 &quot;6&#39; 5\&quot;&quot;  209 lbs Notre Dame    $5,333,334
 ##  6 Jeff Dowtin15          PG       24 &quot;6&#39; 3\&quot;&quot;  177 lbs Rhode Island  --        
 ##  7 Langston Galloway12    SG       30 &quot;6&#39; 1\&quot;&quot;  200 lbs Saint Joseph… --        
 ##  8 George Hill3           PG       35 &quot;6&#39; 4\&quot;&quot;  188 lbs IUPUI         $4,000,000
 ##  9 Jrue Holiday21         PG       31 &quot;6&#39; 3\&quot;&quot;  205 lbs UCLA          $32,413,3…
-## 10 Rodney Hood5           SG       29 &quot;6&#39; 8\&quot;&quot;  208 lbs Duke          $1,669,178
+## 10 Serge Ibaka25          C        32 &quot;6&#39; 10\&quot;&quot; 235 lbs --            $9,720,900
 ## 11 Brook Lopez11          C        33 &quot;7&#39; 0\&quot;&quot;  282 lbs Stanford      $13,302,3…
 ## 12 Sandro Mamukelashvili… PF       22 &quot;6&#39; 9\&quot;&quot;  240 lbs Seton Hall    --        
 ## 13 Wesley Matthews23      SG       35 &quot;6&#39; 4\&quot;&quot;  220 lbs Marquette     $1,237,494
 ## 14 Khris Middleton22      SF       30 &quot;6&#39; 7\&quot;&quot;  222 lbs Texas A&amp;M     $35,500,0…
-## 15 Jordan Nwora13         SF       23 &quot;6&#39; 8\&quot;&quot;  225 lbs Louisville    $1,517,981
-## 16 Semi Ojeleye37         PF       27 &quot;6&#39; 6\&quot;&quot;  240 lbs SMU           $1,669,178
-## 17 Bobby Portis9          C        26 &quot;6&#39; 10\&quot;&quot; 250 lbs Arkansas      $4,347,600
+## 15 Greg Monroe15          C        31 &quot;6&#39; 10\&quot;&quot; 250 lbs Georgetown    --        
+## 16 Jordan Nwora13         SF       23 &quot;6&#39; 8\&quot;&quot;  225 lbs Louisville    $1,517,981
+## 17 Bobby Portis9          C        27 &quot;6&#39; 10\&quot;&quot; 250 lbs Arkansas      $4,347,600
 ## 18 Lindell Wigginton28    G        23 &quot;6&#39; 1\&quot;&quot;  189 lbs Iowa State    --</code></pre>
 <p>We'll perform several steps to clean the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Bucks &lt;-<span class="st"> </span>Bucks <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">HT =</span> <span class="kw">str_remove</span>(HT, <span class="st">&#39;&quot;&#39;</span>),             <span class="co"># remove &quot; from heights</span>
@@ -1796,20 +1817,20 @@ Bucks</code></pre></div>
 ##  1 Grayson Allen           7 SG       26     6     4   198 Duke           4.05e6
 ##  2 Giannis Antetokou…     34 PF       27     6    11   242 NA             3.93e7
 ##  3 Thanasis Antetoko…     43 SF       29     6     6   219 NA             1.67e6
-##  4 Pat Connaughton        24 SG       29     6     5   209 Notre Dame     5.33e6
-##  5 Donte DiVincenzo        0 SG       25     6     4   203 Villanova      4.68e6
+##  4 DeAndre&#39; Bembry        95 SG       27     6     5   210 Saint Joseph…  1.67e6
+##  5 Pat Connaughton        24 SG       29     6     5   209 Notre Dame     5.33e6
 ##  6 Jeff Dowtin            15 PG       24     6     3   177 Rhode Island  NA     
 ##  7 Langston Galloway      12 SG       30     6     1   200 Saint Joseph… NA     
 ##  8 George Hill             3 PG       35     6     4   188 IUPUI          4.00e6
 ##  9 Jrue Holiday           21 PG       31     6     3   205 UCLA           3.24e7
-## 10 Rodney Hood             5 SG       29     6     8   208 Duke           1.67e6
+## 10 Serge Ibaka            25 C        32     6    10   235 NA             9.72e6
 ## 11 Brook Lopez            11 C        33     7     0   282 Stanford       1.33e7
 ## 12 Sandro Mamukelash…     54 PF       22     6     9   240 Seton Hall    NA     
 ## 13 Wesley Matthews        23 SG       35     6     4   220 Marquette      1.24e6
 ## 14 Khris Middleton        22 SF       30     6     7   222 Texas A&amp;M      3.55e7
-## 15 Jordan Nwora           13 SF       23     6     8   225 Louisville     1.52e6
-## 16 Semi Ojeleye           37 PF       27     6     6   240 SMU            1.67e6
-## 17 Bobby Portis            9 C        26     6    10   250 Arkansas       4.35e6
+## 15 Greg Monroe            15 C        31     6    10   250 Georgetown    NA     
+## 16 Jordan Nwora           13 SF       23     6     8   225 Louisville     1.52e6
+## 17 Bobby Portis            9 C        27     6    10   250 Arkansas       4.35e6
 ## 18 Lindell Wigginton      28 G        23     6     1   189 Iowa State    NA</code></pre>
 </div>
 <div id="practice-2.5.2" class="section level3 unnumbered">
@@ -2041,14 +2062,14 @@ Dates</code></pre></div>
 <h3>Example 2.5.8 <code>today</code> and <code>now</code></h3>
 <p>The <code>today</code> and <code>now</code> functions return the current date and time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()</code></pre></div>
-<pre><code>## [1] &quot;2022-02-03&quot;</code></pre>
+<pre><code>## [1] &quot;2022-02-21&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">now</span>()</code></pre></div>
-<pre><code>## [1] &quot;2022-02-03 11:39:39 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2022-02-21 22:33:42 CST&quot;</code></pre>
 <p>What happens if we convert between dates and times?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_datetime</span>(<span class="kw">today</span>())</code></pre></div>
-<pre><code>## [1] &quot;2022-02-03 UTC&quot;</code></pre>
+<pre><code>## [1] &quot;2022-02-21 UTC&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_date</span>(<span class="kw">now</span>())</code></pre></div>
-<pre><code>## [1] &quot;2022-02-03&quot;</code></pre>
+<pre><code>## [1] &quot;2022-02-21&quot;</code></pre>
 
 </div>
 </div>
@@ -2058,8 +2079,8 @@ Dates</code></pre></div>
           </div>
         </div>
       </div>
-<a href="data-visualization.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="data-visualization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="shiny-apps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

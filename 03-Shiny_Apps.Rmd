@@ -1,0 +1,475 @@
+# Shiny Apps
+
+
+These notes provide an overview of methods for creating web apps using the R package Shiny. For more detailed information, see the [RStudio Shiny tutorial](https://shiny.rstudio.com/tutorial/). 
+
+## Introduction to Shiny
+
+The [Old Faithful App](https://ajsage.shinyapps.io/GeyserApp/) displays a histogram of the amount of time between eruptions of the geyser called "Old Faithful," which is located at Yellowstone National Park in Wyoming. 
+
+The app lets the user specify the number of bins to include in the histogram. 
+
+Study the app. Imagine you were to create this app. List everything you can think of that you would need to account for when creating the app. 
+
+
+
+### Shiny Structure  {-}
+
+Every Shiny App consists of three parts:    
+1. A user interface that determines the way a user interacts with the graphic.    
+2. A server function that performs the work needed to create the desired output.   
+3. A call to shinyApp to run the app. 
+
+### Shiny App Template   {-}
+
+```{r, eval=FALSE}
+library(shiny)
+
+# Define UI ----
+ui <- fluidPage(
+  # put user interface code here
+)
+
+# Define server logic ----
+server <- function(input, output) {
+  # put server code here
+}
+
+# Run the app ----
+shinyApp(ui = ui, server = server)
+```
+
+Shiny offers many options for customization. See the above tutorial for more. 
+
+To get a sense of what you can do with Shiny, see the [RStudio Shiny Apps](https://shiny.rstudio.com/gallery/) gallery. 
+
+### Example 3.1.1: Geyser App    {-}
+
+The app displays the distribution of time between eruptions of the Old Faithful Geyser in Yellowstone National Park.  
+
+```{r}
+library(shiny)
+library(tidyverse)
+data(faithful)
+
+# Define UI for application 
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Time Between Eruptions of Old Faithful Geyser"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+         sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 30)
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotOutput("distPlot")
+      )
+   )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+   
+   output$distPlot <- renderPlot({
+      # generate bins based on input$bins from ui.R
+      num_bins <- input$bins
+      
+      # draw the histogram with the specified number of bins
+      ggplot(data = faithful) + 
+        geom_histogram(aes(x = waiting), bins = num_bins, color="white", fill="blue") +
+        xlab("Minutes Between Eruptions") + ylab("Frequency")
+      })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+### Practice 3.1.2: Weather App.    {-}
+
+Copy/paste the code from the Geyser app and modify it to display a histogram of temperatures at the NYC airports, taken each hour of the day in 2013. Let the user specify the number of bins as was done in the Geysers.R app. Start with the following code:
+
+```{r}
+# Display temperatures at all airports
+# user sets number of bins
+library(shiny)
+library(tidyverse)
+library(nycflights13)
+data(weather)
+
+#copy/paste code and edit here
+```
+
+### Practice 3.1.3: LGA Temperatures    {-}
+
+Create an app that displays only temperatures at Laguardia airport (LGA). Also allow between 10 and 30 bins (with 20 as default). Color the bins green.    
+
+```{r}
+#Type code here
+```
+
+### Practice 3.1.4: Scatterplot of Temp by Hour    {-}
+
+Display only temperatures at LaGuardia (LGA). Create scatterplot displaying temp on y-axis and hour on x-axis. Use `geom_smooth` to add a smoothing curve to the plot. Let user choose the month to display. For consistency, ensure that the range of the y-axis always runs from 0 to 100 deg. F.    
+
+```{r}
+#Type code here
+```
+
+
+## Shiny App Inputs    
+
+### Example 3.2.1 Weather App     {-}
+
+```{r}
+library(shiny)
+library(tidyverse)
+library(nycflights13)
+data(weather)
+
+# Define UI for application 
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Hourly Temperature at NYC Airports in 2013"),
+  
+  fluidRow(
+    
+    column(4, 
+           checkboxGroupInput("airport_list", 
+                              h3("Select Airport(s)"), 
+                              choices = list("EWR" = "EWR", 
+                                             "JFK" = "JFK", 
+                                             "LGA" = "LGA"),
+                              selected = "EWR")
+           ),
+    
+    column(4,
+           sliderInput("month_number",
+                       "Month Number:",
+                       min = 1,
+                       max = 12,
+                       value = 1)
+    ),
+           
+    
+    column(4,
+           varSelectInput("variable", 
+                        "Select Variable to Display", 
+                      data = weather %>% select(temp, dewp, humid, wind_speed, precip, pressure, visib))
+  ),
+
+    # Show a plot of the generated distribution
+  fluidRow(
+      plotOutput("plot")
+    )
+))
+
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+  
+  output$plot <- renderPlot({
+    airport_list <- input$airport_list
+    num_month <- input$month_number
+  
+    # draw the histogram with the specified number of bins
+    ggplot(data = weather %>% filter(origin %in% airport_list & month == num_month)) + 
+      geom_point(aes(x = hour, y=!!input$variable)) + geom_smooth(aes(x = hour, y=!!input$variable)) + 
+      xlab("Hour")  + xlim(c(0,23))
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+
+### Example 3.2.2 Babynames App     {-}
+
+```{r}
+library(shiny)
+library(tidyverse)
+library(babynames)
+library(mdsr)
+
+summarize <- dplyr::summarize
+
+Names <- c("Ashley", "Brittany", "Dorothy", "Jennifer", "Mary", "Sophia")
+
+# combine genders
+babies <- babynames %>% filter(name %in% Names) %>% group_by(name, year) %>% summarize(n=sum(n))
+
+#user interface
+ui <- fluidPage(
+  
+  titlePanel("Popularity of Baby Names"),
+  
+  fluidRow( 
+    
+       column(4,
+           
+           numericInput("startyear", 
+                        h3("Enter starting year"), 
+                        value=1880, 
+                        min=1880, 
+                        max=2014, 
+                        step=1)
+    ),
+    
+  
+    column(4,
+           numericInput("endyear", 
+                        h3("Enter ending year"), 
+                        value=2014, 
+                        min=1880, 
+                        max=2014, 
+                        step=1)
+    ), 
+    
+    column(4,
+           
+           checkboxGroupInput('names', 'Names to display:', 
+                              sort(Names),
+                              selected=c("Ashley", "Jennifer", "Mary"))
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("plot")
+    )
+  ))
+
+
+# Define server logic required to draw a histogram
+
+server <- function(input, output) {
+  
+  output$plot <- renderPlot({
+    Start_year <- input$startyear
+    End_year <- input$endyear
+    Names <- input$names
+    
+    names_df <- babies %>%
+      filter(year >= Start_year, year <= End_year, name %in% Names)
+    ggplot(data=names_df, aes(x=year, y=n, color=name))+geom_line(size=2)
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+
+### Practice 3.2.3: User Specified Month and Airport.      {-}
+
+Create an app similar to the one in Weather4.R, but now add a dropdown menu, allowing the user to choose which of the three airports to display (EWR, JFK, or LGA). (Hint: See the selectInput command in the [RStudio Shiny tutorial](https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/).)
+
+```{r}
+# Type code here
+```
+
+
+### Practice 3.2.4: User Specified Month and Airport.    {-}
+
+Create an app that lets the user choose the airport using radio buttons, hour of the day using a slider, and variable to display using a pull-down menu. 
+
+Display boxplots for each month, graphing the variable chosen on the y-axis. (See illustration).
+
+
+## Multiple Outputs   
+
+We'll create an app that displays variables by hour, and also a table, containing the high and low for each day.
+
+Rather than doing the filter calculation separately for the graph and table, we'll do it once, using a reactive expression, and reference that expression in the code for the graph and table.
+
+A reactive expression is a function that exists inside the server function that re-evaluates itself when the user changes an input that affects it. These are useful when the same calculated values are used in multiple places in the server function. 
+
+### Example 3.3.1 Weather App with Reactive Expression     {-}
+
+
+
+```{r}
+library(shiny)
+library(tidyverse)
+library(nycflights13)
+data(weather)
+
+# Define UI for application 
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Hourly Temperature at NYC Airports in 2013"),
+  
+  fluidRow(
+    
+    column(4, 
+           checkboxGroupInput("airport_list", 
+                              h3("Select Airport(s)"), 
+                              choices = list("EWR" = "EWR", 
+                                             "JFK" = "JFK", 
+                                             "LGA" = "LGA"),
+                              selected = "EWR")
+           ),
+    
+    column(4,
+           sliderInput("month_number",
+                       "Month Number:",
+                       min = 1,
+                       max = 12,
+                       value = 1)
+    ),
+           
+    
+    column(4,
+           varSelectInput("variable", 
+                        "Select Variable to Display", 
+                      data = weather %>% select(temp, dewp, humid, wind_speed, precip, pressure, visib))
+  )
+  ),
+
+    # Show a plot of the generated distribution
+  fluidRow( 
+    column(8,
+      plotOutput("plot")
+    ),
+    column(4, 
+     tableOutput("table")
+    )
+  )       
+)
+
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+  
+  filtered_data <- reactive({
+    airport_list <- input$airport_list
+    num_month <- input$month_number
+    dataset <- weather %>% filter(origin %in% airport_list & month == num_month)
+  return(dataset)
+  })
+  
+  
+  output$plot <- renderPlot({
+    # draw the histogram with the specified number of bins
+    ggplot(data = filtered_data()) + 
+      geom_point(aes(x = hour, y=!!input$variable)) + geom_smooth(aes(x = hour, y=!!input$variable)) + 
+      xlab("Hour")  + xlim(c(0,23))
+  })
+  
+    output$table <- renderTable({
+    filtered_data() %>% group_by(day) %>% summarize(
+      max=max(!!input$variable, na.rm=TRUE),
+      min=min(!!input$variable, na.rm=TRUE))
+    })
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+### Example 3.3.2 Babynames App with Interactive User Interface     {-}
+
+Sometimes, we'll want to allow the user interface to change, based information provided by the user. Observe how the following app changes based on the years that the user inputs.
+
+
+```{r}
+library(shiny)
+library(tidyverse)
+library(babynames)
+library(mdsr)
+
+summarize <- dplyr::summarize
+
+#user interface
+ui <- fluidPage(
+  
+  titlePanel("Popularity of Baby Names"),
+  
+  fluidRow( 
+    
+    column(4,
+           
+           numericInput("startyear", 
+                        h3("Enter starting year"), 
+                        value=1880, 
+                        min=1880, 
+                        max=2014, 
+                        step=1)
+    ),
+    
+    column(4,
+           numericInput("endyear", 
+                        h3("Enter ending year"), 
+                        value=2014, 
+                        min=1880, 
+                        max=2014, 
+                        step=1)
+    ), 
+    
+    column(4,
+           
+           uiOutput("names_menu")
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("plot")
+    )
+  ))
+
+
+# Define server logic required to draw a histogram
+
+server <- function(input, output) {
+
+
+get_names <- reactive({    
+babies <- babynames %>% filter(year == input$startyear) %>% arrange(desc(n))
+return(babies$name[1:15])
+})
+
+output$names_menu <- renderUI(
+  checkboxGroupInput('names', 'Names to display:', get_names())
+)  
+
+
+filter_names <- reactive({
+dataset <- babynames %>% filter(year >= input$startyear & year <= input$endyear & name %in% input$names) %>% 
+  group_by(name, year) %>% summarize(n=sum(n))
+return(dataset)
+})
+
+  output$plot <- renderPlot({
+    ggplot(data=filter_names(), aes(x=year, y=n, color=name))+geom_line(size=2)
+  })
+  
+  
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+### Practice 3.3.3       {-}
+
+Change the code in example 3.3.2 to allow the user to choose from the 15 most common names over the entire range they're displaying, not just in the first year.
+
+```{r}
+# Type code here.
+```
+
