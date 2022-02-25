@@ -1,3 +1,4 @@
+tab:unnamed-chunk-183
 data-visualization
 loading-and-exploring-data
 creating-graphics
@@ -22,3 +23,22 @@ shiny-apps
 introduction-to-shiny
 shiny-app-inputs
 multiple-outputs
+webscraping
+webscraping-html-tables.
+webscraping-responsibly
+example-4.1.1
+practice-4.1.2
+webscraping-with-selector-gadget
+webscraping-with-selector-gadget-1
+example-4.2.1-read-in-page
+example-4.2.2-scrape-titles
+example-4.2.3-scrape-ratings
+practice-4.2.4-scrape-mpaa-ratings
+example-4.2.5-scrape-runtimes
+example-4.2.6-scrape-genre
+practice-4.2.7-scrape-gross
+practice-4.2.8-scrape-metascore
+practice-4.2.9-scrape-votes
+example-4.2.10-well-combine-the-vectors-of-length-50-into-a-tibble.
+example-4.2.11-better-way-to-scrape-metascore
+practice-4.2.12-better-way-to-scrape-mpaa-rating

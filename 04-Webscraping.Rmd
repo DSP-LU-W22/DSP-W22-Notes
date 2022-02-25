@@ -1,0 +1,434 @@
+# Webscraping
+
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+
+## Webscraping html Tables.    
+
+In these notes, we'll explore ways to extract data from web, using  technique called **webscraping**. Before we learn how to scrape data it's important to think about the ethics of webscraping. 
+
+### Webscraping Responsibly
+
+1. Do not attempt to scrape data that is password protected. If you had to login to a site to access information, don't scrape it.    
+
+2. Scraping for commercial use is often illegal. If you are planning to use data obtained through scraping for commercial use, or to post it publicly, read the webpage's terms of use carefully. You might need to obtain the company's permission.    
+
+3. Consider the implications for all stakeholders. Just because you can scrape data does not necessarily mean that you should. 
+
+In this class, we'll practice scraping data from public sites, where there is no perceived risk to stakeholders. We will not use the data commercially or share it publically in any unauthorized manner. 
+
+
+### Example 4.1.1
+
+Go to the following webpage [https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population]. How many tables do you see?
+
+The read.html command reads in data from a website, and the `html_elements()` function extracts elements of the page that are tagged as tables.      
+
+
+```{r}
+library(httr)
+# The page is read in differently than what we saw in class 
+# due to an issue with the version of R on my computer
+page <- "https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population"
+page <- page %>% 
+  httr::GET(config = httr::config(ssl_verifypeer = FALSE)) %>% 
+  read_html()  
+
+tables <- page %>%
+  html_elements("table") %>%
+  html_table()
+```
+
+Let's explore the tables we've scraped from the web.   
+
+We'll work with the third table. 
+
+```{r}
+States <- tables[[3]]
+head(States)
+```
+
+We'll do some data cleaning and wrangling to get the table into a form we can work with.  
+
+```{r}
+# keep columns 1,3,5,7,9,10
+States <- States[,c(1,3,5,7,9,10)]
+head(States)
+```
+
+```{r}
+#rename State variable
+States <- States %>% rename(State=`State/federal district/territory/division/region`)
+head(States)
+```      
+
+```{r}
+# Keep only the 50 states
+library(Lock5Data)
+data(USStates)
+States <- States %>% semi_join(USStates, by="State")
+head(States)
+```
+
+```{r}
+# remove commas from variables
+States <- States %>% mutate(`2020 pop.`=str_remove_all(`2020 pop.`, "\\,"), 
+                            `2010 pop.`=str_remove_all(`2010 pop.`, "\\,"), 
+                            `2000 pop.`=str_remove_all(`2000 pop.`, "\\,"), 
+                            `2010–2020change` = str_remove_all(`2010–2020change`, c("\\%"))) 
+head(States)
+```
+
+
+```{r, eval=FALSE}
+#try to convert to numeric
+States <- States %>% mutate(`2020 pop.`=as.numeric(`2020 pop.`), 
+                            `2010 pop.`=as.numeric(`2010 pop.`), 
+                            `2000 pop.`=as.numeric(`2000 pop.`), 
+                            `2010–2020change` = as.numeric(`2010–2020change`))
+head(States)
+```
+
+What went wrong?
+
+```{r}
+# add this code before converting to numeric
+States <- States %>% mutate(`2010–2020change` = str_replace(`2010–2020change`, "−", "-"))
+head(States)
+```
+
+
+```{r}
+#try to convert to numeric
+States <- States %>% mutate(`2020 pop.`=as.numeric(`2020 pop.`), 
+                            `2010 pop.`=as.numeric(`2010 pop.`), 
+                            `2000 pop.`=as.numeric(`2000 pop.`), 
+                            `2010–2020change` = as.numeric(`2010–2020change`))
+head(States)
+```
+
+Create a table showing the total population by region in each year. Calculate the percentage change for each region from 2010 to 2020. Also display the number of states in each region.
+
+```{r}
+Regions <- States %>% group_by(`Geo. sort`) %>% summarize(Pop2020=sum(`2020 pop.`), 
+                                                         Pop2010=sum(`2010 pop.`),
+                                                         Pop2000=sum(`2000 pop.`),
+                                                         PctChange = (Pop2020-Pop2010)/Pop2010*100, 
+                                                         States = n()
+                                                         )
+Regions
+
+```
+
+The `kable` function displays a table in professional format. It also allows for captions. This function is part of the `knitr` package. 
+
+```{r}
+library(knitr)
+kable(Regions, caption = "Population Growth by Region")
+```
+
+The **stargazer** package is useful for summarizing multiple variables in the same table. 
+
+```{r}
+library(stargazer)
+#cols give names of variables to include    
+#summary.stat gives statistics to compute
+cols <- c('2020 pop.', '2010 pop.', '2000 pop.')
+stargazer(
+    as.data.frame(States[, cols]), type = "text", 
+    summary.stat = c("min", "median", "max", "mean", "sd")
+    )
+```
+
+
+
+We plot percent change against 2020 population and color by state. 
+
+```{r}
+ggplot(data=States, aes(x=`2020 pop.`, y=`2010–2020change`, color=`Geo. sort`)) + geom_point() +
+  geom_text(data=States %>% filter(`2020 pop.` > 20000000 | `2010–2020change` > 15 ), 
+            aes(x = `2020 pop.`, y = `2010–2020change`, label = State), vjust=-1, 
+            size = 2, color="red") + xlab("2020 Population") + ylab("Population Change 2010-2020")
+```
+
+
+### Practice 4.1.2
+
+Scrape data from the site [read_html("http://tennisabstract.com/reports/atp_elo_ratings.html")]. 
+
+Preview the tables available. Choose one of the tables and try to create a graph or table from it. You will likely need to do some data cleaning and wrangling.   
+
+```{r}
+# Type code here
+```
+
+
+
+## Webscraping with Selector Gadget
+
+```{r}
+page <- read_html("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc")
+tables <- page %>%
+  html_elements("table") %>%
+  html_table()
+```
+
+### Webscraping with Selector Gadget
+
+We'll scrape data from [link](https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc). 
+
+This site contains information on the 50 highest-grossing movies of 2019 (according to US box office revenue). 
+
+First, let's see what happens if we try to read the page in as a html table.
+
+```{r}
+page <- read_html("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc")
+tables <- page %>%
+  html_elements("table") %>%
+  html_table()
+```
+
+Instead, we'll need to scrape in parts of the table individually and assemble it in R, ourselves. 
+
+We'll use the Chrome and its helpful add-on called [Selector Gadget]("https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en")
+
+
+### Example 4.2.1 Read in page
+
+Read in the url
+
+```{r}
+page <- read_html("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc")
+```
+
+### Example 4.2.2 Scrape titles
+
+Use Selector Gadget to help read in the titles. Format them as text. 
+
+```{r}
+title <- page %>%
+  html_nodes(".lister-item-header a") %>%
+  html_text() %>%
+  as.character()
+
+head(title)
+```
+
+```{r}
+length(title)
+```
+
+### Example 4.2.3 Scrape ratings
+
+Use Selector Gadget to help read in the IMDB ratings. Be sure to only scrape the ratings information. Format them as numeric. 
+
+```{r}
+rating <- page %>%
+  html_nodes(".ratings-imdb-rating strong") %>%
+  html_text() %>%
+  as.numeric() 
+
+head(rating)
+```
+
+```{r}
+length(rating)
+```
+
+### Practice 4.2.4 Scrape MPAA ratings
+
+Read in the MPAA ratings (G, PG, PG-13, R, NC-17). Format them as character. 
+
+```{r}
+#Type here
+```
+
+
+
+
+### Example 4.2.5 Scrape runtimes
+
+Read in the runtimes. 
+
+```{r}
+runtime <- page %>%
+  html_nodes(".runtime") %>%
+  html_text() %>%
+  as.character()
+
+head(runtime)
+```
+
+```{r}
+length(runtime)
+```
+
+We'll want to remove the " min", so that runtimes are numeric. We can use `str_remove()` to eliminate excess text.
+
+Since the runtimes initially contained characters, R will treat the vector as character, unless we convert it to numeric. 
+
+```{r}
+runtime <- page %>%
+  html_nodes(".runtime") %>%
+  html_text() %>%
+  as.character() %>% 
+  str_remove(" min") %>% 
+  as.numeric()
+
+head(runtime)
+```
+
+```{r}
+length(runtime)
+```
+
+
+### Example 4.2.6 Scrape Genre
+
+Scrape movie genres.  
+
+```{r}
+genre <- page %>%
+  html_nodes(".genre") %>%
+  html_text() %>%
+  as.character()
+
+head(genre)
+```
+
+```{r}
+length(genre)
+```
+
+We'll remove the "\n" here using `str_remove()` and also the excess whitespace, uing `trimws()`. The `trimws()` command eliminates white space at the beginning and end of the text. It also gets rid of the `\n` which is a spacing character that creates a new line, so in this case, the "\n" would have actually been removed even if we had not done so using `str_remove()`. 
+
+```{r}
+genre <- page %>%
+  html_nodes(".genre") %>%
+  html_text() %>%
+  str_remove("\n") %>%  # remove \n
+  trimws() %>%    #remove excess whitespace
+  as.character()
+
+head(genre)
+```
+
+```{r}
+length(genre)
+```
+
+
+### Practice 4.2.7 Scrape Gross
+
+Scrape film gross. Remove excess letters and characters and convert to numeric. 
+
+```{r}
+# type here
+```
+
+
+
+### Practice 4.2.8 Scrape Metascore
+
+Scrape metascores. Eliminate excess spacing and format as numeric. 
+
+```{r}
+#type here
+```
+
+Do not be surprised if the length of the metascore vector is not what you expected. We'll talk about why this happens. 
+
+###  Practice 4.2.9 Scrape Votes
+
+Scrape number of votes. Remove all commas and convert to numeric. 
+
+```{r}
+#type here
+```
+
+
+### Example 4.2.10 We'll combine the vectors of length 50 into a tibble. 
+
+```{r, eval=FALSE}
+movies2019 <- tibble(title, genre, gross, MPAA_rating, rating, runtime, votes)
+
+head(movies2019)
+```
+
+```{r, eval=FALSE}
+dim(movies2019)
+```
+
+Why can't we add metascore to the tibble yet?
+
+### Example 4.2.11 Better way to scrape metascore
+
+scrape metascore in a way that results in vectors of length 50, with NA's for missing value(s). 
+
+```{r}
+metascore <- page %>%
+  html_nodes(".ratings-bar") %>%
+  html_text %>%
+  str_remove(" ") %>%
+  str_remove("\n") %>%
+  str_split("X") %>%
+  map(2, .default=NA) %>%
+  str_remove("Metascore") %>%
+  str_trim() %>%
+  as.numeric()
+
+head(metascore)
+```
+
+```{r}
+length(metascore)
+```
+
+Now we can add metascore to the tibble. We'll use the `cbind()` commnad, which adds a new column to a dataframe. 
+
+```{r, eval=FALSE}
+movies2019 <- cbind(movies2019, metascore)
+
+head(movies2019)
+```
+
+
+#### Practice 4.2.12 Better way to scrape MPAA Rating
+
+Suppose we want to scape the MPAA ratings for films on the next page, between #101 and #150. We load in the url of that page. 
+
+```{r}
+page <- read_html("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc&start=101&ref_=adv_nxt")
+```
+
+Notice that the code we used above does not return a vector of length 50. Why is this?
+
+```{r}
+MPAA_rating <- page %>%
+  html_nodes(".certificate") %>%
+  html_text() %>%
+  as.character()
+
+head(MPAA_rating)
+```
+
+```{r}
+length(MPAA_rating)
+```
+
+We could instead read in the code as part of a large chunk, as we did above, and then pull out the MPAA ratings. This will give us a vector of length 50 with NA's in the spots that were missing MPAA ratings. 
+
+Use the approach in Example 4.2.11 to scrape all MPAA ratings and fill in NA's for movies where they are missing. 
+
+```{r}
+#Type here
+```
+
+```{r}
+length(MPAA_rating)
+```
+

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Webscraping | Data-Scientific Programming Notes</title>
+  <meta name="description" content="Chapter 4 Webscraping | Data-Scientific Programming Notes" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Webscraping | Data-Scientific Programming Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Webscraping | Data-Scientific Programming Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage" />
+
+
+<meta name="date" content="2022-02-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="shiny-apps.html"/>
+
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data-Scientific Programming Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>1</b> Data Visualization</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-visualization.html"><a href="data-visualization.html#loading-and-exploring-data"><i class="fa fa-check"></i><b>1.1</b> Loading and Exploring Data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="data-visualization.html"><a href="data-visualization.html#creating-graphics"><i class="fa fa-check"></i><b>1.1.1</b> Creating Graphics</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.1-basic-scatterplot"><i class="fa fa-check"></i>Example 1.1.1 Basic Scatterplot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.2-scatterplot-with-text-labels"><i class="fa fa-check"></i>Example 1.1.2 Scatterplot with text labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.3-scatterplot-with-color-shape-and-size"><i class="fa fa-check"></i>Example 1.1.3 Scatterplot with color, shape, and size</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.4-changing-axis-labels-and-hiding-legend"><i class="fa fa-check"></i>Example 1.1.4 Changing Axis Labels and Hiding Legend</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.1.5"><i class="fa fa-check"></i>Practice 1.1.5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-visualization.html"><a href="data-visualization.html#more-graphics"><i class="fa fa-check"></i><b>1.2</b> More Graphics</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-quantitative-data-continued"><i class="fa fa-check"></i><b>1.2.1</b> Visualizing Quantitative Data (Continued)</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.1-faceting"><i class="fa fa-check"></i>Example 1.2.1: Faceting</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.2-histograms"><i class="fa fa-check"></i>Example 1.2.2: Histograms</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.3-boxplots"><i class="fa fa-check"></i>Example 1.2.3: Boxplots</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.4"><i class="fa fa-check"></i>Practice 1.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.5"><i class="fa fa-check"></i>Practice 1.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.6"><i class="fa fa-check"></i>Practice 1.2.6</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-categorical-data"><i class="fa fa-check"></i><b>1.2.2</b> Visualizing Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.7-bar-graph"><i class="fa fa-check"></i>Example 1.2.7: Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.8-reordering-bars"><i class="fa fa-check"></i>Example 1.2.8 Reordering Bars</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.9-relative-frequency-bar-graph"><i class="fa fa-check"></i>Example 1.2.9 Relative Frequency Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.10"><i class="fa fa-check"></i>Practice 1.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.11"><i class="fa fa-check"></i>Practice 1.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.12"><i class="fa fa-check"></i>Practice 1.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.13-stacked-bar-graph"><i class="fa fa-check"></i>Example 1.2.13 Stacked Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.14-stacked-bar-graph-with-equal-heights"><i class="fa fa-check"></i>Example 1.2.14 Stacked Bar Graph with Equal Heights</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.15-side-by-side-bar-graph"><i class="fa fa-check"></i>Example 1.2.15 Side-by-Side Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.16-height-specified-by-variable"><i class="fa fa-check"></i>Example 1.2.16 Height Specified by Variable</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.17-height-specified-by-variable"><i class="fa fa-check"></i>Practice 1.2.17 Height Specified by Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-visualization.html"><a href="data-visualization.html#advanced-data-graphics"><i class="fa fa-check"></i><b>1.3</b> Advanced Data Graphics</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#babynames-dataset"><i class="fa fa-check"></i>Babynames dataset</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.1-age-distribution-for-a-given-name"><i class="fa fa-check"></i>Example 1.3.1: Age Distribution for a Given Name</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#choosing-name-and-gender"><i class="fa fa-check"></i>Choosing Name and Gender</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setting-axis-limits"><i class="fa fa-check"></i>Setting Axis Limits</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-line"><i class="fa fa-check"></i>Adding Line</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#axis-labels"><i class="fa fa-check"></i>Axis Labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-text"><i class="fa fa-check"></i>Adding Text</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-median-age"><i class="fa fa-check"></i>Adding Median Age</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.2-common-female-names"><i class="fa fa-check"></i>Example 1.3.2: Common Female Names</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#some-data-prep"><i class="fa fa-check"></i>Some data prep</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setup-the-plot"><i class="fa fa-check"></i>Setup the Plot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-linerange-and-color"><i class="fa fa-check"></i>Add Linerange and color</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-points-at-median"><i class="fa fa-check"></i>Add points at median</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-labels-and-flip-coordinates"><i class="fa fa-check"></i>Add Labels and Flip Coordinates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-and-arranging-data-and-selecting-columns"><i class="fa fa-check"></i><b>2.1</b> Filtering and Arranging Data, and Selecting Columns</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.1"><i class="fa fa-check"></i>Example 2.1.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.2"><i class="fa fa-check"></i>Example 2.1.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.3"><i class="fa fa-check"></i>Example 2.1.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.4"><i class="fa fa-check"></i>Example 2.1.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.5"><i class="fa fa-check"></i>Example 2.1.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.6"><i class="fa fa-check"></i>Practice 2.1.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.7"><i class="fa fa-check"></i>Practice 2.1.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.8"><i class="fa fa-check"></i>Practice 2.1.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.9-multiple-logicals"><i class="fa fa-check"></i>Example 2.1.9 Multiple Logicals</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.10-dealing-with-nas"><i class="fa fa-check"></i>Example 2.1.10: Dealing with NA's</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.11"><i class="fa fa-check"></i>Practice 2.1.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.12"><i class="fa fa-check"></i>Practice 2.1.12</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Mutating, Summarizing, and Grouping Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.1"><i class="fa fa-check"></i>Example 2.2.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.2"><i class="fa fa-check"></i>Example 2.2.2</a></li>
+<li class="chapter" data-level="2.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#summarize"><i class="fa fa-check"></i><b>2.2.1</b> Summarize</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.3"><i class="fa fa-check"></i>Example 2.2.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.4"><i class="fa fa-check"></i>Practice 2.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.5"><i class="fa fa-check"></i>Practice 2.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.6"><i class="fa fa-check"></i>Example 2.2.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.7"><i class="fa fa-check"></i>Example 2.2.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.8"><i class="fa fa-check"></i>Example 2.2.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.9"><i class="fa fa-check"></i>Example 2.2.9</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.10"><i class="fa fa-check"></i>Practice 2.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.11"><i class="fa fa-check"></i>Practice 2.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.12"><i class="fa fa-check"></i>Practice 2.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.13"><i class="fa fa-check"></i>Practice 2.2.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>2.3</b> Tidy Data</a><ul>
+<li><a href="data-wrangling.html#example-2.3.1-pivot_longer">Example 2.3.1: <code>pivot_longer()</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.2-pivot_wider">Example 2.3.2 <code>pivot_wider</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.3-separate-and-unite">Example 2.3.3 <code>separate()</code> and <code>unite()</code></a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.4"><i class="fa fa-check"></i>Practice 2.3.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.5"><i class="fa fa-check"></i>Practice 2.3.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.6"><i class="fa fa-check"></i>Practice 2.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling.html"><a href="data-wrangling.html#joining-data"><i class="fa fa-check"></i><b>2.4</b> Joining Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-joins"><i class="fa fa-check"></i>Mutating Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.1-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.1 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.2"><i class="fa fa-check"></i>Practice 2.4.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-joins"><i class="fa fa-check"></i>Filtering Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.3-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.3 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.4"><i class="fa fa-check"></i>Practice 2.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-wrangling.html"><a href="data-wrangling.html#strings-factors-and-dates"><i class="fa fa-check"></i><b>2.5</b> Strings, Factors and Dates</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.1-modifying-string-variables"><i class="fa fa-check"></i>Example 2.5.1: Modifying String Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.2"><i class="fa fa-check"></i>Practice 2.5.2:</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.3-working-with-factor-variables"><i class="fa fa-check"></i>Example 2.5.3: Working with Factor Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.5-dates-and-times"><i class="fa fa-check"></i>Example 2.5.5: Dates and Times</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.6"><i class="fa fa-check"></i>Practice 2.5.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.7-creating-date-variable"><i class="fa fa-check"></i>Example 2.5.7 Creating Date Variable</a></li>
+<li><a href="data-wrangling.html#example-2.5.8-today-and-now">Example 2.5.8 <code>today</code> and <code>now</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>3</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="3.1" data-path="shiny-apps.html"><a href="shiny-apps.html#introduction-to-shiny"><i class="fa fa-check"></i><b>3.1</b> Introduction to Shiny</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-structure"><i class="fa fa-check"></i>Shiny Structure</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-template"><i class="fa fa-check"></i>Shiny App Template</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.1.1-geyser-app"><i class="fa fa-check"></i>Example 3.1.1: Geyser App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.2-weather-app."><i class="fa fa-check"></i>Practice 3.1.2: Weather App.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.3-lga-temperatures"><i class="fa fa-check"></i>Practice 3.1.3: LGA Temperatures</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.4-scatterplot-of-temp-by-hour"><i class="fa fa-check"></i>Practice 3.1.4: Scatterplot of Temp by Hour</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-inputs"><i class="fa fa-check"></i><b>3.2</b> Shiny App Inputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.1-weather-app"><i class="fa fa-check"></i>Example 3.2.1 Weather App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.2-babynames-app"><i class="fa fa-check"></i>Example 3.2.2 Babynames App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.3-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.3: User Specified Month and Airport.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.4-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.4: User Specified Month and Airport.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="shiny-apps.html"><a href="shiny-apps.html#multiple-outputs"><i class="fa fa-check"></i><b>3.3</b> Multiple Outputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.1-weather-app-with-reactive-expression"><i class="fa fa-check"></i>Example 3.3.1 Weather App with Reactive Expression</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.2-babynames-app-with-interactive-user-interface"><i class="fa fa-check"></i>Example 3.3.2 Babynames App with Interactive User Interface</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.3.3"><i class="fa fa-check"></i>Practice 3.3.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="webscraping.html"><a href="webscraping.html"><i class="fa fa-check"></i><b>4</b> Webscraping</a><ul>
+<li class="chapter" data-level="4.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-html-tables."><i class="fa fa-check"></i><b>4.1</b> Webscraping html Tables.</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-responsibly"><i class="fa fa-check"></i><b>4.1.1</b> Webscraping Responsibly</a></li>
+<li class="chapter" data-level="4.1.2" data-path="webscraping.html"><a href="webscraping.html#example-4.1.1"><i class="fa fa-check"></i><b>4.1.2</b> Example 4.1.1</a></li>
+<li class="chapter" data-level="4.1.3" data-path="webscraping.html"><a href="webscraping.html#practice-4.1.2"><i class="fa fa-check"></i><b>4.1.3</b> Practice 4.1.2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="webscraping.html"><a href="webscraping.html#webscraping-with-selector-gadget"><i class="fa fa-check"></i><b>4.2</b> Webscraping with Selector Gadget</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-with-selector-gadget-1"><i class="fa fa-check"></i><b>4.2.1</b> Webscraping with Selector Gadget</a></li>
+<li class="chapter" data-level="4.2.2" data-path="webscraping.html"><a href="webscraping.html#example-4.2.1-read-in-page"><i class="fa fa-check"></i><b>4.2.2</b> Example 4.2.1 Read in page</a></li>
+<li class="chapter" data-level="4.2.3" data-path="webscraping.html"><a href="webscraping.html#example-4.2.2-scrape-titles"><i class="fa fa-check"></i><b>4.2.3</b> Example 4.2.2 Scrape titles</a></li>
+<li class="chapter" data-level="4.2.4" data-path="webscraping.html"><a href="webscraping.html#example-4.2.3-scrape-ratings"><i class="fa fa-check"></i><b>4.2.4</b> Example 4.2.3 Scrape ratings</a></li>
+<li class="chapter" data-level="4.2.5" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.4-scrape-mpaa-ratings"><i class="fa fa-check"></i><b>4.2.5</b> Practice 4.2.4 Scrape MPAA ratings</a></li>
+<li class="chapter" data-level="4.2.6" data-path="webscraping.html"><a href="webscraping.html#example-4.2.5-scrape-runtimes"><i class="fa fa-check"></i><b>4.2.6</b> Example 4.2.5 Scrape runtimes</a></li>
+<li class="chapter" data-level="4.2.7" data-path="webscraping.html"><a href="webscraping.html#example-4.2.6-scrape-genre"><i class="fa fa-check"></i><b>4.2.7</b> Example 4.2.6 Scrape Genre</a></li>
+<li class="chapter" data-level="4.2.8" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.7-scrape-gross"><i class="fa fa-check"></i><b>4.2.8</b> Practice 4.2.7 Scrape Gross</a></li>
+<li class="chapter" data-level="4.2.9" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.8-scrape-metascore"><i class="fa fa-check"></i><b>4.2.9</b> Practice 4.2.8 Scrape Metascore</a></li>
+<li class="chapter" data-level="4.2.10" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.9-scrape-votes"><i class="fa fa-check"></i><b>4.2.10</b> Practice 4.2.9 Scrape Votes</a></li>
+<li class="chapter" data-level="4.2.11" data-path="webscraping.html"><a href="webscraping.html#example-4.2.10-well-combine-the-vectors-of-length-50-into-a-tibble."><i class="fa fa-check"></i><b>4.2.11</b> Example 4.2.10 We'll combine the vectors of length 50 into a tibble.</a></li>
+<li class="chapter" data-level="4.2.12" data-path="webscraping.html"><a href="webscraping.html#example-4.2.11-better-way-to-scrape-metascore"><i class="fa fa-check"></i><b>4.2.12</b> Example 4.2.11 Better way to scrape metascore</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data-Scientific Programming Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="webscraping" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Webscraping</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rvest)</code></pre></div>
+<div id="webscraping-html-tables." class="section level2">
+<h2><span class="header-section-number">4.1</span> Webscraping html Tables.</h2>
+<p>In these notes, we'll explore ways to extract data from web, using technique called <strong>webscraping</strong>. Before we learn how to scrape data it's important to think about the ethics of webscraping.</p>
+<div id="webscraping-responsibly" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Webscraping Responsibly</h3>
+<ol style="list-style-type: decimal">
+<li><p>Do not attempt to scrape data that is password protected. If you had to login to a site to access information, don't scrape it.</p></li>
+<li><p>Scraping for commercial use is often illegal. If you are planning to use data obtained through scraping for commercial use, or to post it publicly, read the webpage's terms of use carefully. You might need to obtain the company's permission.</p></li>
+<li><p>Consider the implications for all stakeholders. Just because you can scrape data does not necessarily mean that you should.</p></li>
+</ol>
+<p>In this class, we'll practice scraping data from public sites, where there is no perceived risk to stakeholders. We will not use the data commercially or share it publically in any unauthorized manner.</p>
+</div>
+<div id="example-4.1.1" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Example 4.1.1</h3>
+<p>Go to the following webpage [<a href="https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population" class="uri">https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population</a>]. How many tables do you see?</p>
+<p>The read.html command reads in data from a website, and the <code>html_elements()</code> function extracts elements of the page that are tagged as tables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(httr)
+<span class="co"># The page is read in differently than what we saw in class </span>
+<span class="co"># due to an issue with the version of R on my computer</span>
+page &lt;-<span class="st"> &quot;https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population&quot;</span>
+page &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="dt">config =</span> httr<span class="op">::</span><span class="kw">config</span>(<span class="dt">ssl_verifypeer =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">read_html</span>()  
+
+tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_elements</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_table</span>()</code></pre></div>
+<p>Let's explore the tables we've scraped from the web.</p>
+<p>We'll work with the third table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">States &lt;-<span class="st"> </span>tables[[<span class="dv">3</span>]]
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 10
+##   `State/federal di… `#`   `2020 pop.` `#`   `2010 pop.` `#`   `2000 pop.` `#`  
+##   &lt;chr&gt;              &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;
+## 1 Massachusetts      15    7,029,917   14    6,547,629   13    6,349,097   21   
+## 2 Connecticut        29    3,605,944   29    3,574,097   29    3,405,565   47   
+## 3 New Hampshire      41    1,377,529   42    1,316,470   41    1,235,786   30   
+## 4 Maine              42    1,362,359   41    1,328,361   40    1,274,923   42   
+## 5 Rhode Island       43    1,097,379   43    1,052,567   43    1,048,319   31   
+## 6 Vermont            49    643,077     49    625,741     49    608,827     40   
+## # … with 2 more variables: 2010–2020change &lt;chr&gt;, Geo. sort &lt;chr&gt;</code></pre>
+<p>We'll do some data cleaning and wrangling to get the table into a form we can work with.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># keep columns 1,3,5,7,9,10</span>
+States &lt;-<span class="st"> </span>States[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>)]
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   `State/federal district/… `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang…
+##   &lt;chr&gt;                     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;           
+## 1 Massachusetts             7,029,917   6,547,629   6,349,097   7.4%            
+## 2 Connecticut               3,605,944   3,574,097   3,405,565   0.9%            
+## 3 New Hampshire             1,377,529   1,316,470   1,235,786   4.6%            
+## 4 Maine                     1,362,359   1,328,361   1,274,923   2.6%            
+## 5 Rhode Island              1,097,379   1,052,567   1,048,319   4.3%            
+## 6 Vermont                   643,077     625,741     608,827     2.8%            
+## # … with 1 more variable: Geo. sort &lt;chr&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#rename State variable</span>
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">rename</span>(<span class="dt">State=</span><span class="st">`</span><span class="dt">State/federal district/territory/division/region</span><span class="st">`</span>)
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   State         `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang… `Geo. sort`
+##   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;      
+## 1 Massachusetts 7,029,917   6,547,629   6,349,097   7.4%             NEng       
+## 2 Connecticut   3,605,944   3,574,097   3,405,565   0.9%             NEng       
+## 3 New Hampshire 1,377,529   1,316,470   1,235,786   4.6%             NEng       
+## 4 Maine         1,362,359   1,328,361   1,274,923   2.6%             NEng       
+## 5 Rhode Island  1,097,379   1,052,567   1,048,319   4.3%             NEng       
+## 6 Vermont       643,077     625,741     608,827     2.8%             NEng</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep only the 50 states</span>
+<span class="kw">library</span>(Lock5Data)
+<span class="kw">data</span>(USStates)
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">semi_join</span>(USStates, <span class="dt">by=</span><span class="st">&quot;State&quot;</span>)
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   State         `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang… `Geo. sort`
+##   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;      
+## 1 Massachusetts 7,029,917   6,547,629   6,349,097   7.4%             NEng       
+## 2 Connecticut   3,605,944   3,574,097   3,405,565   0.9%             NEng       
+## 3 New Hampshire 1,377,529   1,316,470   1,235,786   4.6%             NEng       
+## 4 Maine         1,362,359   1,328,361   1,274,923   2.6%             NEng       
+## 5 Rhode Island  1,097,379   1,052,567   1,048,319   4.3%             NEng       
+## 6 Vermont       643,077     625,741     608,827     2.8%             NEng</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># remove commas from variables</span>
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>=<span class="kw">str_remove_all</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>), 
+                            <span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>=<span class="kw">str_remove_all</span>(<span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>), 
+                            <span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>=<span class="kw">str_remove_all</span>(<span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">,&quot;</span>), 
+                            <span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span> =<span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>, <span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">%&quot;</span>))) 
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   State         `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang… `Geo. sort`
+##   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;      
+## 1 Massachusetts 7029917     6547629     6349097     7.4              NEng       
+## 2 Connecticut   3605944     3574097     3405565     0.9              NEng       
+## 3 New Hampshire 1377529     1316470     1235786     4.6              NEng       
+## 4 Maine         1362359     1328361     1274923     2.6              NEng       
+## 5 Rhode Island  1097379     1052567     1048319     4.3              NEng       
+## 6 Vermont       643077      625741      608827      2.8              NEng</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#try to convert to numeric</span>
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span> =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>))
+<span class="kw">head</span>(States)</code></pre></div>
+<p>What went wrong?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add this code before converting to numeric</span>
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span> =<span class="st"> </span><span class="kw">str_replace</span>(<span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>, <span class="st">&quot;−&quot;</span>, <span class="st">&quot;-&quot;</span>))
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   State         `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang… `Geo. sort`
+##   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;      
+## 1 Massachusetts 7029917     6547629     6349097     7.4              NEng       
+## 2 Connecticut   3605944     3574097     3405565     0.9              NEng       
+## 3 New Hampshire 1377529     1316470     1235786     4.6              NEng       
+## 4 Maine         1362359     1328361     1274923     2.6              NEng       
+## 5 Rhode Island  1097379     1052567     1048319     4.3              NEng       
+## 6 Vermont       643077      625741      608827      2.8              NEng</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#try to convert to numeric</span>
+States &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>=<span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>), 
+                            <span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span> =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>))
+<span class="kw">head</span>(States)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   State         `2020 pop.` `2010 pop.` `2000 pop.` `2010–2020chang… `Geo. sort`
+##   &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;      
+## 1 Massachusetts     7029917     6547629     6349097              7.4 NEng       
+## 2 Connecticut       3605944     3574097     3405565              0.9 NEng       
+## 3 New Hampshire     1377529     1316470     1235786              4.6 NEng       
+## 4 Maine             1362359     1328361     1274923              2.6 NEng       
+## 5 Rhode Island      1097379     1052567     1048319              4.3 NEng       
+## 6 Vermont            643077      625741      608827              2.8 NEng</code></pre>
+<p>Create a table showing the total population by region in each year. Calculate the percentage change for each region from 2010 to 2020. Also display the number of states in each region.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Regions &lt;-<span class="st"> </span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Geo. sort</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">Pop2020=</span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>), 
+                                                         <span class="dt">Pop2010=</span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">2010 pop.</span><span class="st">`</span>),
+                                                         <span class="dt">Pop2000=</span><span class="kw">sum</span>(<span class="st">`</span><span class="dt">2000 pop.</span><span class="st">`</span>),
+                                                         <span class="dt">PctChange =</span> (Pop2020<span class="op">-</span>Pop2010)<span class="op">/</span>Pop2010<span class="op">*</span><span class="dv">100</span>, 
+                                                         <span class="dt">States =</span> <span class="kw">n</span>()
+                                                         )
+Regions</code></pre></div>
+<pre><code>## # A tibble: 9 x 6
+##   `Geo. sort`  Pop2020  Pop2010  Pop2000 PctChange States
+##   &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;int&gt;
+## 1 ENC         47368533 46421564 45155037      2.04      5
+## 2 ESC         19402234 18432505 17022810      5.26      4
+## 3 MAtl        42492943 40872375 39671861      3.96      3
+## 4 Mtn         24919150 22065451 18172295     12.9       8
+## 5 NEng        15116205 14444865 13922517      4.65      6
+## 6 Pac         53669422 49880102 45025637      7.60      5
+## 7 SAtl        65400189 59175314 51197101     10.5       8
+## 8 WNC         21616921 20505437 19237739      5.42      7
+## 9 WSC         40774139 36346202 31444850     12.2       4</code></pre>
+<p>The <code>kable</code> function displays a table in professional format. It also allows for captions. This function is part of the <code>knitr</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">kable</span>(Regions, <span class="dt">caption =</span> <span class="st">&quot;Population Growth by Region&quot;</span>)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-183">Table 4.1: </span>Population Growth by Region</caption>
+<thead>
+<tr class="header">
+<th align="left">Geo. sort</th>
+<th align="right">Pop2020</th>
+<th align="right">Pop2010</th>
+<th align="right">Pop2000</th>
+<th align="right">PctChange</th>
+<th align="right">States</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ENC</td>
+<td align="right">47368533</td>
+<td align="right">46421564</td>
+<td align="right">45155037</td>
+<td align="right">2.039933</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">ESC</td>
+<td align="right">19402234</td>
+<td align="right">18432505</td>
+<td align="right">17022810</td>
+<td align="right">5.260972</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">MAtl</td>
+<td align="right">42492943</td>
+<td align="right">40872375</td>
+<td align="right">39671861</td>
+<td align="right">3.964947</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">Mtn</td>
+<td align="right">24919150</td>
+<td align="right">22065451</td>
+<td align="right">18172295</td>
+<td align="right">12.932883</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">NEng</td>
+<td align="right">15116205</td>
+<td align="right">14444865</td>
+<td align="right">13922517</td>
+<td align="right">4.647603</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Pac</td>
+<td align="right">53669422</td>
+<td align="right">49880102</td>
+<td align="right">45025637</td>
+<td align="right">7.596857</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">SAtl</td>
+<td align="right">65400189</td>
+<td align="right">59175314</td>
+<td align="right">51197101</td>
+<td align="right">10.519378</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">WNC</td>
+<td align="right">21616921</td>
+<td align="right">20505437</td>
+<td align="right">19237739</td>
+<td align="right">5.420436</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">WSC</td>
+<td align="right">40774139</td>
+<td align="right">36346202</td>
+<td align="right">31444850</td>
+<td align="right">12.182668</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>stargazer</strong> package is useful for summarizing multiple variables in the same table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stargazer)
+<span class="co">#cols give names of variables to include    </span>
+<span class="co">#summary.stat gives statistics to compute</span>
+cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;2020 pop.&#39;</span>, <span class="st">&#39;2010 pop.&#39;</span>, <span class="st">&#39;2000 pop.&#39;</span>)
+<span class="kw">stargazer</span>(
+    <span class="kw">as.data.frame</span>(States[, cols]), <span class="dt">type =</span> <span class="st">&quot;text&quot;</span>, 
+    <span class="dt">summary.stat =</span> <span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;median&quot;</span>, <span class="st">&quot;max&quot;</span>, <span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>)
+    )</code></pre></div>
+<pre><code>## 
+## ====================================================================
+## Statistic   Min     Median       Max         Mean        St. Dev.   
+## --------------------------------------------------------------------
+## 2020 pop. 576,851 4,581,796.0 39,538,223 6,615,195.000 7,436,143.000
+## 2010 pop. 563,626 4,436,370.0 37,253,956 6,162,876.000 6,848,235.000
+## 2000 pop. 493,782 4,026,890.0 33,871,648 5,616,997.000 6,185,580.000
+## --------------------------------------------------------------------</code></pre>
+<p>We plot percent change against 2020 population and color by state.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>States, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>, <span class="dt">color=</span><span class="st">`</span><span class="dt">Geo. sort</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data=</span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">20000000</span> <span class="op">|</span><span class="st"> `</span><span class="dt">2010–2020change</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span> ), 
+            <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>, <span class="dt">label =</span> State), <span class="dt">vjust=</span><span class="op">-</span><span class="dv">1</span>, 
+            <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;2020 Population&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Population Change 2010-2020&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-185-1.png" width="576" /></p>
+</div>
+<div id="practice-4.1.2" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Practice 4.1.2</h3>
+<p>Scrape data from the site [read_html(&quot;<a href="http://tennisabstract.com/reports/atp_elo_ratings.html" class="uri">http://tennisabstract.com/reports/atp_elo_ratings.html</a>&quot;)].</p>
+<p>Preview the tables available. Choose one of the tables and try to create a graph or table from it. You will likely need to do some data cleaning and wrangling.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Type code here</span></code></pre></div>
+</div>
+</div>
+<div id="webscraping-with-selector-gadget" class="section level2">
+<h2><span class="header-section-number">4.2</span> Webscraping with Selector Gadget</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&quot;</span>)
+tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_elements</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_table</span>()</code></pre></div>
+<div id="webscraping-with-selector-gadget-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Webscraping with Selector Gadget</h3>
+<p>We'll scrape data from <a href="https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc">link</a>.</p>
+<p>This site contains information on the 50 highest-grossing movies of 2019 (according to US box office revenue).</p>
+<p>First, let's see what happens if we try to read the page in as a html table.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&quot;</span>)
+tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_elements</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_table</span>()</code></pre></div>
+<p>Instead, we'll need to scrape in parts of the table individually and assemble it in R, ourselves.</p>
+<p>We'll use the Chrome and its helpful add-on called <a href="%22https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=en%22">Selector Gadget</a></p>
+</div>
+<div id="example-4.2.1-read-in-page" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Example 4.2.1 Read in page</h3>
+<p>Read in the url</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&quot;</span>)</code></pre></div>
+</div>
+<div id="example-4.2.2-scrape-titles" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Example 4.2.2 Scrape titles</h3>
+<p>Use Selector Gadget to help read in the titles. Format them as text.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">title &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header a&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+<span class="kw">head</span>(title)</code></pre></div>
+<pre><code>## [1] &quot;Avengers: Endgame&quot;                &quot;The Lion King&quot;                   
+## [3] &quot;Star Wars: The Rise Of Skywalker&quot; &quot;Frozen II&quot;                       
+## [5] &quot;Toy Story 4&quot;                      &quot;Captain Marvel&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(title)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+</div>
+<div id="example-4.2.3-scrape-ratings" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Example 4.2.3 Scrape ratings</h3>
+<p>Use Selector Gadget to help read in the IMDB ratings. Be sure to only scrape the ratings information. Format them as numeric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-imdb-rating strong&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>() 
+
+<span class="kw">head</span>(rating)</code></pre></div>
+<pre><code>## [1] 8.4 6.8 6.5 6.8 7.7 6.8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(rating)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+</div>
+<div id="practice-4.2.4-scrape-mpaa-ratings" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Practice 4.2.4 Scrape MPAA ratings</h3>
+<p>Read in the MPAA ratings (G, PG, PG-13, R, NC-17). Format them as character.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type here</span></code></pre></div>
+</div>
+<div id="example-4.2.5-scrape-runtimes" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Example 4.2.5 Scrape runtimes</h3>
+<p>Read in the runtimes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">runtime &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.runtime&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+<span class="kw">head</span>(runtime)</code></pre></div>
+<pre><code>## [1] &quot;181 min&quot; &quot;118 min&quot; &quot;141 min&quot; &quot;103 min&quot; &quot;100 min&quot; &quot;123 min&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(runtime)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<p>We'll want to remove the &quot; min&quot;, so that runtimes are numeric. We can use <code>str_remove()</code> to eliminate excess text.</p>
+<p>Since the runtimes initially contained characters, R will treat the vector as character, unless we convert it to numeric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">runtime &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.runtime&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot; min&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+<span class="kw">head</span>(runtime)</code></pre></div>
+<pre><code>## [1] 181 118 141 103 100 123</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(runtime)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+</div>
+<div id="example-4.2.6-scrape-genre" class="section level3">
+<h3><span class="header-section-number">4.2.7</span> Example 4.2.6 Scrape Genre</h3>
+<p>Scrape movie genres.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genre &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.genre&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+<span class="kw">head</span>(genre)</code></pre></div>
+<pre><code>## [1] &quot;\nAction, Adventure, Drama            &quot;    
+## [2] &quot;\nAnimation, Adventure, Drama            &quot; 
+## [3] &quot;\nAction, Adventure, Fantasy            &quot;  
+## [4] &quot;\nAnimation, Adventure, Comedy            &quot;
+## [5] &quot;\nAnimation, Adventure, Comedy            &quot;
+## [6] &quot;\nAction, Adventure, Sci-Fi            &quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(genre)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<p>We'll remove the &quot;&quot; here using <code>str_remove()</code> and also the excess whitespace, uing <code>trimws()</code>. The <code>trimws()</code> command eliminates white space at the beginning and end of the text. It also gets rid of the <code>\n</code> which is a spacing character that creates a new line, so in this case, the &quot;&quot; would have actually been removed even if we had not done so using <code>str_remove()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">genre &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.genre&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># remove \n</span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span><span class="st">    </span><span class="co">#remove excess whitespace</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+<span class="kw">head</span>(genre)</code></pre></div>
+<pre><code>## [1] &quot;Action, Adventure, Drama&quot;     &quot;Animation, Adventure, Drama&quot; 
+## [3] &quot;Action, Adventure, Fantasy&quot;   &quot;Animation, Adventure, Comedy&quot;
+## [5] &quot;Animation, Adventure, Comedy&quot; &quot;Action, Adventure, Sci-Fi&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(genre)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+</div>
+<div id="practice-4.2.7-scrape-gross" class="section level3">
+<h3><span class="header-section-number">4.2.8</span> Practice 4.2.7 Scrape Gross</h3>
+<p>Scrape film gross. Remove excess letters and characters and convert to numeric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+</div>
+<div id="practice-4.2.8-scrape-metascore" class="section level3">
+<h3><span class="header-section-number">4.2.9</span> Practice 4.2.8 Scrape Metascore</h3>
+<p>Scrape metascores. Eliminate excess spacing and format as numeric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type here</span></code></pre></div>
+<p>Do not be surprised if the length of the metascore vector is not what you expected. We'll talk about why this happens.</p>
+</div>
+<div id="practice-4.2.9-scrape-votes" class="section level3">
+<h3><span class="header-section-number">4.2.10</span> Practice 4.2.9 Scrape Votes</h3>
+<p>Scrape number of votes. Remove all commas and convert to numeric.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type here</span></code></pre></div>
+</div>
+<div id="example-4.2.10-well-combine-the-vectors-of-length-50-into-a-tibble." class="section level3">
+<h3><span class="header-section-number">4.2.11</span> Example 4.2.10 We'll combine the vectors of length 50 into a tibble.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies2019 &lt;-<span class="st"> </span><span class="kw">tibble</span>(title, genre, gross, MPAA_rating, rating, runtime, votes)
+
+<span class="kw">head</span>(movies2019)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(movies2019)</code></pre></div>
+<p>Why can't we add metascore to the tibble yet?</p>
+</div>
+<div id="example-4.2.11-better-way-to-scrape-metascore" class="section level3">
+<h3><span class="header-section-number">4.2.12</span> Example 4.2.11 Better way to scrape metascore</h3>
+<p>scrape metascore in a way that results in vectors of length 50, with NA's for missing value(s).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metascore &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>html_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;X&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove</span>(<span class="st">&quot;Metascore&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+<span class="kw">head</span>(metascore)</code></pre></div>
+<pre><code>## [1] 78 55 53 64 84 64</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(metascore)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<p>Now we can add metascore to the tibble. We'll use the <code>cbind()</code> commnad, which adds a new column to a dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies2019 &lt;-<span class="st"> </span><span class="kw">cbind</span>(movies2019, metascore)
+
+<span class="kw">head</span>(movies2019)</code></pre></div>
+<div id="practice-4.2.12-better-way-to-scrape-mpaa-rating" class="section level4">
+<h4><span class="header-section-number">4.2.12.1</span> Practice 4.2.12 Better way to scrape MPAA Rating</h4>
+<p>Suppose we want to scape the MPAA ratings for films on the next page, between #101 and #150. We load in the url of that page.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&amp;start=101&amp;ref_=adv_nxt&quot;</span>)</code></pre></div>
+<p>Notice that the code we used above does not return a vector of length 50. Why is this?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MPAA_rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.certificate&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+<span class="kw">head</span>(MPAA_rating)</code></pre></div>
+<pre><code>## [1] &quot;R&quot;     &quot;PG-13&quot; &quot;R&quot;     &quot;R&quot;     &quot;R&quot;     &quot;PG-13&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(MPAA_rating)</code></pre></div>
+<pre><code>## [1] 42</code></pre>
+<p>We could instead read in the code as part of a large chunk, as we did above, and then pull out the MPAA ratings. This will give us a vector of length 50 with NA's in the spots that were missing MPAA ratings.</p>
+<p>Use the approach in Example 4.2.11 to scrape all MPAA ratings and fill in NA's for movies where they are missing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Type here</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(MPAA_rating)</code></pre></div>
+<pre><code>## [1] 42</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="shiny-apps.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/edit/master/04-Webscraping.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/blob/master/04-Webscraping.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
