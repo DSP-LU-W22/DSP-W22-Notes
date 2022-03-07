@@ -1,0 +1,749 @@
+# Programming
+
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+
+This module pertains to chapters 17 -21 in Wickham and Grolemund's text. We'll learn about basic programming in R. 
+
+```{r}
+library(tidyverse)
+```
+
+## Vectors
+
+Let's investigate how R performs operations on vectors. We'll start by generating four vectors. 
+
+```{r}
+x <- 1:10    # integers from 1 through 10
+y <- seq(from = 2, to =29, by =3) # count from 2 to 29 by increments of 3
+z <- rep(7, 5) # repeat 7, 5 times
+w <- sample(1:10, 6) #randomly select six integers from 1 to 10
+```
+
+```{r}
+x
+```
+
+
+```{r}
+y
+```
+
+
+```{r}
+z
+```
+
+
+```{r}
+w
+```
+
+### Practice 5.1.1 {-}
+
+Perform each of the following operations in R. Write a sentence explaining what each operation does. If anything surprises you, note that. 
+
+1)
+```{r}
+typeof(x)
+```
+
+2)
+```{r}
+x + 5
+```
+
+3)
+```{r}
+x + y
+```
+
+4)
+```{r}
+x * y
+```
+
+5)
+```{r}
+x + z
+```
+
+6)
+```{r}
+x + w
+```
+
+
+7)
+```{r}
+sort(x)
+```
+
+8)
+```{r}
+length(x)
+```
+
+9)
+```{r}
+mean(x)
+```
+
+10)
+```{r}
+x > 5
+```
+
+11)
+```{r}
+mean(x > 5)
+```
+
+12)
+```{r}
+x %% 5 == 0 
+```
+
+13)
+```{r}
+y[1]
+```
+
+14)
+```{r}
+y[3]
+```
+
+15)
+```{r}
+y[(c(3,1))]
+```
+
+16)
+```{r}
+y[1:5]
+```
+
+17)
+```{r}
+y[-2]
+```
+
+18)
+```{r}
+y[x %% 5 == 0]
+```
+
+
+## Functions
+
+A function takes in one or more inputs and returns one or more outputs. 
+
+### Example 5.2.1: Function with Real Number Inputs  {-}
+
+Write a function called `sum_of_squares` that takes in two real numbers x and y, and returns the sum of the squares of these numbers. 
+
+```{r}
+sum_of_squares <- function(x, y){
+  # inputs are real numbers x and y
+  # output is sum of squares of x and y
+  z <- x^2 + y^2
+  return(z)
+}
+```
+
+```{r}
+sum_of_squares(x=3, y=7)
+```
+
+```{r}
+sum_of_squares(x= c(1, 3), y=c(2, 4))
+```
+
+### Example 5.2.2: Function with Vectors and Dataframes as Inputs  {-}
+
+The `starwars` dataset contains information on characters that appear in the Star Wars movies. 
+
+```{r}
+data(starwars)
+head(starwars)
+```
+
+
+```{r}
+ggplot(data=starwars, aes(x=mass)) + geom_histogram() + ggtitle("Mass Distribution")
+```
+
+```{r}
+starwars %>% arrange(desc(mass))
+```
+
+
+```{r}
+ggplot(data=starwars, aes(x=height)) + geom_histogram() + ggtitle("Height Distribution")
+```
+
+```{r}
+starwars %>% arrange(desc(height))
+```
+
+```{r}
+ggplot(data=starwars, aes(x=birth_year)) + geom_histogram() + ggtitle("Birth Year Distribution")
+```
+
+```{r}
+starwars %>% arrange(desc(birth_year))
+```
+
+
+```{r}
+mean(starwars$mass, na.rm=TRUE)
+```
+
+Why might this not be a good representation of the average mass of star wars characters?
+
+A **trimmed mean** is a version of the mean that excludes the largest and smallest m numbers (where m is an integer). Calculate trimmed means for mass, height, and birth year that exclude the maximum and minumum values. 
+
+Why is the following code sub-optimal
+```{r}
+#mass calculation
+(sum(starwars$mass, na.rm=TRUE) - min(starwars$mass, na.rm=TRUE) - max(starwars$mass, na.rm=TRUE)) / (sum(!is.na(starwars$mass)) - 2)
+```
+
+```{r}
+#height calculation
+(sum(starwars$height, na.rm=TRUE) - min(starwars$height, na.rm=TRUE) - max(starwars$height, na.rm=TRUE)) / (sum(!is.na(starwars$height)) - 2)
+```
+
+```{r}
+#age calculation
+(sum(starwars$birth_year, na.rm=TRUE) - min(starwars$birth_year, na.rm=TRUE) - max(starwars$birth_year, na.rm=TRUE)) / (sum(!is.na(starwars$birth_year)) - 2)
+```
+
+
+Write a function that calculates the trimmed mean, excluding the maximum and minimum value for a given vector. Exclude NA's from the calculation.
+
+```{r}
+
+trimmed_mean <- function(x){
+  # input a vector x
+  # output the mean, excluding largest and smallest values, and NA's
+  
+  tm <- (sum(x, na.rm=TRUE) - max(x, na.rm=TRUE) - min(x, na.rm=TRUE)) / (sum(!is.na(x))-2)
+  return(tm)
+}
+```
+
+```{r}
+trimmed_mean(x=starwars$mass)
+trimmed_mean(x=starwars$height)
+trimmed_mean(x=starwars$birth_year)
+trimmed_mean(y)
+trimmed_mean(c(3,5))
+```
+
+
+### Example 5.2.3  {-}
+
+Write a function that inputs a dataframe and returns every fifth row. 
+
+```{r}
+return_every_fifth <- function(df){
+  # take in a dataframe
+  # return rows 5, 10, 15, etc.
+  
+  keep <- seq( from = 5, to = nrow(df), by = 5 )
+  df1 <- df[ keep , ]
+  return(df1)
+}
+
+```
+
+
+```{r}
+return_every_fifth(df=starwars)
+```
+
+### Practice 5.2.4   {-}
+
+Write functions to perform each of the following. Exclude NA's from the calculation. Test the functions on the starwars dataset, where appropriate. 
+
+a) Input two real numbers x and y, and return the sum of the absolute values. 
+
+```{r}
+# type here
+```
+
+
+b) Input two real numbers x and y and return the larger of the two. 
+
+```{r}
+# type here
+```
+
+
+c) Input a vector and calculate the range of values (max - min). 
+
+```{r}
+# type here
+```
+
+
+d) Input a vector and calculate the variance. Note: $\frac{1}{n-1}\sum(x-\bar{x})^2$. Do not use the built-in function `var`.    
+
+```{r}
+# type here
+```
+
+
+e) Input a dataframe and return 5 rows, selected at random. Hint: use `sample`. 
+
+```{r}
+# type here
+```
+
+
+### Example 5.2.5    {-}
+
+Write a function that takes in a function defined on the real numbers, and returns a graph, using a viewing window specified by the user. 
+
+```{r}
+plot_function <- function(f, xrange, yrange){
+  # input f is a function on reals
+  # input xrange is a vector for x-axis
+  # input yrange is a vector for y-axis
+  p <- ggplot(data = data.frame(xrange, yrange), aes(x=xrange, y=yrange)) + stat_function(fun=f) + xlim(xrange) + ylim(yrange)
+return(p)
+}
+```
+
+```{r}
+square <- function(x){
+  #input a real number
+  #return its square
+  return(x^2)
+}
+```
+
+
+```{r}
+plot <- plot_function(f=square, xrange = c(-2, 2), yrange = c(0,5) ) 
+```
+
+```{r}
+plot
+```
+
+
+### Example 5.2.6: Approximating Area   {-}
+
+The standard normal probability density function is given by $f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}.$ We define the function in R. 
+
+```{r}
+normal_density <- function(x){
+#input real number x
+#return standard normal density at x   
+  return(1/sqrt(2*pi)*exp(-x^2/2))
+  }
+```
+
+```{r}
+plot_function(f=normal_density, xrange = c(-3, 3), yrange = c(0,0.5) ) 
+```
+
+Note: this function is actually already available via the built-in function `dnorm`
+
+```{r}
+plot_function(f=dnorm, xrange = c(-3, 3), yrange = c(0,0.5) ) 
+```
+
+
+This function does not have a closed-form anti-derivative, so we cannot find areas under the curve using standard calculus techniques. Instead, we can use simulation to approximate area. This technique is called **Monte Carlo Integration**. 
+
+We'll use the `runif` function, which generates a specified number of random numbers (n), between a minimum (min) and maximum (max) value. 
+
+```{r}
+x <- runif(n=1, min=0, max=1)
+y <- runif(n=1, min=0, max=1)
+x
+y
+```
+
+
+
+#### 1. Describe the steps you could use to approximate the area under the standard normal curve between $x=-1$ and $x=1$, using simulation. 
+
+
+#### 2. Write a function that performs these steps. Allow the user to input the following arguments. Can you make the function return both an approximation of the area, and also a visual representation?
+
+Arguments:     
+n: number of points to simulate
+f: function to integrate
+x1: minimum of x range    
+x2: maximim of x range      
+y1: minimum of y range    
+y2: maximum of y range    
+
+
+```{r}
+simulate_area <- function(n, f, x1, x2, y1, y2){
+  # f is function to find area under
+  # xmin and xmax give range of x-values
+  # ymin and ymax give range of y-values
+x <- runif(n, x1, x2) 
+y <- runif(n, y1, y2)
+under <- y < f(x)
+df <- data.frame(x, y, under)
+p <- ggplot(data = df, mapping = aes(x = x, y=y)) + geom_point(aes(color = under)) + stat_function(fun=f)
+area_est <- mean(under) * (x2 - x1) * (y2 - y1)
+return(list(p, area_est))
+}
+```
+
+
+
+### 3. Test the function using n=10, n=1000, n=10000, and n=100000.   {-}
+
+## Section 5.3: Iteration    
+
+### Example 5.3.1: For Loop for Monte Carlo Integration  {-}
+
+We suspected that using larger values of $n$ would give us more precise approximations. Write a function that runs 1,000 simulations, using samples of size specified by the user, and returns the resulting estimates. Test the function using n=100, 1000, and 10000, and create histograms displaying the distribution of the resulting estimates. What can we conclude?
+
+```{r}
+RepeatSim <- function(sampsize){
+Results <- vector("double", 1000)
+for( i in 1:1000){
+  Results[i] <- simulate_area(n=sampsize, f=dnorm, x1=-1, x2=1, y1=0, y2=1)[[2]]
+}
+return(Results)
+}
+```
+
+
+a) n=100
+```{r}
+Results_n100 <- RepeatSim(sampsize=100)
+```
+
+```{r}
+ggplot(data=data.frame(Results_n100), aes(x=Results_n100)) + geom_histogram() 
+```
+
+b) n=1,000
+
+```{r}
+Results_n1000 <- RepeatSim(sampsize=1000)
+```
+
+```{r}
+ggplot(data=data.frame(Results_n1000), aes(x=Results_n1000)) + geom_histogram() 
+```
+
+
+c) n=10,000
+
+```{r}
+Results_n10000 <- RepeatSim(sampsize=10000)
+```
+
+
+```{r}
+ggplot(data=data.frame(Results_n10000), aes(x=Results_n10000)) + geom_histogram() 
+```
+
+
+
+### Example 5.3.2: Iteration on Dataframes    {-}
+
+```{r}
+data(diamonds)
+diamonds <- diamonds %>% select_if(is.numeric) # create a copy of the dataset
+diamonds <- data.frame(diamonds)
+```
+
+In many situations, we will want to perform the same function to multiple columns of a dataframe. For example, it is often helpful to standardize variables before entering them into a statistical model or a machine learning algorithm. 
+
+Note: standardizing means subtracting the mean, and dividing by the standard deviation. Thus, a standardized score (or z-score) tells us how many standard deviations an observation lies above or below the mean. 
+
+We could easily write our own function to standardize, but the `scale` function in R does this already. 
+
+
+Create a new dataframe containing standardized versions of all numeric variables in the diamonds dataset, using each of the following three techniques: 
+
+
+1. Using `transmute`
+```{r}
+diamonds_scaled <- diamonds %>% transmute(
+  carat = scale(carat),
+  depth = scale(depth), 
+  table = scale(table), 
+  price = scale(price), 
+  x = scale(x), 
+  y = scale(y),
+  z = scale(z)
+  )
+
+head(diamonds_scaled)
+```
+
+
+2. Using a for loop
+```{r}
+diamonds_scaled2 <- diamonds
+for(i in seq_along(diamonds)){
+  diamonds_scaled2[,i] <- scale(diamonds[,i])
+}
+
+head(diamonds_scaled2)
+```
+
+Note: the textbook recommends using `seq_along(diamonds)` in place of `1:ncol(diamonds)`. These functions are equivalent, except `seq_along` better handles zero-length vectors.  
+
+3. Using the `apply()` function
+
+The `apply()` function applies a function over all rows or columns of a dataframe. The `MARGIN` argument specifies whether the function should be applied to the rows(1) or columns(2) of the dataframe. 
+
+```{r}
+diamonds_scaled3 <- apply(diamonds, MARGIN=2, FUN=scale)
+
+head(diamonds_scaled3)
+```
+
+Note `apply` is one of a family of functions including `lapply`, `vapply`, and `mapply` which work on different kinds of structures, such as lists and vectors. The `purrr` package, which is part of tidyverse includes a set of mapping functions, discussed in section 21.5 of the text, which perform similar tasks. 
+
+### Practice 5.3.3  {-}
+
+We previously wrote a function called `trimmed_mean()` to calculate the mean of a vector, excluding the smallest and largest value. 
+
+```{r}
+trimmed_mean <- function(x){
+  # input a vector x
+  # output the mean, excluding largest and smallest values, and NA's
+  tm <- (sum(x, na.rm=TRUE) - max(x, na.rm=TRUE) - min(x, na.rm=TRUE)) / (sum(!is.na(x))-2)
+  return(tm)
+}
+```
+
+Calculate the trimmed mean of each column of the diamonds dataset using 
+
+a) a for loop
+
+```{r}
+# type here
+```
+
+b) the `apply` function
+
+```{r}
+#type here
+```
+
+
+### Example 5.3.4: Loop for scraping   {-}
+
+We used the following code to scrape the 50 highest grossing 2019 movies from imdb.com.
+
+```{r}
+library(rvest)
+```
+
+
+```{r}
+page <- read_html("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc&start=101&ref_=adv_nxt")
+
+title <- page %>%
+  html_nodes(".lister-item-header a") %>%
+  html_text()
+
+rating <- page %>%
+  html_nodes(".ratings-bar") %>%
+  html_text() %>%
+  str_remove_all(" ") %>%
+  str_remove_all("\n") %>%
+  str_remove_all("\"") %>%
+  str_split("Ratethis") %>%
+  map(1, .default=NA) %>%
+  as.numeric()
+
+runtime <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text() %>%
+  as.character() %>% 
+  str_replace("\n            \n", "\n           NA \n |" )  %>%
+  str_split("\\|") %>%
+  map(2, .default=NA) %>% 
+  str_remove_all("min") %>%
+  trimws() %>%
+  as.numeric()
+  
+
+genre <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text() %>%
+  as.character() %>% 
+  str_replace("\n            \n", "\n           NA \n |" )  %>%
+  str_split("\\|") %>%
+  map(4, .default=NA) %>%
+  trimws()
+
+votes <- page %>%
+  html_nodes(".sort-num_votes-visible span:nth-child(2)") %>%
+  html_text() %>%
+  str_remove_all(",") %>%              # remove all commas in each entry
+  as.numeric() %>% as.numeric()
+
+gross <- page %>%
+  html_nodes(".sort-num_votes-visible") %>%
+  html_text() %>%
+  str_replace("\n            \n", "\n           NA \n |" ) %>%
+  str_split("\\|") %>%
+  map(2, .default=NA) %>% 
+  str_remove_all("Gross:\n") %>%
+  str_remove_all("\\$") %>%
+  str_remove_all("M") %>%
+  trimws() %>% 
+  as.numeric()
+
+MPAA_rating <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text %>%
+  str_replace("\n            \n", "\n           NA \n |" ) %>%
+  str_split("\\|") %>%
+  map(1, .default=NA) %>% 
+  trimws() %>%
+  as.character()
+
+metascore <- page %>%
+  html_nodes(".ratings-bar") %>%
+  html_text %>%
+  str_remove_all(" ") %>%
+  str_remove_all("\n") %>%
+  str_split("X") %>%
+  map(2, .default=NA) %>%
+  str_remove_all("Metascore") %>%
+  str_trim() %>%
+  as.numeric()
+
+movies <- tibble(title, genre, rating, runtime, metascore, MPAA_rating, gross, votes)
+```
+
+We can incorporate this code into a function and a loop to scrape in multiple pages of films. 
+
+Write a function that takes in the rank of the first movie on the page (in terms of gross), and returns a dataframe with the 50 movies on that page. 
+
+Use `sprintf` to read in a url with a variable url. Place `%d` in a url in place of a variable numeric (double) variable. Similarly, use `%s` in place of a character variable. 
+
+```{r}
+Read_page <- function(pagestart){
+  
+url <- sprintf("https://www.imdb.com/search/title/?title_type=feature&release_date=2019-01-01,2019-12-31&sort=boxoffice_gross_us,desc&start=%d&ref_=adv_nxt", pagestart)
+
+page <- read_html(url)
+
+title <- page %>%
+  html_nodes(".lister-item-header a") %>%
+  html_text()
+
+rating <- page %>%
+  html_nodes(".ratings-bar") %>%
+  html_text() %>%
+  str_remove_all(" ") %>%
+  str_remove_all("\n") %>%
+  str_remove_all("\"") %>%
+  str_split("Ratethis") %>%
+  map(1, .default=NA) %>%
+  as.numeric()
+
+runtime <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text() %>%
+  as.character() %>% 
+  str_replace("\n            \n", "\n           NA \n |" )  %>%
+  str_split("\\|") %>%
+  map(2, .default=NA) %>% 
+  str_remove_all("min") %>%
+  trimws() %>%
+  as.numeric()
+  
+
+genre <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text() %>%
+  as.character() %>% 
+  str_replace("\n            \n", "\n           NA \n |" )  %>%
+  str_split("\\|") %>%
+  map(4, .default=NA) %>%
+  trimws()
+
+votes <- page %>%
+  html_nodes(".sort-num_votes-visible span:nth-child(2)") %>%
+  html_text() %>%
+  str_remove_all(",") %>%              # remove all commas in each entry
+  as.numeric() %>% as.numeric()
+
+gross <- page %>%
+  html_nodes(".sort-num_votes-visible") %>%
+  html_text() %>%
+  str_replace("\n            \n", "\n           NA \n |" ) %>%
+  str_split("\\|") %>%
+  map(2, .default=NA) %>% 
+  str_remove_all("Gross:\n") %>%
+  str_remove_all("\\$") %>%
+  str_remove_all("M") %>%
+  trimws() %>% 
+  as.numeric()
+
+MPAA_rating <- page %>%
+  html_nodes(".lister-item-header+ .text-muted") %>%
+  html_text %>%
+  str_replace("\n            \n", "\n           NA \n |" ) %>%
+  str_split("\\|") %>%
+  map(1, .default=NA) %>% 
+  trimws() %>%
+  as.character()
+
+metascore <- page %>%
+  html_nodes(".ratings-bar") %>%
+  html_text %>%
+  str_remove_all(" ") %>%
+  str_remove_all("\n") %>%
+  str_split("X") %>%
+  map(2, .default=NA) %>%
+  str_remove_all("Metascore") %>%
+  str_trim() %>%
+  as.numeric()
+
+movies <- tibble(title, genre, rating, runtime, metascore, MPAA_rating, gross, votes)
+  
+return(movies)
+}
+
+```
+
+Write a loop that collects data on the 200 highest grossing movies, and collects them in a dataframe. 
+
+```{r}
+movies <- NULL
+
+for( i in c(1, 51, 101, 151)){
+  movies1 <- Read_page(pagestart = i)
+  movies <-rbind(movies, movies1)
+}
+
+```
+
+```{r}
+tail(movies)
+```
+
+
+```{r}
+dim(movies)
+```
+
+

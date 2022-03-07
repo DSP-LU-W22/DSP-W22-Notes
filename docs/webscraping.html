@@ -24,7 +24,7 @@
 <meta name="author" content="Andrew Sage" />
 
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-03-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="shiny-apps.html"/>
-
+<link rel="next" href="programming.html"/>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -256,6 +256,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.2.12" data-path="webscraping.html"><a href="webscraping.html#example-4.2.11-better-way-to-scrape-metascore"><i class="fa fa-check"></i><b>4.2.12</b> Example 4.2.11 Better way to scrape metascore</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>5</b> Programming</a><ul>
+<li class="chapter" data-level="5.1" data-path="programming.html"><a href="programming.html#vectors"><i class="fa fa-check"></i><b>5.1</b> Vectors</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.1.1"><i class="fa fa-check"></i>Practice 5.1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="programming.html"><a href="programming.html#functions"><i class="fa fa-check"></i><b>5.2</b> Functions</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.1-function-with-real-number-inputs"><i class="fa fa-check"></i>Example 5.2.1: Function with Real Number Inputs</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.2-function-with-vectors-and-dataframes-as-inputs"><i class="fa fa-check"></i>Example 5.2.2: Function with Vectors and Dataframes as Inputs</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.3"><i class="fa fa-check"></i>Example 5.2.3</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.2.4"><i class="fa fa-check"></i>Practice 5.2.4</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.5"><i class="fa fa-check"></i>Example 5.2.5</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.6-approximating-area"><i class="fa fa-check"></i>Example 5.2.6: Approximating Area</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#test-the-function-using-n10-n1000-n10000-and-n100000."><i class="fa fa-check"></i>3. Test the function using n=10, n=1000, n=10000, and n=100000.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="programming.html"><a href="programming.html#section-5.3-iteration"><i class="fa fa-check"></i><b>5.3</b> Section 5.3: Iteration</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.1-for-loop-for-monte-carlo-integration"><i class="fa fa-check"></i>Example 5.3.1: For Loop for Monte Carlo Integration</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.2-iteration-on-dataframes"><i class="fa fa-check"></i>Example 5.3.2: Iteration on Dataframes</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.3.3"><i class="fa fa-check"></i>Practice 5.3.3</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.4-loop-for-scraping"><i class="fa fa-check"></i>Example 5.3.4: Loop for scraping</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -295,15 +315,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">4.1.2</span> Example 4.1.1</h3>
 <p>Go to the following webpage [<a href="https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population" class="uri">https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population</a>]. How many tables do you see?</p>
 <p>The read.html command reads in data from a website, and the <code>html_elements()</code> function extracts elements of the page that are tagged as tables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(httr)
-<span class="co"># The page is read in differently than what we saw in class </span>
-<span class="co"># due to an issue with the version of R on my computer</span>
-page &lt;-<span class="st"> &quot;https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population&quot;</span>
-page &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="dt">config =</span> httr<span class="op">::</span><span class="kw">config</span>(<span class="dt">ssl_verifypeer =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">read_html</span>()  
-
-tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">html_elements</span>(<span class="st">&quot;table&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">html_table</span>()</code></pre></div>
 <p>Let's explore the tables we've scraped from the web.</p>
@@ -433,7 +446,7 @@ Regions</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
 <span class="kw">kable</span>(Regions, <span class="dt">caption =</span> <span class="st">&quot;Population Growth by Region&quot;</span>)</code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-183">Table 4.1: </span>Population Growth by Region</caption>
+<caption><span id="tab:unnamed-chunk-185">Table 4.1: </span>Population Growth by Region</caption>
 <thead>
 <tr class="header">
 <th align="left">Geo. sort</th>
@@ -541,7 +554,7 @@ cols &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">data=</span>States <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">20000000</span> <span class="op">|</span><span class="st"> `</span><span class="dt">2010–2020change</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">15</span> ), 
             <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">2020 pop.</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2010–2020change</span><span class="st">`</span>, <span class="dt">label =</span> State), <span class="dt">vjust=</span><span class="op">-</span><span class="dv">1</span>, 
             <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;2020 Population&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Population Change 2010-2020&quot;</span>)</code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-185-1.png" width="576" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-187-1.png" width="576" /></p>
 </div>
 <div id="practice-4.1.2" class="section level3">
 <h3><span class="header-section-number">4.1.3</span> Practice 4.1.2</h3>
@@ -597,7 +610,7 @@ tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">as.numeric</span>() 
 
 <span class="kw">head</span>(rating)</code></pre></div>
-<pre><code>## [1] 8.4 6.8 6.5 6.8 7.7 6.8</code></pre>
+<pre><code>## [1] 8.4 6.9 6.5 6.8 7.7 6.8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(rating)</code></pre></div>
 <pre><code>## [1] 50</code></pre>
 </div>
@@ -739,8 +752,8 @@ tables &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
           </div>
         </div>
       </div>
-<a href="shiny-apps.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="shiny-apps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -795,6 +808,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

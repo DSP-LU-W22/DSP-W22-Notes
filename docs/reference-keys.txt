@@ -1,4 +1,4 @@
-tab:unnamed-chunk-183
+tab:unnamed-chunk-185
 data-visualization
 loading-and-exploring-data
 creating-graphics
@@ -42,3 +42,9 @@ practice-4.2.9-scrape-votes
 example-4.2.10-well-combine-the-vectors-of-length-50-into-a-tibble.
 example-4.2.11-better-way-to-scrape-metascore
 practice-4.2.12-better-way-to-scrape-mpaa-rating
+programming
+vectors
+functions
+describe-the-steps-you-could-use-to-approximate-the-area-under-the-standard-normal-curve-between-x-1-and-x1-using-simulation.
+write-a-function-that-performs-these-steps.-allow-the-user-to-input-the-following-arguments.-can-you-make-the-function-return-both-an-approximation-of-the-area-and-also-a-visual-representation
+section-5.3-iteration

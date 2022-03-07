@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Programming | Data-Scientific Programming Notes</title>
+  <meta name="description" content="Chapter 5 Programming | Data-Scientific Programming Notes" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Programming | Data-Scientific Programming Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Programming | Data-Scientific Programming Notes" />
+  
+  
+  
+
+<meta name="author" content="Andrew Sage" />
+
+
+<meta name="date" content="2022-03-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="webscraping.html"/>
+
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data-Scientific Programming Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>1</b> Data Visualization</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-visualization.html"><a href="data-visualization.html#loading-and-exploring-data"><i class="fa fa-check"></i><b>1.1</b> Loading and Exploring Data</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="data-visualization.html"><a href="data-visualization.html#creating-graphics"><i class="fa fa-check"></i><b>1.1.1</b> Creating Graphics</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.1-basic-scatterplot"><i class="fa fa-check"></i>Example 1.1.1 Basic Scatterplot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.2-scatterplot-with-text-labels"><i class="fa fa-check"></i>Example 1.1.2 Scatterplot with text labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.3-scatterplot-with-color-shape-and-size"><i class="fa fa-check"></i>Example 1.1.3 Scatterplot with color, shape, and size</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.1.4-changing-axis-labels-and-hiding-legend"><i class="fa fa-check"></i>Example 1.1.4 Changing Axis Labels and Hiding Legend</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.1.5"><i class="fa fa-check"></i>Practice 1.1.5</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="data-visualization.html"><a href="data-visualization.html#more-graphics"><i class="fa fa-check"></i><b>1.2</b> More Graphics</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-quantitative-data-continued"><i class="fa fa-check"></i><b>1.2.1</b> Visualizing Quantitative Data (Continued)</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.1-faceting"><i class="fa fa-check"></i>Example 1.2.1: Faceting</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.2-histograms"><i class="fa fa-check"></i>Example 1.2.2: Histograms</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.3-boxplots"><i class="fa fa-check"></i>Example 1.2.3: Boxplots</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.4"><i class="fa fa-check"></i>Practice 1.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.5"><i class="fa fa-check"></i>Practice 1.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.6"><i class="fa fa-check"></i>Practice 1.2.6</a></li>
+<li class="chapter" data-level="1.2.2" data-path="data-visualization.html"><a href="data-visualization.html#visualizing-categorical-data"><i class="fa fa-check"></i><b>1.2.2</b> Visualizing Categorical Data</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.7-bar-graph"><i class="fa fa-check"></i>Example 1.2.7: Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.8-reordering-bars"><i class="fa fa-check"></i>Example 1.2.8 Reordering Bars</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.9-relative-frequency-bar-graph"><i class="fa fa-check"></i>Example 1.2.9 Relative Frequency Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.10"><i class="fa fa-check"></i>Practice 1.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.11"><i class="fa fa-check"></i>Practice 1.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.12"><i class="fa fa-check"></i>Practice 1.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.13-stacked-bar-graph"><i class="fa fa-check"></i>Example 1.2.13 Stacked Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.14-stacked-bar-graph-with-equal-heights"><i class="fa fa-check"></i>Example 1.2.14 Stacked Bar Graph with Equal Heights</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.15-side-by-side-bar-graph"><i class="fa fa-check"></i>Example 1.2.15 Side-by-Side Bar Graph</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.2.16-height-specified-by-variable"><i class="fa fa-check"></i>Example 1.2.16 Height Specified by Variable</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#practice-1.2.17-height-specified-by-variable"><i class="fa fa-check"></i>Practice 1.2.17 Height Specified by Variable</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="data-visualization.html"><a href="data-visualization.html#advanced-data-graphics"><i class="fa fa-check"></i><b>1.3</b> Advanced Data Graphics</a><ul>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#babynames-dataset"><i class="fa fa-check"></i>Babynames dataset</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.1-age-distribution-for-a-given-name"><i class="fa fa-check"></i>Example 1.3.1: Age Distribution for a Given Name</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#choosing-name-and-gender"><i class="fa fa-check"></i>Choosing Name and Gender</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setting-axis-limits"><i class="fa fa-check"></i>Setting Axis Limits</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-line"><i class="fa fa-check"></i>Adding Line</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#axis-labels"><i class="fa fa-check"></i>Axis Labels</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-text"><i class="fa fa-check"></i>Adding Text</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#adding-median-age"><i class="fa fa-check"></i>Adding Median Age</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#example-1.3.2-common-female-names"><i class="fa fa-check"></i>Example 1.3.2: Common Female Names</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#some-data-prep"><i class="fa fa-check"></i>Some data prep</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#setup-the-plot"><i class="fa fa-check"></i>Setup the Plot</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-linerange-and-color"><i class="fa fa-check"></i>Add Linerange and color</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-points-at-median"><i class="fa fa-check"></i>Add points at median</a></li>
+<li class="chapter" data-level="" data-path="data-visualization.html"><a href="data-visualization.html#add-labels-and-flip-coordinates"><i class="fa fa-check"></i>Add Labels and Flip Coordinates</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>2</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-and-arranging-data-and-selecting-columns"><i class="fa fa-check"></i><b>2.1</b> Filtering and Arranging Data, and Selecting Columns</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.1"><i class="fa fa-check"></i>Example 2.1.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.2"><i class="fa fa-check"></i>Example 2.1.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.3"><i class="fa fa-check"></i>Example 2.1.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.4"><i class="fa fa-check"></i>Example 2.1.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.5"><i class="fa fa-check"></i>Example 2.1.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.6"><i class="fa fa-check"></i>Practice 2.1.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.7"><i class="fa fa-check"></i>Practice 2.1.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.8"><i class="fa fa-check"></i>Practice 2.1.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.9-multiple-logicals"><i class="fa fa-check"></i>Example 2.1.9 Multiple Logicals</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.1.10-dealing-with-nas"><i class="fa fa-check"></i>Example 2.1.10: Dealing with NA's</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.11"><i class="fa fa-check"></i>Practice 2.1.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.1.12"><i class="fa fa-check"></i>Practice 2.1.12</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-summarizing-and-grouping-data"><i class="fa fa-check"></i><b>2.2</b> Mutating, Summarizing, and Grouping Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.1"><i class="fa fa-check"></i>Example 2.2.1</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.2"><i class="fa fa-check"></i>Example 2.2.2</a></li>
+<li class="chapter" data-level="2.2.1" data-path="data-wrangling.html"><a href="data-wrangling.html#summarize"><i class="fa fa-check"></i><b>2.2.1</b> Summarize</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.3"><i class="fa fa-check"></i>Example 2.2.3</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.4"><i class="fa fa-check"></i>Practice 2.2.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.5"><i class="fa fa-check"></i>Practice 2.2.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.6"><i class="fa fa-check"></i>Example 2.2.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.7"><i class="fa fa-check"></i>Example 2.2.7</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.8"><i class="fa fa-check"></i>Example 2.2.8</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.2.9"><i class="fa fa-check"></i>Example 2.2.9</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.10"><i class="fa fa-check"></i>Practice 2.2.10</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.11"><i class="fa fa-check"></i>Practice 2.2.11</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.12"><i class="fa fa-check"></i>Practice 2.2.12</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.2.13"><i class="fa fa-check"></i>Practice 2.2.13</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="data-wrangling.html"><a href="data-wrangling.html#tidy-data"><i class="fa fa-check"></i><b>2.3</b> Tidy Data</a><ul>
+<li><a href="data-wrangling.html#example-2.3.1-pivot_longer">Example 2.3.1: <code>pivot_longer()</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.2-pivot_wider">Example 2.3.2 <code>pivot_wider</code></a></li>
+<li><a href="data-wrangling.html#example-2.3.3-separate-and-unite">Example 2.3.3 <code>separate()</code> and <code>unite()</code></a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.4"><i class="fa fa-check"></i>Practice 2.3.4</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.5"><i class="fa fa-check"></i>Practice 2.3.5</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.3.6"><i class="fa fa-check"></i>Practice 2.3.6</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-wrangling.html"><a href="data-wrangling.html#joining-data"><i class="fa fa-check"></i><b>2.4</b> Joining Data</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#mutating-joins"><i class="fa fa-check"></i>Mutating Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.1-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.1 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.2"><i class="fa fa-check"></i>Practice 2.4.2</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#filtering-joins"><i class="fa fa-check"></i>Filtering Joins</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.4.3-joining-countries-and-continents"><i class="fa fa-check"></i>Example 2.4.3 Joining countries and continents</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.4.4"><i class="fa fa-check"></i>Practice 2.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="data-wrangling.html"><a href="data-wrangling.html#strings-factors-and-dates"><i class="fa fa-check"></i><b>2.5</b> Strings, Factors and Dates</a><ul>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.1-modifying-string-variables"><i class="fa fa-check"></i>Example 2.5.1: Modifying String Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.2"><i class="fa fa-check"></i>Practice 2.5.2:</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.3-working-with-factor-variables"><i class="fa fa-check"></i>Example 2.5.3: Working with Factor Variables</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.5-dates-and-times"><i class="fa fa-check"></i>Example 2.5.5: Dates and Times</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#practice-2.5.6"><i class="fa fa-check"></i>Practice 2.5.6</a></li>
+<li class="chapter" data-level="" data-path="data-wrangling.html"><a href="data-wrangling.html#example-2.5.7-creating-date-variable"><i class="fa fa-check"></i>Example 2.5.7 Creating Date Variable</a></li>
+<li><a href="data-wrangling.html#example-2.5.8-today-and-now">Example 2.5.8 <code>today</code> and <code>now</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="shiny-apps.html"><a href="shiny-apps.html"><i class="fa fa-check"></i><b>3</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="3.1" data-path="shiny-apps.html"><a href="shiny-apps.html#introduction-to-shiny"><i class="fa fa-check"></i><b>3.1</b> Introduction to Shiny</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-structure"><i class="fa fa-check"></i>Shiny Structure</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-template"><i class="fa fa-check"></i>Shiny App Template</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.1.1-geyser-app"><i class="fa fa-check"></i>Example 3.1.1: Geyser App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.2-weather-app."><i class="fa fa-check"></i>Practice 3.1.2: Weather App.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.3-lga-temperatures"><i class="fa fa-check"></i>Practice 3.1.3: LGA Temperatures</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.1.4-scatterplot-of-temp-by-hour"><i class="fa fa-check"></i>Practice 3.1.4: Scatterplot of Temp by Hour</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="shiny-apps.html"><a href="shiny-apps.html#shiny-app-inputs"><i class="fa fa-check"></i><b>3.2</b> Shiny App Inputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.1-weather-app"><i class="fa fa-check"></i>Example 3.2.1 Weather App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.2.2-babynames-app"><i class="fa fa-check"></i>Example 3.2.2 Babynames App</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.3-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.3: User Specified Month and Airport.</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.2.4-user-specified-month-and-airport."><i class="fa fa-check"></i>Practice 3.2.4: User Specified Month and Airport.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="shiny-apps.html"><a href="shiny-apps.html#multiple-outputs"><i class="fa fa-check"></i><b>3.3</b> Multiple Outputs</a><ul>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.1-weather-app-with-reactive-expression"><i class="fa fa-check"></i>Example 3.3.1 Weather App with Reactive Expression</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#example-3.3.2-babynames-app-with-interactive-user-interface"><i class="fa fa-check"></i>Example 3.3.2 Babynames App with Interactive User Interface</a></li>
+<li class="chapter" data-level="" data-path="shiny-apps.html"><a href="shiny-apps.html#practice-3.3.3"><i class="fa fa-check"></i>Practice 3.3.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="webscraping.html"><a href="webscraping.html"><i class="fa fa-check"></i><b>4</b> Webscraping</a><ul>
+<li class="chapter" data-level="4.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-html-tables."><i class="fa fa-check"></i><b>4.1</b> Webscraping html Tables.</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-responsibly"><i class="fa fa-check"></i><b>4.1.1</b> Webscraping Responsibly</a></li>
+<li class="chapter" data-level="4.1.2" data-path="webscraping.html"><a href="webscraping.html#example-4.1.1"><i class="fa fa-check"></i><b>4.1.2</b> Example 4.1.1</a></li>
+<li class="chapter" data-level="4.1.3" data-path="webscraping.html"><a href="webscraping.html#practice-4.1.2"><i class="fa fa-check"></i><b>4.1.3</b> Practice 4.1.2</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="webscraping.html"><a href="webscraping.html#webscraping-with-selector-gadget"><i class="fa fa-check"></i><b>4.2</b> Webscraping with Selector Gadget</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="webscraping.html"><a href="webscraping.html#webscraping-with-selector-gadget-1"><i class="fa fa-check"></i><b>4.2.1</b> Webscraping with Selector Gadget</a></li>
+<li class="chapter" data-level="4.2.2" data-path="webscraping.html"><a href="webscraping.html#example-4.2.1-read-in-page"><i class="fa fa-check"></i><b>4.2.2</b> Example 4.2.1 Read in page</a></li>
+<li class="chapter" data-level="4.2.3" data-path="webscraping.html"><a href="webscraping.html#example-4.2.2-scrape-titles"><i class="fa fa-check"></i><b>4.2.3</b> Example 4.2.2 Scrape titles</a></li>
+<li class="chapter" data-level="4.2.4" data-path="webscraping.html"><a href="webscraping.html#example-4.2.3-scrape-ratings"><i class="fa fa-check"></i><b>4.2.4</b> Example 4.2.3 Scrape ratings</a></li>
+<li class="chapter" data-level="4.2.5" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.4-scrape-mpaa-ratings"><i class="fa fa-check"></i><b>4.2.5</b> Practice 4.2.4 Scrape MPAA ratings</a></li>
+<li class="chapter" data-level="4.2.6" data-path="webscraping.html"><a href="webscraping.html#example-4.2.5-scrape-runtimes"><i class="fa fa-check"></i><b>4.2.6</b> Example 4.2.5 Scrape runtimes</a></li>
+<li class="chapter" data-level="4.2.7" data-path="webscraping.html"><a href="webscraping.html#example-4.2.6-scrape-genre"><i class="fa fa-check"></i><b>4.2.7</b> Example 4.2.6 Scrape Genre</a></li>
+<li class="chapter" data-level="4.2.8" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.7-scrape-gross"><i class="fa fa-check"></i><b>4.2.8</b> Practice 4.2.7 Scrape Gross</a></li>
+<li class="chapter" data-level="4.2.9" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.8-scrape-metascore"><i class="fa fa-check"></i><b>4.2.9</b> Practice 4.2.8 Scrape Metascore</a></li>
+<li class="chapter" data-level="4.2.10" data-path="webscraping.html"><a href="webscraping.html#practice-4.2.9-scrape-votes"><i class="fa fa-check"></i><b>4.2.10</b> Practice 4.2.9 Scrape Votes</a></li>
+<li class="chapter" data-level="4.2.11" data-path="webscraping.html"><a href="webscraping.html#example-4.2.10-well-combine-the-vectors-of-length-50-into-a-tibble."><i class="fa fa-check"></i><b>4.2.11</b> Example 4.2.10 We'll combine the vectors of length 50 into a tibble.</a></li>
+<li class="chapter" data-level="4.2.12" data-path="webscraping.html"><a href="webscraping.html#example-4.2.11-better-way-to-scrape-metascore"><i class="fa fa-check"></i><b>4.2.12</b> Example 4.2.11 Better way to scrape metascore</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i><b>5</b> Programming</a><ul>
+<li class="chapter" data-level="5.1" data-path="programming.html"><a href="programming.html#vectors"><i class="fa fa-check"></i><b>5.1</b> Vectors</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.1.1"><i class="fa fa-check"></i>Practice 5.1.1</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="programming.html"><a href="programming.html#functions"><i class="fa fa-check"></i><b>5.2</b> Functions</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.1-function-with-real-number-inputs"><i class="fa fa-check"></i>Example 5.2.1: Function with Real Number Inputs</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.2-function-with-vectors-and-dataframes-as-inputs"><i class="fa fa-check"></i>Example 5.2.2: Function with Vectors and Dataframes as Inputs</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.3"><i class="fa fa-check"></i>Example 5.2.3</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.2.4"><i class="fa fa-check"></i>Practice 5.2.4</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.5"><i class="fa fa-check"></i>Example 5.2.5</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.2.6-approximating-area"><i class="fa fa-check"></i>Example 5.2.6: Approximating Area</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#test-the-function-using-n10-n1000-n10000-and-n100000."><i class="fa fa-check"></i>3. Test the function using n=10, n=1000, n=10000, and n=100000.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="programming.html"><a href="programming.html#section-5.3-iteration"><i class="fa fa-check"></i><b>5.3</b> Section 5.3: Iteration</a><ul>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.1-for-loop-for-monte-carlo-integration"><i class="fa fa-check"></i>Example 5.3.1: For Loop for Monte Carlo Integration</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.2-iteration-on-dataframes"><i class="fa fa-check"></i>Example 5.3.2: Iteration on Dataframes</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#practice-5.3.3"><i class="fa fa-check"></i>Practice 5.3.3</a></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#example-5.3.4-loop-for-scraping"><i class="fa fa-check"></i>Example 5.3.4: Loop for scraping</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data-Scientific Programming Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="programming" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Programming</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rvest)</code></pre></div>
+<p>This module pertains to chapters 17 -21 in Wickham and Grolemund's text. We'll learn about basic programming in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<div id="vectors" class="section level2">
+<h2><span class="header-section-number">5.1</span> Vectors</h2>
+<p>Let's investigate how R performs operations on vectors. We'll start by generating four vectors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>    <span class="co"># integers from 1 through 10</span>
+y &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">2</span>, <span class="dt">to =</span><span class="dv">29</span>, <span class="dt">by =</span><span class="dv">3</span>) <span class="co"># count from 2 to 29 by increments of 3</span>
+z &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">7</span>, <span class="dv">5</span>) <span class="co"># repeat 7, 5 times</span>
+w &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">6</span>) <span class="co">#randomly select six integers from 1 to 10</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y</code></pre></div>
+<pre><code>##  [1]  2  5  8 11 14 17 20 23 26 29</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z</code></pre></div>
+<pre><code>## [1] 7 7 7 7 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">w</code></pre></div>
+<pre><code>## [1]  4  1  2 10  5  3</code></pre>
+<div id="practice-5.1.1" class="section level3 unnumbered">
+<h3>Practice 5.1.1</h3>
+<p>Perform each of the following operations in R. Write a sentence explaining what each operation does. If anything surprises you, note that.</p>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
+<pre><code>##  [1]  6  7  8  9 10 11 12 13 14 15</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">+</span><span class="st"> </span>y</code></pre></div>
+<pre><code>##  [1]  3  7 11 15 19 23 27 31 35 39</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>y</code></pre></div>
+<pre><code>##  [1]   2  10  24  44  70 102 140 184 234 290</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">+</span><span class="st"> </span>z</code></pre></div>
+<pre><code>##  [1]  8  9 10 11 12 13 14 15 16 17</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">+</span><span class="st"> </span>w</code></pre></div>
+<pre><code>##  [1]  5  3  5 14 10  9 11  9 11 20</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(x)</code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(x)</code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span> </code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<ol start="13" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<ol start="14" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[<span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<ol start="15" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">1</span>))]</code></pre></div>
+<pre><code>## [1] 8 2</code></pre>
+<ol start="16" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</code></pre></div>
+<pre><code>## [1]  2  5  8 11 14</code></pre>
+<ol start="17" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[<span class="op">-</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1]  2  8 11 14 17 20 23 26 29</code></pre>
+<ol start="18" style="list-style-type: decimal">
+<li></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[x <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>]</code></pre></div>
+<pre><code>## [1] 14 29</code></pre>
+</div>
+</div>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">5.2</span> Functions</h2>
+<p>A function takes in one or more inputs and returns one or more outputs.</p>
+<div id="example-5.2.1-function-with-real-number-inputs" class="section level3 unnumbered">
+<h3>Example 5.2.1: Function with Real Number Inputs</h3>
+<p>Write a function called <code>sum_of_squares</code> that takes in two real numbers x and y, and returns the sum of the squares of these numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_of_squares &lt;-<span class="st"> </span><span class="cf">function</span>(x, y){
+  <span class="co"># inputs are real numbers x and y</span>
+  <span class="co"># output is sum of squares of x and y</span>
+  z &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>y<span class="op">^</span><span class="dv">2</span>
+  <span class="kw">return</span>(z)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum_of_squares</span>(<span class="dt">x=</span><span class="dv">3</span>, <span class="dt">y=</span><span class="dv">7</span>)</code></pre></div>
+<pre><code>## [1] 58</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum_of_squares</span>(<span class="dt">x=</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dt">y=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1]  5 25</code></pre>
+</div>
+<div id="example-5.2.2-function-with-vectors-and-dataframes-as-inputs" class="section level3 unnumbered">
+<h3>Example 5.2.2: Function with Vectors and Dataframes as Inputs</h3>
+<p>The <code>starwars</code> dataset contains information on characters that appear in the Star Wars movies.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(starwars)
+<span class="kw">head</span>(starwars)</code></pre></div>
+<pre><code>## # A tibble: 6 x 14
+##   name     height  mass hair_color  skin_color eye_color birth_year sex   gender
+##   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+## 1 Luke Sk…    172    77 blond       fair       blue            19   male  mascu…
+## 2 C-3PO       167    75 &lt;NA&gt;        gold       yellow         112   none  mascu…
+## 3 R2-D2        96    32 &lt;NA&gt;        white, bl… red             33   none  mascu…
+## 4 Darth V…    202   136 none        white      yellow          41.9 male  mascu…
+## 5 Leia Or…    150    49 brown       light      brown           19   fema… femin…
+## 6 Owen La…    178   120 brown, grey light      blue            52   male  mascu…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>starwars, <span class="kw">aes</span>(<span class="dt">x=</span>mass)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Mass Distribution&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-247-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(mass))</code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name    height  mass hair_color  skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Jabba …    175  1358 &lt;NA&gt;        green-tan… orange         600   herm… mascu…
+##  2 Grievo…    216   159 none        brown, wh… green, y…       NA   male  mascu…
+##  3 IG-88      200   140 none        metal      red             15   none  mascu…
+##  4 Darth …    202   136 none        white      yellow          41.9 male  mascu…
+##  5 Tarfful    234   136 brown       brown      blue            NA   male  mascu…
+##  6 Owen L…    178   120 brown, grey light      blue            52   male  mascu…
+##  7 Bossk      190   113 none        green      red             53   male  mascu…
+##  8 Chewba…    228   112 brown       unknown    blue           200   male  mascu…
+##  9 Jek To…    180   110 brown       fair       blue            NA   male  mascu…
+## 10 Dexter…    198   102 none        brown      yellow          NA   male  mascu…
+## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>starwars, <span class="kw">aes</span>(<span class="dt">x=</span>height)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Height Distribution&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-249-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(height))</code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name    height  mass hair_color skin_color  eye_color birth_year sex   gender
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Yarael…    264    NA none       white       yellow          NA   male  mascu…
+##  2 Tarfful    234   136 brown      brown       blue            NA   male  mascu…
+##  3 Lama Su    229    88 none       grey        black           NA   male  mascu…
+##  4 Chewba…    228   112 brown      unknown     blue           200   male  mascu…
+##  5 Roos T…    224    82 none       grey        orange          NA   male  mascu…
+##  6 Grievo…    216   159 none       brown, whi… green, y…       NA   male  mascu…
+##  7 Taun We    213    NA none       grey        black           NA   fema… femin…
+##  8 Rugor …    206    NA none       green       orange          NA   male  mascu…
+##  9 Tion M…    206    80 none       grey        black           NA   male  mascu…
+## 10 Darth …    202   136 none       white       yellow          41.9 male  mascu…
+## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>starwars, <span class="kw">aes</span>(<span class="dt">x=</span>birth_year)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Birth Year Distribution&quot;</span>)</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-251-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(birth_year))</code></pre></div>
+<pre><code>## # A tibble: 87 x 14
+##    name    height  mass hair_color skin_color  eye_color birth_year sex   gender
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Yoda        66    17 white      green       brown            896 male  mascu…
+##  2 Jabba …    175  1358 &lt;NA&gt;       green-tan,… orange           600 herm… mascu…
+##  3 Chewba…    228   112 brown      unknown     blue             200 male  mascu…
+##  4 C-3PO      167    75 &lt;NA&gt;       gold        yellow           112 none  mascu…
+##  5 Dooku      193    80 white      fair        brown            102 male  mascu…
+##  6 Qui-Go…    193    89 brown      fair        blue              92 male  mascu…
+##  7 Ki-Adi…    198    82 white      pale        yellow            92 male  mascu…
+##  8 Finis …    170    NA blond      fair        blue              91 male  mascu…
+##  9 Palpat…    170    75 grey       pale        yellow            82 male  mascu…
+## 10 Cliegg…    183    NA brown      fair        blue              82 male  mascu…
+## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(starwars<span class="op">$</span>mass, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] 97.31186</code></pre>
+<p>Why might this not be a good representation of the average mass of star wars characters?</p>
+<p>A <strong>trimmed mean</strong> is a version of the mean that excludes the largest and smallest m numbers (where m is an integer). Calculate trimmed means for mass, height, and birth year that exclude the maximum and minumum values.</p>
+<p>Why is the following code sub-optimal</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mass calculation</span>
+(<span class="kw">sum</span>(starwars<span class="op">$</span>mass, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(starwars<span class="op">$</span>mass, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(starwars<span class="op">$</span>mass, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">/</span><span class="st"> </span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(starwars<span class="op">$</span>mass)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 76.6386</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#height calculation</span>
+(<span class="kw">sum</span>(starwars<span class="op">$</span>height, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(starwars<span class="op">$</span>height, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(starwars<span class="op">$</span>height, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">/</span><span class="st"> </span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(starwars<span class="op">$</span>height)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 174.5949</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#age calculation</span>
+(<span class="kw">sum</span>(starwars<span class="op">$</span>birth_year, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(starwars<span class="op">$</span>birth_year, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(starwars<span class="op">$</span>birth_year, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">/</span><span class="st"> </span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(starwars<span class="op">$</span>birth_year)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 69.7878</code></pre>
+<p>Write a function that calculates the trimmed mean, excluding the maximum and minimum value for a given vector. Exclude NA's from the calculation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trimmed_mean &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="co"># input a vector x</span>
+  <span class="co"># output the mean, excluding largest and smallest values, and NA&#39;s</span>
+  
+  tm &lt;-<span class="st"> </span>(<span class="kw">sum</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">/</span><span class="st"> </span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x))<span class="op">-</span><span class="dv">2</span>)
+  <span class="kw">return</span>(tm)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimmed_mean</span>(<span class="dt">x=</span>starwars<span class="op">$</span>mass)</code></pre></div>
+<pre><code>## [1] 76.6386</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimmed_mean</span>(<span class="dt">x=</span>starwars<span class="op">$</span>height)</code></pre></div>
+<pre><code>## [1] 174.5949</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimmed_mean</span>(<span class="dt">x=</span>starwars<span class="op">$</span>birth_year)</code></pre></div>
+<pre><code>## [1] 69.7878</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimmed_mean</span>(y)</code></pre></div>
+<pre><code>## [1] 15.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">trimmed_mean</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">5</span>))</code></pre></div>
+<pre><code>## [1] NaN</code></pre>
+</div>
+<div id="example-5.2.3" class="section level3 unnumbered">
+<h3>Example 5.2.3</h3>
+<p>Write a function that inputs a dataframe and returns every fifth row.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">return_every_fifth &lt;-<span class="st"> </span><span class="cf">function</span>(df){
+  <span class="co"># take in a dataframe</span>
+  <span class="co"># return rows 5, 10, 15, etc.</span>
+  
+  keep &lt;-<span class="st"> </span><span class="kw">seq</span>( <span class="dt">from =</span> <span class="dv">5</span>, <span class="dt">to =</span> <span class="kw">nrow</span>(df), <span class="dt">by =</span> <span class="dv">5</span> )
+  df1 &lt;-<span class="st"> </span>df[ keep , ]
+  <span class="kw">return</span>(df1)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">return_every_fifth</span>(<span class="dt">df=</span>starwars)</code></pre></div>
+<pre><code>## # A tibble: 17 x 14
+##    name    height  mass hair_color  skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Leia O…    150    49 brown       light      brown             19 fema… femin…
+##  2 Obi-Wa…    182    77 auburn, wh… fair       blue-gray         57 male  mascu…
+##  3 Greedo     173    74 &lt;NA&gt;        green      black             44 male  mascu…
+##  4 Palpat…    170    75 grey        pale       yellow            82 male  mascu…
+##  5 Lobot      175    79 none        light      blue              37 male  mascu…
+##  6 Nien N…    160    68 none        grey       black             NA male  mascu…
+##  7 Roos T…    224    82 none        grey       orange            NA male  mascu…
+##  8 Quarsh…    183    NA black       dark       brown             62 &lt;NA&gt;  &lt;NA&gt;  
+##  9 Dud Bo…     94    45 none        blue, grey yellow            NA male  mascu…
+## 10 Kit Fi…    196    87 none        green      black             NA male  mascu…
+## 11 Plo Ko…    188    80 none        orange     black             22 male  mascu…
+## 12 Poggle…    183    80 none        green      yellow            NA male  mascu…
+## 13 Bail P…    191    NA black       tan        brown             67 male  mascu…
+## 14 Taun We    213    NA none        grey       black             NA fema… femin…
+## 15 San Hi…    191    NA none        grey       gold              NA male  mascu…
+## 16 Sly Mo…    178    48 none        pale       white             NA &lt;NA&gt;  &lt;NA&gt;  
+## 17 BB8         NA    NA none        none       black             NA none  mascu…
+## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+<div id="practice-5.2.4" class="section level3 unnumbered">
+<h3>Practice 5.2.4</h3>
+<p>Write functions to perform each of the following. Exclude NA's from the calculation. Test the functions on the starwars dataset, where appropriate.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Input two real numbers x and y, and return the sum of the absolute values.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Input two real numbers x and y and return the larger of the two.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Input a vector and calculate the range of values (max - min).</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Input a vector and calculate the variance. Note: <span class="math inline">\(\frac{1}{n-1}\sum(x-\bar{x})^2\)</span>. Do not use the built-in function <code>var</code>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Input a dataframe and return 5 rows, selected at random. Hint: use <code>sample</code>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+</div>
+<div id="example-5.2.5" class="section level3 unnumbered">
+<h3>Example 5.2.5</h3>
+<p>Write a function that takes in a function defined on the real numbers, and returns a graph, using a viewing window specified by the user.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot_function &lt;-<span class="st"> </span><span class="cf">function</span>(f, xrange, yrange){
+  <span class="co"># input f is a function on reals</span>
+  <span class="co"># input xrange is a vector for x-axis</span>
+  <span class="co"># input yrange is a vector for y-axis</span>
+  p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(xrange, yrange), <span class="kw">aes</span>(<span class="dt">x=</span>xrange, <span class="dt">y=</span>yrange)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun=</span>f) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(xrange) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(yrange)
+<span class="kw">return</span>(p)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">square &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="co">#input a real number</span>
+  <span class="co">#return its square</span>
+  <span class="kw">return</span>(x<span class="op">^</span><span class="dv">2</span>)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot &lt;-<span class="st"> </span><span class="kw">plot_function</span>(<span class="dt">f=</span>square, <span class="dt">xrange =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">yrange =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">5</span>) ) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plot</code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-269-1.png" width="576" /></p>
+</div>
+<div id="example-5.2.6-approximating-area" class="section level3 unnumbered">
+<h3>Example 5.2.6: Approximating Area</h3>
+<p>The standard normal probability density function is given by <span class="math inline">\(f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}.\)</span> We define the function in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">normal_density &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+<span class="co">#input real number x</span>
+<span class="co">#return standard normal density at x   </span>
+  <span class="kw">return</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">2</span><span class="op">*</span>pi)<span class="op">*</span><span class="kw">exp</span>(<span class="op">-</span>x<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="dv">2</span>))
+  }</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_function</span>(<span class="dt">f=</span>normal_density, <span class="dt">xrange =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">yrange =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>) ) </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-271-1.png" width="576" /></p>
+<p>Note: this function is actually already available via the built-in function <code>dnorm</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_function</span>(<span class="dt">f=</span>dnorm, <span class="dt">xrange =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dt">yrange =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>) ) </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-272-1.png" width="576" /></p>
+<p>This function does not have a closed-form anti-derivative, so we cannot find areas under the curve using standard calculus techniques. Instead, we can use simulation to approximate area. This technique is called <strong>Monte Carlo Integration</strong>.</p>
+<p>We'll use the <code>runif</code> function, which generates a specified number of random numbers (n), between a minimum (min) and maximum (max) value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">1</span>)
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">1</span>)
+x</code></pre></div>
+<pre><code>## [1] 0.2032791</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y</code></pre></div>
+<pre><code>## [1] 0.3297677</code></pre>
+<div id="describe-the-steps-you-could-use-to-approximate-the-area-under-the-standard-normal-curve-between-x-1-and-x1-using-simulation." class="section level4">
+<h4><span class="header-section-number">5.2.0.1</span> 1. Describe the steps you could use to approximate the area under the standard normal curve between <span class="math inline">\(x=-1\)</span> and <span class="math inline">\(x=1\)</span>, using simulation.</h4>
+</div>
+<div id="write-a-function-that-performs-these-steps.-allow-the-user-to-input-the-following-arguments.-can-you-make-the-function-return-both-an-approximation-of-the-area-and-also-a-visual-representation" class="section level4">
+<h4><span class="header-section-number">5.2.0.2</span> 2. Write a function that performs these steps. Allow the user to input the following arguments. Can you make the function return both an approximation of the area, and also a visual representation?</h4>
+<p>Arguments:<br />
+n: number of points to simulate f: function to integrate x1: minimum of x range<br />
+x2: maximim of x range<br />
+y1: minimum of y range<br />
+y2: maximum of y range</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simulate_area &lt;-<span class="st"> </span><span class="cf">function</span>(n, f, x1, x2, y1, y2){
+  <span class="co"># f is function to find area under</span>
+  <span class="co"># xmin and xmax give range of x-values</span>
+  <span class="co"># ymin and ymax give range of y-values</span>
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(n, x1, x2) 
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(n, y1, y2)
+under &lt;-<span class="st"> </span>y <span class="op">&lt;</span><span class="st"> </span><span class="kw">f</span>(x)
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x, y, under)
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y=</span>y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> under)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun=</span>f)
+area_est &lt;-<span class="st"> </span><span class="kw">mean</span>(under) <span class="op">*</span><span class="st"> </span>(x2 <span class="op">-</span><span class="st"> </span>x1) <span class="op">*</span><span class="st"> </span>(y2 <span class="op">-</span><span class="st"> </span>y1)
+<span class="kw">return</span>(<span class="kw">list</span>(p, area_est))
+}</code></pre></div>
+</div>
+</div>
+<div id="test-the-function-using-n10-n1000-n10000-and-n100000." class="section level3 unnumbered">
+<h3>3. Test the function using n=10, n=1000, n=10000, and n=100000.</h3>
+</div>
+</div>
+<div id="section-5.3-iteration" class="section level2">
+<h2><span class="header-section-number">5.3</span> Section 5.3: Iteration</h2>
+<div id="example-5.3.1-for-loop-for-monte-carlo-integration" class="section level3 unnumbered">
+<h3>Example 5.3.1: For Loop for Monte Carlo Integration</h3>
+<p>We suspected that using larger values of <span class="math inline">\(n\)</span> would give us more precise approximations. Write a function that runs 1,000 simulations, using samples of size specified by the user, and returns the resulting estimates. Test the function using n=100, 1000, and 10000, and create histograms displaying the distribution of the resulting estimates. What can we conclude?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RepeatSim &lt;-<span class="st"> </span><span class="cf">function</span>(sampsize){
+Results &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">1000</span>)
+<span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){
+  Results[i] &lt;-<span class="st"> </span><span class="kw">simulate_area</span>(<span class="dt">n=</span>sampsize, <span class="dt">f=</span>dnorm, <span class="dt">x1=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">x2=</span><span class="dv">1</span>, <span class="dt">y1=</span><span class="dv">0</span>, <span class="dt">y2=</span><span class="dv">1</span>)[[<span class="dv">2</span>]]
+}
+<span class="kw">return</span>(Results)
+}</code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>n=100</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results_n100 &lt;-<span class="st"> </span><span class="kw">RepeatSim</span>(<span class="dt">sampsize=</span><span class="dv">100</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Results_n100), <span class="kw">aes</span>(<span class="dt">x=</span>Results_n100)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-277-1.png" width="576" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>n=1,000</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results_n1000 &lt;-<span class="st"> </span><span class="kw">RepeatSim</span>(<span class="dt">sampsize=</span><span class="dv">1000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Results_n1000), <span class="kw">aes</span>(<span class="dt">x=</span>Results_n1000)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-279-1.png" width="576" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>n=10,000</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Results_n10000 &lt;-<span class="st"> </span><span class="kw">RepeatSim</span>(<span class="dt">sampsize=</span><span class="dv">10000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(Results_n10000), <span class="kw">aes</span>(<span class="dt">x=</span>Results_n10000)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() </code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-281-1.png" width="576" /></p>
+</div>
+<div id="example-5.3.2-iteration-on-dataframes" class="section level3 unnumbered">
+<h3>Example 5.3.2: Iteration on Dataframes</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(diamonds)
+diamonds &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_if</span>(is.numeric) <span class="co"># create a copy of the dataset</span>
+diamonds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(diamonds)</code></pre></div>
+<p>In many situations, we will want to perform the same function to multiple columns of a dataframe. For example, it is often helpful to standardize variables before entering them into a statistical model or a machine learning algorithm.</p>
+<p>Note: standardizing means subtracting the mean, and dividing by the standard deviation. Thus, a standardized score (or z-score) tells us how many standard deviations an observation lies above or below the mean.</p>
+<p>We could easily write our own function to standardize, but the <code>scale</code> function in R does this already.</p>
+<p>Create a new dataframe containing standardized versions of all numeric variables in the diamonds dataset, using each of the following three techniques:</p>
+<ol style="list-style-type: decimal">
+<li>Using <code>transmute</code></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_scaled &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(
+  <span class="dt">carat =</span> <span class="kw">scale</span>(carat),
+  <span class="dt">depth =</span> <span class="kw">scale</span>(depth), 
+  <span class="dt">table =</span> <span class="kw">scale</span>(table), 
+  <span class="dt">price =</span> <span class="kw">scale</span>(price), 
+  <span class="dt">x =</span> <span class="kw">scale</span>(x), 
+  <span class="dt">y =</span> <span class="kw">scale</span>(y),
+  <span class="dt">z =</span> <span class="kw">scale</span>(z)
+  )
+
+<span class="kw">head</span>(diamonds_scaled)</code></pre></div>
+<pre><code>##       carat      depth      table      price         x         y         z
+## 1 -1.198157 -0.1740899 -1.0996618 -0.9040868 -1.587823 -1.536181 -1.571115
+## 2 -1.240350 -1.3607259  1.5855140 -0.9040868 -1.641310 -1.658759 -1.741159
+## 3 -1.198157 -3.3849872  3.3756312 -0.9038361 -1.498677 -1.457382 -1.741159
+## 4 -1.071577  0.4541292  0.2429261 -0.9020815 -1.364959 -1.317293 -1.287708
+## 5 -1.029384  1.0823482  0.2429261 -0.9018308 -1.240155 -1.212227 -1.117663
+## 6 -1.177060  0.7333376 -0.2046032 -0.9015802 -1.596737 -1.553692 -1.500263</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Using a for loop</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_scaled2 &lt;-<span class="st"> </span>diamonds
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(diamonds)){
+  diamonds_scaled2[,i] &lt;-<span class="st"> </span><span class="kw">scale</span>(diamonds[,i])
+}
+
+<span class="kw">head</span>(diamonds_scaled2)</code></pre></div>
+<pre><code>##       carat      depth      table      price         x         y         z
+## 1 -1.198157 -0.1740899 -1.0996618 -0.9040868 -1.587823 -1.536181 -1.571115
+## 2 -1.240350 -1.3607259  1.5855140 -0.9040868 -1.641310 -1.658759 -1.741159
+## 3 -1.198157 -3.3849872  3.3756312 -0.9038361 -1.498677 -1.457382 -1.741159
+## 4 -1.071577  0.4541292  0.2429261 -0.9020815 -1.364959 -1.317293 -1.287708
+## 5 -1.029384  1.0823482  0.2429261 -0.9018308 -1.240155 -1.212227 -1.117663
+## 6 -1.177060  0.7333376 -0.2046032 -0.9015802 -1.596737 -1.553692 -1.500263</code></pre>
+<p>Note: the textbook recommends using <code>seq_along(diamonds)</code> in place of <code>1:ncol(diamonds)</code>. These functions are equivalent, except <code>seq_along</code> better handles zero-length vectors.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Using the <code>apply()</code> function</li>
+</ol>
+<p>The <code>apply()</code> function applies a function over all rows or columns of a dataframe. The <code>MARGIN</code> argument specifies whether the function should be applied to the rows(1) or columns(2) of the dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diamonds_scaled3 &lt;-<span class="st"> </span><span class="kw">apply</span>(diamonds, <span class="dt">MARGIN=</span><span class="dv">2</span>, <span class="dt">FUN=</span>scale)
+
+<span class="kw">head</span>(diamonds_scaled3)</code></pre></div>
+<pre><code>##          carat      depth      table      price         x         y         z
+## [1,] -1.198157 -0.1740899 -1.0996618 -0.9040868 -1.587823 -1.536181 -1.571115
+## [2,] -1.240350 -1.3607259  1.5855140 -0.9040868 -1.641310 -1.658759 -1.741159
+## [3,] -1.198157 -3.3849872  3.3756312 -0.9038361 -1.498677 -1.457382 -1.741159
+## [4,] -1.071577  0.4541292  0.2429261 -0.9020815 -1.364959 -1.317293 -1.287708
+## [5,] -1.029384  1.0823482  0.2429261 -0.9018308 -1.240155 -1.212227 -1.117663
+## [6,] -1.177060  0.7333376 -0.2046032 -0.9015802 -1.596737 -1.553692 -1.500263</code></pre>
+<p>Note <code>apply</code> is one of a family of functions including <code>lapply</code>, <code>vapply</code>, and <code>mapply</code> which work on different kinds of structures, such as lists and vectors. The <code>purrr</code> package, which is part of tidyverse includes a set of mapping functions, discussed in section 21.5 of the text, which perform similar tasks.</p>
+</div>
+<div id="practice-5.3.3" class="section level3 unnumbered">
+<h3>Practice 5.3.3</h3>
+<p>We previously wrote a function called <code>trimmed_mean()</code> to calculate the mean of a vector, excluding the smallest and largest value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trimmed_mean &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="co"># input a vector x</span>
+  <span class="co"># output the mean, excluding largest and smallest values, and NA&#39;s</span>
+  tm &lt;-<span class="st"> </span>(<span class="kw">sum</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">max</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">/</span><span class="st"> </span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x))<span class="op">-</span><span class="dv">2</span>)
+  <span class="kw">return</span>(tm)
+}</code></pre></div>
+<p>Calculate the trimmed mean of each column of the diamonds dataset using</p>
+<ol style="list-style-type: lower-alpha">
+<li>a for loop</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># type here</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>the <code>apply</code> function</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#type here</span></code></pre></div>
+</div>
+<div id="example-5.3.4-loop-for-scraping" class="section level3 unnumbered">
+<h3>Example 5.3.4: Loop for scraping</h3>
+<p>We used the following code to scrape the 50 highest grossing 2019 movies from imdb.com.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&amp;start=101&amp;ref_=adv_nxt&quot;</span>)
+
+title &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header a&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>()
+
+rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;Ratethis&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">1</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+runtime &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> )  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;min&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+  
+
+genre &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> )  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">4</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>()
+
+votes &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.sort-num_votes-visible span:nth-child(2)&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;,&quot;</span>) <span class="op">%&gt;%</span><span class="st">              </span><span class="co"># remove all commas in each entry</span>
+<span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
+
+gross &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.sort-num_votes-visible&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;Gross:</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">$&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;M&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+MPAA_rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>html_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">1</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+metascore &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>html_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;X&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;Metascore&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+movies &lt;-<span class="st"> </span><span class="kw">tibble</span>(title, genre, rating, runtime, metascore, MPAA_rating, gross, votes)</code></pre></div>
+<p>We can incorporate this code into a function and a loop to scrape in multiple pages of films.</p>
+<p>Write a function that takes in the rank of the first movie on the page (in terms of gross), and returns a dataframe with the 50 movies on that page.</p>
+<p>Use <code>sprintf</code> to read in a url with a variable url. Place <code>%d</code> in a url in place of a variable numeric (double) variable. Similarly, use <code>%s</code> in place of a character variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Read_page &lt;-<span class="st"> </span><span class="cf">function</span>(pagestart){
+  
+url &lt;-<span class="st"> </span><span class="kw">sprintf</span>(<span class="st">&quot;https://www.imdb.com/search/title/?title_type=feature&amp;release_date=2019-01-01,2019-12-31&amp;sort=boxoffice_gross_us,desc&amp;start=%d&amp;ref_=adv_nxt&quot;</span>, pagestart)
+
+page &lt;-<span class="st"> </span><span class="kw">read_html</span>(url)
+
+title &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header a&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>()
+
+rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;Ratethis&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">1</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+runtime &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> )  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;min&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+  
+
+genre &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> )  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">4</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>()
+
+votes &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.sort-num_votes-visible span:nth-child(2)&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;,&quot;</span>) <span class="op">%&gt;%</span><span class="st">              </span><span class="co"># remove all commas in each entry</span>
+<span class="st">  </span><span class="kw">as.numeric</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()
+
+gross &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.sort-num_votes-visible&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;Gross:</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">$&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;M&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+MPAA_rating &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.lister-item-header+ .text-muted&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>html_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">            </span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">           NA </span><span class="ch">\n</span><span class="st"> |&quot;</span> ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">|&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">1</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">trimws</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.character</span>()
+
+metascore &lt;-<span class="st"> </span>page <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;.ratings-bar&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>html_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot; &quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_split</span>(<span class="st">&quot;X&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map</span>(<span class="dv">2</span>, <span class="dt">.default=</span><span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_remove_all</span>(<span class="st">&quot;Metascore&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_trim</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as.numeric</span>()
+
+movies &lt;-<span class="st"> </span><span class="kw">tibble</span>(title, genre, rating, runtime, metascore, MPAA_rating, gross, votes)
+  
+<span class="kw">return</span>(movies)
+}</code></pre></div>
+<p>Write a loop that collects data on the 200 highest grossing movies, and collects them in a dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="cf">for</span>( i <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">51</span>, <span class="dv">101</span>, <span class="dv">151</span>)){
+  movies1 &lt;-<span class="st"> </span><span class="kw">Read_page</span>(<span class="dt">pagestart =</span> i)
+  movies &lt;-<span class="kw">rbind</span>(movies, movies1)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(movies)</code></pre></div>
+<pre><code>## # A tibble: 6 x 8
+##   title        genre            rating runtime metascore MPAA_rating gross votes
+##   &lt;chr&gt;        &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 India&#39;s Mos… Action, Adventu…    4.6     123        NA Not Rated      NA  2172
+## 2 Bright Ones  Musical             7.8      82        NA PG             NA    45
+## 3 Them That F… Drama, Thriller     5.4      98        57 R              NA  3265
+## 4 Money        NA                  6       115        NA NA             NA   726
+## 5 Play the Fl… NA                  6.9     103        NA NA             NA    53
+## 6 Give Me Lib… NA                  6.7     110        82 NA             NA  1935</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(movies)</code></pre></div>
+<pre><code>## [1] 200   8</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="webscraping.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/edit/master/05-Programming.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/blob/master/05-Programming.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

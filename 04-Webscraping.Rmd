@@ -28,8 +28,11 @@ Go to the following webpage [https://en.wikipedia.org/wiki/List_of_U.S._states_a
 
 The read.html command reads in data from a website, and the `html_elements()` function extracts elements of the page that are tagged as tables.      
 
+```{r, eval=FALSE}
+page <- read_html("https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population")
+```
 
-```{r}
+```{r, echo=FALSE}
 library(httr)
 # The page is read in differently than what we saw in class 
 # due to an issue with the version of R on my computer
@@ -37,7 +40,9 @@ page <- "https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_po
 page <- page %>% 
   httr::GET(config = httr::config(ssl_verifypeer = FALSE)) %>% 
   read_html()  
+```
 
+```{r}
 tables <- page %>%
   html_elements("table") %>%
   html_table()
