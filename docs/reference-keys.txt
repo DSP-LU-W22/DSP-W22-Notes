@@ -47,4 +47,11 @@ vectors
 functions
 describe-the-steps-you-could-use-to-approximate-the-area-under-the-standard-normal-curve-between-x-1-and-x1-using-simulation.
 write-a-function-that-performs-these-steps.-allow-the-user-to-input-the-following-arguments.-can-you-make-the-function-return-both-an-approximation-of-the-area-and-also-a-visual-representation
-section-5.3-iteration
+iteration
+data-ethics
+misleading-graphics
+collecting-storing-and-reporting-data
+example-6.2.1-ethics-of-webscraping
+example-6.2.2-data-security-and-storage
+example-6.2.3-reproducible-analysis
+ethical-guidelines

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Data-Scientific Programming Notes</title>
-  <meta name="description" content="Data-Scientific Programming Notes" />
+  <title>Chapter 6 Data Ethics | Data-Scientific Programming Notes</title>
+  <meta name="description" content="Chapter 6 Data Ethics | Data-Scientific Programming Notes" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Data-Scientific Programming Notes" />
+  <meta property="og:title" content="Chapter 6 Data Ethics | Data-Scientific Programming Notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data-Scientific Programming Notes" />
+  <meta name="twitter:title" content="Chapter 6 Data Ethics | Data-Scientific Programming Notes" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="programming.html"/>
 
-<link rel="next" href="data-visualization.html"/>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -309,23 +309,69 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data-Scientific Programming Notes</h1>
-<p class="author"><em>Andrew Sage</em></p>
-<p class="date"><em>2022-03-08</em></p>
+<div id="data-ethics" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Data Ethics</h1>
+<div id="misleading-graphics" class="section level2">
+<h2><span class="header-section-number">6.1</span> Misleading Graphics</h2>
+<p>Scenarios 1 and 4 are from from <a href="https://beanumber.github.io/mdsr2e/ch-ethics.html">Modern Data Science with R</a> by Baumer, Horton, and Kaplan.</p>
+<p>The following graphics were all created in ways that are intended to mislead the viewer. Identify the misleading features of each graph. How does publishing and sharing such figures potentially harm society?</p>
+<div id="example-6.1.1" class="section level3 unnumbered">
+<h3>Example 6.1.1</h3>
+<p><img src="FLA_Graphic.png" alt="inline" /> Source: <a href="https://www.buzzfeednews.com/article/katienotopoulos/graphs-that-lied-to-us" class="uri">https://www.buzzfeednews.com/article/katienotopoulos/graphs-that-lied-to-us</a></p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are the class notes for the Winter 2022 section of cmsc/stat 205: Data-Scientific Programming at Lawrence University. In addition to these notes, you will find helpful examples in our primary course text <a href="https://r4ds.had.co.nz/">R for Data Science by Wickham and Grolemund</a> and our secondary text <a href="https://mdsr-book.github.io/mdsr2e/">Modern Data Science with R by Baumer, Kaplan, and Horton</a>.</p>
+<div id="example-6.1.2" class="section level3 unnumbered">
+<h3>Example 6.1.2</h3>
+<p><img src="Climate_Graphic1.png" alt="inline" /> Source: <a href="https://venngage.com/blog/misleading-graphs/" class="uri">https://venngage.com/blog/misleading-graphs/</a></p>
+</div>
+<div id="example-6.1.3" class="section level3 unnumbered">
+<h3>Example 6.1.3</h3>
+<p>Figure 3: <img src="Climate_Graphic2.png" alt="inline" /> Source: <a href="https://www.climatecentral.org/gallery/graphics/its-official-2012-is-hottest-us-year-on-record" class="uri">https://www.climatecentral.org/gallery/graphics/its-official-2012-is-hottest-us-year-on-record</a></p>
+</div>
+<div id="example-6.1.4" class="section level3 unnumbered">
+<h3>Example 6.1.4</h3>
+<p><img src="UK_Employment_Graphic.png" alt="inline" /> Source: <a href="https://digitalblog.ons.gov.uk/2019/07/03/dueling-with-axis-the-problems-with-dual-axis-charts/" class="uri">https://digitalblog.ons.gov.uk/2019/07/03/dueling-with-axis-the-problems-with-dual-axis-charts/</a></p>
+</div>
+</div>
+<div id="collecting-storing-and-reporting-data" class="section level2">
+<h2><span class="header-section-number">6.2</span> Collecting, Storing, and Reporting Data</h2>
+<div id="example-6.2.1-ethics-of-webscraping" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Example 6.2.1: Ethics of Webscraping</h3>
+<p>In May 2016, the online OpenPsych Forum published a paper titled “The OkCupid data set: A very large public data set of dating site users”. The resulting data set contained 2,620 variables—including usernames, gender, and dating preferences—from 68,371 people scraped from the OkCupid dating website. The ostensible purpose of the data dump was to provide an interesting open public data set to fellow researchers. These data might be used to answer questions such as this one suggested in the abstract of the paper: whether the Zodiac sign of each user was associated with any of the other variables (spoiler alert: it wasn’t).</p>
+<p>The data scraping did not involve any illicit technology such as breaking passwords. Nonetheless, the author received many comments on the OpenPsych Forum challenging the work as an ethical breach in doxing people by releasing personal data. Does the work raise actual ethical issues?</p>
+</div>
+<div id="example-6.2.2-data-security-and-storage" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Example 6.2.2: Data Security and Storage</h3>
+<p>In 2011, The University of North Carolina first attempted to fire, then demote Professor Bonnie Yankaskas, a leading cancer researcher, after her lab failed to securely store confidential information about its patients. Read [this article] (<a href="https://www.insidehighered.com/news/2011/01/27/security-hacks" class="uri">https://www.insidehighered.com/news/2011/01/27/security-hacks</a>).</p>
+<p>Was the University justified in firing or demoting Yankaskas? Justify your answer.</p>
+</div>
+<div id="example-6.2.3-reproducible-analysis" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Example 6.2.3: Reproducible Analysis</h3>
+<p>In 2010, Harvard economists Carmen Reinhart and Kenneth Rogoff published a report entitled Growth in a Time of Debt Rogoff and Reinhart (2010), which argued that countries which pursued austerity measures did not necessarily suffer from slow economic growth. These ideas influenced the thinking of policymakers—notably United States Congressman Paul Ryan—during the time of the European debt crisis.</p>
+<p>Graduate student Thomas Herndon requested access to the data and analysis contained in the paper. After receiving the original spreadsheet from Reinhart, Herndon found several errors.</p>
+<p>“I clicked on cell L51, and saw that they had only averaged rows 30 through 44, instead of rows 30 through 49.” —Thomas Herndon Roose (2013)</p>
+<p>In a critique Herndon, Ash, and Pollin (2014) of the paper, Herndon, Ash, and Pollin point out coding errors, selective inclusion of data, and odd weighting of summary statistics that shaped the conclusions of the Reinhart/Rogoff paper.</p>
+<p>see <a href="https://blogs.lse.ac.uk/politicsandpolicy/public-debt-gdp-growth-and-austerity-why-reinhart-and-rogoff-are-wrong/" class="uri">https://blogs.lse.ac.uk/politicsandpolicy/public-debt-gdp-growth-and-austerity-why-reinhart-and-rogoff-are-wrong/</a></p>
+<p>Does publishing a flawed analysis raise ethical questions?</p>
+</div>
+</div>
+<div id="ethical-guidelines" class="section level2">
+<h2><span class="header-section-number">6.3</span> Ethical Guidelines</h2>
+<p>For more discussion of data ethics, see [Chapter 8 of Modern Data Science with R] (<a href="https://mdsr-book.github.io/mdsr2e/ch-foundations.html#samples-and-populations" class="uri">https://mdsr-book.github.io/mdsr2e/ch-foundations.html#samples-and-populations</a>) by Baumer, Horton, and Kaplan. These authors suggest that data scientists apply the following three principles when conducting their work.</p>
+<ul>
+<li><p>Do your work well by your own standards and by the standards of your profession.</p></li>
+<li><p>Recognize the parties to whom you have a special professional obligation.</p></li>
+<li><p>Report results and methods honestly and respect your responsibility to identify and report flaws and shortcomings in your work.</p></li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="programming.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="data-visualization.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -357,7 +403,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/edit/master/index.Rmd",
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/edit/master/06-Data_Ethics.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -365,7 +411,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/blob/master/index.Rmd",
+"link": "https://github.com/DSP-LU-W22/DSP-W22-Notes/blob/master/06-Data_Ethics.Rmd",
 "text": null
 },
 "download": null,
