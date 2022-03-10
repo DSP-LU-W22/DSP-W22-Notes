@@ -1,0 +1,57 @@
+# Epilogue
+
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 6)
+```
+
+## Links for Future Reference  
+
+### R/RStudio
+During this class, you have had access to RStudio Cloud, through our class's workspace. This space will no longer be available once the term is over. You can continue using RStudio Cloud on your own, using your own workspace. The free plan that you are signed up for allows up to 25 hours per month. If you would like more than that, you can upgrade to the "Plus Plan", which allows up to 75 hours per month at a cost of $5/month.   
+
+You can also install R and R Studio on your own computer for free.    
+* [Installing R](https://www.r-project.org/)     
+* [Installing RStudio](https://www.rstudio.com/products/rstudio/download/) - choose Free version   
+
+### Git/GitHub
+
+If you install R and RStudio on your own computer, and want to continue using GitHub, you will need to also install Git. [Happy Git with R](https://happygitwithr.com/index.html) by Jennifer Bryan provides directions on how to install Git and gives more detail on how to use GitHub together with R, going beyone what we've done in this class.   
+
+The work you have done in our class will remain available in our class's GitHub organization. If you want to download the work onto your own computer, you can do this by either downloading it as a ZIP file, or by ["Cloning" the repository](https://happygitwithr.com/new-github-first.html). 
+
+Repositories containing work you've done in this class are private, but you may choose to share any of your own work if you wish. To do this, create your own repository ob GitHub, clone it to your computer, and add the files from your project. You can either set the repository as public, making it accessible to anyone on the web (be sure it doesn't contain any private information!), or by adding individual people as collaborators. Details can be found in [Happy Git with R](https://happygitwithr.com/index.html).   
+
+If you need help accessing or sharing your work form this class in the future, please let me know. I'll be happy to help.  
+
+### Publishing Shiny Apps on the Web   
+
+There are several ways to publish Shiny Apps to the web, as seen [here].(https://shiny.rstudio.com/tutorial/written-tutorial/lesson7/)    
+
+I recommend using [Shinyapps.io](https://www.shinyapps.io/?_ga=2.218848985.1591583387.1646925637-1022827444.1638367417) The free plan allows you to deploy up to 5 apps at a time and for users to interact with them for up to 25 hours per month. 
+
+[Instructions for publishing apps to the web using shinyapps.io](https://shiny.rstudio.com/articles/shinyapps.html).   
+
+## Other Statistics and Data Science Courses at Lawrence     
+
+Applied courses in math/stat/cs department:    
+
+* CMSC/STAT 208: Machine Learning    
+* STAT 255: Statistics for Data Science      
+* STAT 455: Advanced Statistical Modeling (prereq:STAT 255)    
+
+Math-intensive courses:    
+
+* MATH/STAT 340: Probability    
+* STAT 445: Mathematical Statistics     
+* STAT 450: Bayesian Statistics    
+
+Some data-driven courses offered by other departments:     
+
+* BIOL 170: Experimental Design, BIOL 360: Bioinformatics, and BIOL 375: Biostatistics     
+* GOVT 271: Research Methods and GOVT 538: Quantitative Prediction in Modern Politics    
+* ECON 380: Econometrics, and ECON 481: Advanced Econometrics    
+* PSYC 284: Research Methods, 340/342: Cognitive Psychology, 343: Cognitive Neuroscience
+
+I will be happy to talk with you about either the minor in Statistics and Data Science, or the Statistics Track of the Mathematics major if you are interested.   
+

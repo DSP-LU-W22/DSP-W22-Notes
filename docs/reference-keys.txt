@@ -55,3 +55,9 @@ example-6.2.1-ethics-of-webscraping
 example-6.2.2-data-security-and-storage
 example-6.2.3-reproducible-analysis
 ethical-guidelines
+epilogue
+links-for-future-reference
+rrstudio
+gitgithub
+publishing-shiny-apps-on-the-web
+other-statistics-and-data-science-courses-at-lawrence
