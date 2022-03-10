@@ -698,15 +698,10 @@ votes <- page %>%
   as.numeric() %>% as.numeric()
 
 gross <- page %>%
-  html_nodes(".sort-num_votes-visible") %>%
+  html_nodes(".ghost~ .text-muted+ span") %>%
   html_text() %>%
-  str_replace("\n            \n", "\n           NA \n |" ) %>%
-  str_split("\\|") %>%
-  map(2, .default=NA) %>% 
-  str_remove_all("Gross:\n") %>%
-  str_remove_all("\\$") %>%
-  str_remove_all("M") %>%
-  trimws() %>% 
+  str_remove("\\$") %>%  #note \\ is required before special characters
+  str_remove("M") %>%
   as.numeric()
 
 MPAA_rating <- page %>%
@@ -736,16 +731,20 @@ return(movies)
 
 ```
 
-Write a loop that collects data on the 200 highest grossing movies, and collects them in a dataframe. 
+Write a loop that collects data on the 150 highest grossing movies, and collects them in a dataframe. 
 
 ```{r}
 movies <- NULL
 
-for( i in c(1, 51, 101, 151)){
+for( i in c(1, 51, 101)){
   movies1 <- Read_page(pagestart = i)
   movies <-rbind(movies, movies1)
 }
 
+```
+
+```{r}
+head(movies)
 ```
 
 ```{r}
